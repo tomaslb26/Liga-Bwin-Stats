@@ -1,6 +1,6 @@
 # Liga Bwin Stats
 
-![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/landingpage_ss.png)
+![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/landingpage_ss2.png)
 
 ## Functionalities
 * ### Global ###
