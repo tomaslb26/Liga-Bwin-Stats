@@ -2,6 +2,7 @@ import React from "react";
 import * as d3 from "d3";
 import { create_glow } from '../CreateGlow';
 import teams_colors from "./../../data/teams_colors"
+import "./../../styles/global.css"
 
 export default function Classification(props) {
 
@@ -38,6 +39,7 @@ export default function Classification(props) {
     function append_text(svg, x, y, font_size, text, color) {
         svg
             .append("text")
+            .attr("class", "text-d3")
             .attr("x", x)
             .attr("y", y)
             .style("font-size", font_size)
@@ -45,7 +47,6 @@ export default function Classification(props) {
             .style("fill", color)
             .style("text-anchor", "middle")
             .style("font-weight", "bold")
-            .style("font-family", "Inter")
             .text(text);
     }
 
