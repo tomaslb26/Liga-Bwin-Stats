@@ -18,3 +18,8 @@ Plot the passing network for the game that you which to visualize and display th
 See where you favorite player ranks among the other players in Liga Bwin, choose to plot the stats in percentile or per 90' stat. Plot where your favorite player touches the ball, passes, defends or even shoots.
 
 ![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/player_stats.png)
+
+* ### Match Momentum ###
+Check which team was the most dominant in a match, expected threat aggregated by minute.
+
+![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/match_momentum.png)
