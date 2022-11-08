@@ -23,11 +23,15 @@
 
 .text-container {
     margin: 8% auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 5%;
 }
 
 .title-container {
     border-left: 1px solid white;
-    padding-left: 5%;
+    padding-left: 1%;
     margin-top: 2%;
     width: 55%;
 }
@@ -49,31 +53,37 @@
 
 .button-container {
     border-left: 1px solid white;
-    padding-left: 5%;
+    padding-left: 1%;
     margin-top: 2%;
-    width: 50%;
+    width: 90%;
     display: grid;
-    gap: 3%;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr;
+    gap: 1%;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.button-container>h4 {
+    font-family: "Inter", sans-serif;
+    text-shadow: 4px 2px 6px #000000;
+    margin: 0 0;
+    font-size: 190%;
+    color: white;
 }
 
 .button-landing {
     display: flex;
-    align-items: center;
-    background: #1A1A1A;
-    border-radius: 15px;
-    padding: 0 0;
+    flex-direction: column;
+    border-radius: 0px;
+    padding: 3% 2%;
     margin-top: 3%;
     cursor: pointer;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 1));
+
 }
 
 .button-landing:hover {
-    transform: scale(1.05);
-    transition-duration: 0.5s;
-    background-color: #2a2e30;
-    transition: background-color 1s;
+    background-position: left;
+    box-shadow: inset 500px 0 0 0 #1A1A1A;
+    transition: 1.5s ease-out;
 }
 
 footer>a:hover {
@@ -86,16 +96,34 @@ footer>a:hover {
 .button-landing>h5 {
     font-family: "Inter", sans-serif;
     text-shadow: 4px 2px 6px #000000;
-    margin: 0 2%;
     font-size: 100%;
     white-space: nowrap;
+    margin-top: 2%;
+    margin-bottom: 0%;
+    margin-left: 2%;
+    color: #FFB700;
 }
 
 .button-landing>img {
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 1));
     height: 48px;
+    width: fit-content;
     margin-left: 2%;
-    width: 48px;
+}
+
+.button-landing>span {
+    text-shadow: 4px 2px 6px #000000;
+    margin-left: 2%;
+    margin-top: 2%;
+    font-family: "Inter", sans-serif;
+    color: rgba(255, 255, 255, 0.901);
+}
+
+.button-landing>i {
+    text-shadow: 4px 2px 6px #000000;
+    margin-left: 3%;
+    margin-top: 2%;
+    color: white;
 }
 
 .image-container {
@@ -213,11 +241,18 @@ footer>a>i {
     }
 
     .title-container {
-        width: 100%;
+        width: 90%;
     }
 
     .button-container {
         width: 90%;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+    }
+
+    .button-container>h4 {
+        grid-column: span 2;
+        white-space: nowrap;
     }
 
 

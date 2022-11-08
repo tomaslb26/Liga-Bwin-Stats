@@ -45,21 +45,26 @@ export default function LandingPage() {
                                     <span style={{ color: "white" }}>The place to check all the stats of your favorite <span style={{ color: "#FFB700" }}>teams</span> and <span style={{ color: "#FFB700" }}>players</span>.</span>
                                 </div>
                                 <div className="button-container">
-                                    <div style={{ border: "1px solid white" }} className="button-landing" onClick={() => routeChange("global")}>
-                                        <img src={require("./../data/podium.png")}></img>
-                                        <h5 style={{ color: "white" }}>Global</h5>
+                                    <h4>What can you <span style={{ color: "#FFB700" }}>visualize</span> here?</h4>
+                                    <div style={{}} className="button-landing" onClick={() => routeChange("global")}>
+                                        <h5 style={{}}>Global</h5>
+                                        <span>Classification and a couple more general team stats.</span>
+                                        <i class="fas fa-long-arrow-alt-right fa-lg"></i>
                                     </div>
-                                    <div style={{ border: "1px solid #FFB700" }} className="button-landing" onClick={() => routeChange("team_stats")}>
-                                        <img src={require("./../data/team_icon.png")}></img>
-                                        <h5 style={{ color: "#FFB700" }}>Team Stats</h5>
+                                    <div style={{}} className="button-landing" onClick={() => routeChange("team_stats")}>
+                                        <h5 style={{}}>Team Stats</h5>
+                                        <span style={{}}>Stats about your favorite team, from xG to plotting shots or passing network.</span>
+                                        <i class="fas fa-long-arrow-alt-right fa-lg"></i>
                                     </div>
-                                    <div style={{ border: "1px solid white" }} className="button-landing" onClick={() => routeChange("player_stats")}>
-                                        <img style={{ height: "40px" }} src={require("./../data/player_icon.png")}></img>
-                                        <h5 style={{ color: "white" }}>Player Stats</h5>
+                                    <div style={{}} className="button-landing" onClick={() => routeChange("player_stats")}>
+                                        <h5 style={{}}>Player Stats</h5>
+                                        <span style={{}}>Know where your favorite player ranks among other players.</span>
+                                        <i class="fas fa-long-arrow-alt-right fa-lg"></i>
                                     </div>
-                                    <div style={{ border: "1px solid #FFB700" }} className="button-landing" onClick={() => routeChange("match_momentum")}>
-                                        <img style={{ height: "40px" }} src={require("./../data/momentum_icon.png")}></img>
-                                        <h5 style={{ color: "#FFB700" }}>Match Momentum</h5>
+                                    <div style={{}} className="button-landing" onClick={() => routeChange("match_momentum")}>
+                                        <h5 style={{}}>Match Momentum</h5>
+                                        <span style={{}}>Check which team had more momentum in a specific game.</span>
+                                        <i class="fas fa-long-arrow-alt-right fa-lg"></i>
                                     </div>
                                 </div>
 
