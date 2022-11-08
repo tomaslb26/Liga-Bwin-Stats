@@ -45,7 +45,7 @@ export default function Classification(props) {
             .style("fill", color)
             .style("text-anchor", "middle")
             .style("font-weight", "bold")
-            .style("font-family", "Inter, sans serif")
+            .style("font-family", "Inter")
             .text(text);
     }
 
