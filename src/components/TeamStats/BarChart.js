@@ -95,8 +95,7 @@ export default function BarChart(props) {
         svg.selectAll("YAxisBar .tick")
             .data(data_selected).enter()
             .append("text")
-            .attr("id", "display_over")
-            .attr("font-family", "Inter, sans serif")
+            .attr("class", "text-d3")
             .attr("x", d => {
                 return x(Number(d["stat"])) * 0.7 + 55
             })
@@ -112,7 +111,7 @@ export default function BarChart(props) {
             .data(data_selected).enter()
             .append("text")
             .attr("id", "display_over")
-            .attr("font-family", "Inter, sans serif")
+            .attr("class", "text-d3")
             .attr("x", d => {
                 return 55
             })

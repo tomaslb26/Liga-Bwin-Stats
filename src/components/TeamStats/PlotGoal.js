@@ -120,7 +120,7 @@ export function plot_goal(event, d, color, tooltip) {
             .attr("y", y * pitchMultiplier)
             .attr("dx", "0%")
             .attr("text-anchor", "middle")
-            .attr("font-family", "Inter, sans serif")
+            .attr("class", "text-d3")
             .style("font-size", "12px")
             .style("filter", "url(#glow)")
             .style("fill", "white")
