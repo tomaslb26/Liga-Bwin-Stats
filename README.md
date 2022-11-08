@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Liga Bwin Stats
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/landingpage_ss.png)
 
-## Available Scripts
+## Functionalities
+* ### Global ###
+Contains information about the current classification, with info like Goals, Goals Against, Points and Average Attendance. A bar chart aggregated by team in which the user can check which teams ranks higher in various stats like yellow cards, interceptions, crosses, possession, etc.
 
-In the project directory, you can run:
+![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/global.png)
 
-### `npm start`
+* ### Team Stats ###
+The place to check the stats of your favorite team for seasons 21/22 or 22/23. See the xG and xGA evolution game by game or simply list which player ranks higher in the stat of your choosing.
+Plot the passing network for the game that you which to visualize and display the passes, shots and defensive actions of that game.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/team_stats.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+* ### Player Stats ###
+See where you favorite player ranks among the other players in Liga Bwin, choose to plot the stats in percentile or per 90' stat. Plot where your favorite player touches the ball, passes, defends or even shoots.
 
-### `npm test`
+![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/player_stats.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* ### Match Momentum ###
+Check which team was the most dominant in a match, expected threat aggregated by minute.
 
-### `npm run build`
+![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/match_momentum.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## What was used in this project?
+* ### React.js ###
+* ### d3.js ###
+* ### HTML ###
+* ### CSS ###
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## What was used to get the data used in this project?
+All the data present in this website comes from whoscored, fotmob and fbref. The scraping was done using Python with the aid of Selenium and the cleaning was done with pandas. Check out the Scraping Scripts over at: https://github.com/tomaslb26/LigaBwin
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## What's is next?
+* ### A couple of new visualizations will be added ###
+* ### Docker container for scraping (just missing Opera integration) ###
+* ### Landing Page improvement ###
