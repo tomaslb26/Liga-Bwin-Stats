@@ -23,3 +23,17 @@ See where you favorite player ranks among the other players in Liga Bwin, choose
 Check which team was the most dominant in a match, expected threat aggregated by minute.
 
 ![Screenshot](https://github.com/tomaslb26/Liga-Bwin-Stats/blob/main/match_momentum.png)
+
+## What was used in this project?
+* ### React.js ###
+* ### d3.js ###
+* ### HTML ###
+* ### CSS ###
+
+## What was used to get the data used in this project?
+All the data present in this website comes from whoscored, fotmob and fbref. The scraping was done using Python with the aid of Selenium and the cleaning was done with pandas. Check out the Scraping Scripts over at: https://github.com/tomaslb26/LigaBwin
+
+## What's is next?
+* ### A couple of new visualizations will be added ###
+* ### Docker container for scraping (just missing Opera integration) ###
+* ### Landing Page improvement ###
