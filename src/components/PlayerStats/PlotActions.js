@@ -1,0 +1,203 @@
+import React from "react";
+import * as d3 from "d3";
+import CreatePitchHorizontal from "../CreatePitchHorizontal";
+import { create_glow } from './../CreateGlow';
+import { CreatePitch } from "../CreatePitch";
+import { createTriangle } from './../CreateTriangle';
+import { plot_lines } from "./PlotLines"
+import { plot_circles } from "./PlotCircles"
+import { plot_def_actions } from "./PlotDefActions"
+import { plot_shot_circles } from "./PlotShots"
+import GetData from "../GetData";
+import PlotAllTouches from "./PlotAllTouches";
+
+export default function PlotActions(props) {
+    var svgRef = React.useRef(null);
+    if (props.win_width > 992) {
+        var svgWidth = props.win_width / 2 + 150;
+        var svgHeight = props.win_height / 2 + 120;
+        var mode = false
+        var pitchMultiplier = props.win_width * 8.3 / 1920
+    }
+    else if (props.win_width > 768) {
+        var svgWidth = props.win_width / 2 + 80
+        var svgHeight = 610;
+        var margin = { top: 10, right: 9, bottom: 0, left: 100 }
+        var mode = true
+        var pitchMultiplier = 5.5
+    }
+    else {
+        var svgWidth = props.win_width - 120
+        var svgHeight = props.win_height - 250;
+        var margin = { top: 10, right: 9, bottom: 0, left: 0 }
+        var mode = true
+        var pitchMultiplier = 5.5
+    }
+
+    React.useEffect(() => {
+        d3.select(svgRef.current).selectAll("*").remove();
+        var svg = d3.select(svgRef.current)
+            .append("svg")
+            .attr("width", svgWidth)
+            .attr("height", svgHeight)
+
+
+        if (props.win_width > 990) var pitch = CreatePitchHorizontal(svg, pitchMultiplier)
+        else var pitch = CreatePitch(svg, 0, 0, margin)
+
+        create_glow(pitch)
+        createTriangle(pitch, "triangle3", 0.8)
+        createTriangle(pitch, "triangle2", 0.3)
+
+        if (props.allTouches) {
+            var touches = GetData(props.data, ["Carry", "Pass", "Aerial", "BallTouch", "BallRecovery", "Interception", "Tackle", "BlockedPass", "Clearance", "MissedShots", "ShotOnPost", "Goal", "SavedShot", "TakeOn"], null, null, props.playerId)
+            PlotAllTouches(touches, pitch, mode, pitchMultiplier, props.color)
+        }
+        if (props.allPasses) {
+            if (props.progPasses) var passes = GetData(props.data, "Pass", "Successful", "False", props.playerId)
+            else var passes = GetData(props.data, "Pass", "Successful", null, props.playerId)
+
+            pitch.selectAll('.progressiveLines')
+                .data(passes)
+                .enter().append("line")
+                .attr("id", "progressive")
+                .attr("x1", function (d) {
+                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
+                    else return (Number(d.x)) * pitchMultiplier
+                })
+                .attr("y1", function (d) {
+                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
+                    else return (68 - Number(d.y)) * pitchMultiplier
+                })
+                .attr("x2", function (d) {
+                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
+                    else return (Number(d.endX)) * pitchMultiplier
+                })
+                .attr("y2", function (d) {
+                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
+                    else return (68 - Number(d.endY)) * pitchMultiplier
+                })
+                .style("filter", "url(#glow)")
+                .attr("stroke", "white")
+                .style("stroke-opacity", 0.8)
+                .attr("stroke-width", 1.8)
+                .attr("marker-end", "url(#triangle3)");
+        }
+        if (props.progPasses) {
+            var passes = GetData(props.data, "Pass", "Successful", "True", props.playerId)
+            plot_lines(pitch, passes, pitchMultiplier, mode)
+            plot_circles(pitch, passes, props.color, pitchMultiplier, mode)
+        }
+        if (props.unsuccessfulPasses) {
+            passes = GetData(props.data, "Pass", "Unsuccessful", null, props.playerId)
+            pitch.selectAll('.progressiveLines')
+                .data(passes)
+                .enter().append("line")
+                .attr("id", "progressive")
+                .attr("x1", function (d) {
+                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
+                    else return (Number(d.x)) * pitchMultiplier
+                })
+                .attr("y1", function (d) {
+                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
+                    else return (68 - Number(d.y)) * pitchMultiplier
+                })
+                .attr("x2", function (d) {
+                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
+                    else return (Number(d.endX)) * pitchMultiplier
+                })
+                .attr("y2", function (d) {
+                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
+                    else return (68 - Number(d.endY)) * pitchMultiplier
+                })
+                .style("filter", "url(#glow)")
+                .attr("stroke", "white")
+                .style("stroke-opacity", 0.1)
+                .attr("stroke-width", 1.8)
+                .attr("marker-end", "url(#triangle2)");
+        }
+        if (props.allCarries) {
+            if (props.progCarries) var carries = GetData(props.data, "Carry", null, "False", props.playerId)
+            else var carries = GetData(props.data, "Carry", null, null, props.playerId)
+
+            pitch.selectAll('.progressiveLines')
+                .data(carries)
+                .enter().append("line")
+                .attr("id", "progressive")
+                .attr("x1", function (d) {
+                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
+                    else return (Number(d.x)) * pitchMultiplier
+                })
+                .attr("y1", function (d) {
+                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
+                    else return (68 - Number(d.y)) * pitchMultiplier
+                })
+                .attr("x2", function (d) {
+                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
+                    else return (Number(d.endX)) * pitchMultiplier
+                })
+                .attr("y2", function (d) {
+                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
+                    else return (68 - Number(d.endY)) * pitchMultiplier
+                })
+                .style("filter", "url(#glow)")
+                .attr("stroke", "white")
+                .style("stroke-opacity", 0.8)
+                .attr("stroke-width", 1.8)
+                .attr("marker-end", "url(#triangle3)");
+
+        }
+        if (props.progCarries) {
+            var carries = GetData(props.data, "Carry", null, "True", props.playerId)
+            plot_lines(pitch, carries, pitchMultiplier, mode)
+            plot_circles(pitch, carries, "#48EDDB", pitchMultiplier, mode)
+        }
+        if (props.ballRecoveries) {
+            var touches = GetData(props.data, "BallRecovery", null, null, props.playerId)
+            plot_def_actions(pitch, touches, "#42DC60", pitchMultiplier, mode)
+        }
+        if (props.blockedPasses) {
+            var touches = GetData(props.data, "BlockedPass", null, null, props.playerId)
+            plot_def_actions(pitch, touches, "#42DCD5", pitchMultiplier, mode)
+        }
+        if (props.interceptions) {
+            var touches = GetData(props.data, "Interception", null, null, props.playerId)
+            plot_def_actions(pitch, touches, "red", pitchMultiplier, mode)
+        }
+        if (props.clearances) {
+            var touches = GetData(props.data, "Clearance", null, null, props.playerId)
+            plot_def_actions(pitch, touches, "#D047D6", pitchMultiplier, mode)
+        }
+
+        if (props.tackles) {
+            var touches = GetData(props.data, "Tackle", null, null, props.playerId)
+            plot_def_actions(pitch, touches, "#E38A18", pitchMultiplier, mode)
+        }
+
+        if (props.goals) {
+            var goals = props.data.filter(item => item["eventType"] === "Goal" && Number(item["playerId"]) === props.fotmobPlayerId)
+            console.log(goals)
+            plot_shot_circles(pitch, goals, "#55DD31", pitchMultiplier, mode, props.color)
+        }
+
+        if (props.attemptSaved) {
+            var attempts = props.data.filter(item => item["eventType"] === "AttemptSaved" && Number(item["playerId"]) === props.fotmobPlayerId)
+            plot_shot_circles(pitch, attempts, "#DD9131", pitchMultiplier, mode, props.color)
+        }
+
+        if (props.misses) {
+            var miss = props.data.filter(item => item["eventType"] === "Miss" && Number(item["playerId"]) === props.fotmobPlayerId)
+            plot_shot_circles(pitch, miss, "#DD3131", pitchMultiplier, mode, props.color)
+        }
+
+        if (props.post) {
+            var post = props.data.filter(item => item["eventType"] === "Post" && Number(item["playerId"]) === props.fotmobPlayerId)
+            plot_shot_circles(pitch, post, "#31B1DD", pitchMultiplier, mode, props.color)
+        }
+
+    }, [props.data, props.win_width, props.win_height, props.playerId, props.allTouches, props.allPasses, props.progPasses, props.unsuccessfulPasses, props.allCarries, props.progCarries,
+    props.ballRecoveries, props.blockedPasses, props.interceptions, props.clearances, props.tackles, props.goals, props.attemptSaved, props.misses, props.post, props.color]);
+
+
+    return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;
+}

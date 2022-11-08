@@ -1,0 +1,181 @@
+.actions-header {
+    font-family: "Inter", sans-serif;
+    color: white;
+    font-weight: bold;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    margin-left: 3%;
+    align-self: flex-start;
+}
+
+.buttons-team {
+    display: flex;
+    align-items: center;
+    gap: 1%;
+}
+
+.button {
+    font-family: "Inter", sans-serif;
+    font-size: 115%;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    padding: 1.8% 2.5%;
+    box-shadow: 0px 8px 8px -8px #000000;
+    border-radius: 0.25em;
+    cursor: pointer;
+    transition: background-color 0.5s linear;
+}
+
+.button:hover {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+}
+
+.def_action {
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    margin-left: 10px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 2%;
+}
+
+#inputs {
+    width: fit-content;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 3%;
+    font-family: "Inter", sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#inputs label {
+    margin-left: 1%;
+}
+
+#inputs input {
+    margin-left: 2%;
+}
+
+@keyframes swing {
+    15% {
+        -webkit-transform: translateX(5px);
+        transform: translateX(5px);
+    }
+
+    30% {
+        -webkit-transform: translateX(-5px);
+        transform: translateX(-5px);
+    }
+
+    50% {
+        -webkit-transform: translateX(3px);
+        transform: translateX(3px);
+    }
+
+    65% {
+        -webkit-transform: translateX(-3px);
+        transform: translateX(-3px);
+    }
+
+    80% {
+        -webkit-transform: translateX(2px);
+        transform: translateX(2px);
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+.checkbox-flip {
+    vertical-align: middle;
+    appearance: none;
+    background-color: #5a5757;
+    border: 1px solid white;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    border-radius: 0.25em;
+    box-shadow: 0px 8px 8px -8px #000000;
+}
+
+.checkbox-flip:active,
+.checkbox-flip:checked:active {
+    box-shadow: 0px 8px 8px -8px #000000;
+}
+
+.checkbox-flip:hover {
+    transform: scale(1.1);
+    transition: 120ms transform ease-in-out;
+}
+
+.checkbox-flip:hover:after {
+    content: '\2714';
+    font-size: 20px;
+    color: white;
+    position: relative;
+    top: -3px;
+}
+
+.checkbox-flip:checked:after {
+    content: '\2714';
+    font-size: 20px;
+    color: white;
+    position: relative;
+    top: -3px;
+}
+
+.checkbox-flip:checked {
+    background-color: black;
+    transition: background-color 500ms linear;
+    box-shadow: 0px 8px 8px -8px #000000;
+    animation: swing 500ms ease;
+}
+
+div.tooltip_2 {
+    padding: 0.3% 0.3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 130%;
+    background: #2a2e30fd;
+    color: white;
+    border: 2px solid #cf261f;
+    border-radius: 10px;
+}
+
+
+div.tooltip_3 {
+    font-family: "Inter", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: fit-content;
+    height: fit-content;
+    white-space: nowrap;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    font-size: 130%;
+    background: #2a2e30fd;
+    color: white;
+    border: 2px solid #cf261f;
+    border-radius: 10px;
+}

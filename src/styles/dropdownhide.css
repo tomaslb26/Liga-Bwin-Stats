@@ -1,0 +1,121 @@
+.links {
+    display: flex;
+    align-items: center;
+    gap: 3%;
+    margin-left: auto;
+    margin-right: 4%;
+}
+
+.nav-link {
+    color: white;
+    font-size: 120%;
+    font-weight: bold;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.dropdown-hide {
+    margin-right: 5%;
+}
+
+.sub-menu-parent-hide {
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+}
+
+.sub-menu-hide {
+    visibility: hidden;
+    /* hides sub-menu */
+    opacity: 0;
+    position: absolute;
+    top: 100%;
+    left: -1300%;
+    width: fit-content;
+    transform: translateY(-2em);
+    z-index: -1;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+    width: fit-content;
+}
+
+#icon-hide {
+    display: inline-block;
+    color: white;
+}
+
+#icon-hide:hover {
+    transform: rotate(180deg);
+    transition: 0.5s ease;
+
+}
+
+.nav-hide {
+    width: 100%;
+    padding: 3% 2%;
+    border-bottom: 1px solid white;
+    box-shadow: 1px 1px 11px #000000;
+    font-size: 100%;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+}
+
+.nav-hide:hover {
+    background-color: #000000;
+    transition: scale 1s linear;
+    transform: scale(1.1);
+}
+
+.sub-menu-parent-hide:focus .sub-menu-hide,
+.sub-menu-parent-hide:focus-within .sub-menu-hide,
+.sub-menu-parent-hide:hover .sub-menu-hide {
+    visibility: visible;
+    /* shows sub-menu */
+    opacity: 1;
+    z-index: 1;
+    transform: translateY(0%);
+    transition-delay: 0s, 0s, 0.3s;
+    /* this removes the transition delay so the menu will be visible while the other styles transition */
+}
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 768px) {
+    .dropdown-hide {
+        margin-left: auto;
+    }
+
+    .links {
+        display: none;
+    }
+
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .dropdown-hide {
+        margin-left: auto;
+    }
+
+    .links {
+        display: none;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .dropdown-hide {
+        display: none;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .dropdow-hide {
+        display: none;
+    }
+
+}

@@ -1,0 +1,45 @@
+.XAxis line {
+    stroke: white;
+}
+
+.XAxis path {
+    stroke: white;
+}
+
+.XAxis text {
+    stroke: none;
+    color: white;
+    font-size: 90%;
+}
+
+.YAxis line {
+    stroke: white;
+    stroke-width: 0%;
+}
+
+.YAxis path {
+    stroke: white;
+    stroke-width: 0%;
+}
+
+.YAxis text {
+    color: white;
+}
+
+div.tooltip {
+    padding: 0.1% 0.5%;
+    display: flex;
+    justify-content: center;
+    font-family: "Inter", sans-serif;
+    position: absolute;
+    width: fit-content;
+    white-space: nowrap;
+    height: 55px;
+    font-weight: bold;
+    font-size: 130%;
+    background: #2a2e30fd;
+    color: white;
+    right: 10px;
+    border: 2px solid #cf261f;
+    border-radius: 10px;
+}

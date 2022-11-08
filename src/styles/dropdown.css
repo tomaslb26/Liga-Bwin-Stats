@@ -1,0 +1,113 @@
+.sub-menu-parent {
+    margin-left: 0%;
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    margin-right: 0;
+    margin-left: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+}
+
+.sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+    list-style: none;
+    width: fit-content;
+    z-index: 2;
+}
+
+.dropdown--elem {
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    font-size: 105%;
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    padding: 2% 3%;
+}
+
+.dropdown--elem:hover {
+    background-color: #000000;
+    transition: scale 1s linear;
+    transform: scale(1.1);
+}
+
+.dropdown--elem>img {
+    height: 15px;
+    width: 13px;
+    margin-right: 2%;
+}
+
+.dropdown--elem>i {
+    margin-left: 1%;
+}
+
+.placeholder {
+    display: flex;
+    align-items: center;
+    font-size: 120%;
+    font-weight: bold;
+    text-decoration: none;
+    text-decoration-color: none;
+    color: white;
+    box-shadow: 1px 1px 11px #000000;
+    border-radius: 0.25em;
+    padding: 0.8em 0.8em;
+    white-space: nowrap;
+    font-family: "Inter", sans-serif;
+}
+
+.placeholder:hover {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+}
+
+ul,
+ul li {
+    font-family: "Inter", sans-serif;
+    list-style-type: none;
+    z-index: 2;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid white;
+    box-shadow: 1px 1px 11px #000000;
+    width: 100%;
+    background-color: #2a2e30;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+
+#icon {
+    color: white;
+    margin-left: 1%;
+}
+
+label {
+    position: relative;
+    cursor: pointer;
+}
+
+label [type="checkbox"] {
+    display: none;
+}
+
+[type="checkbox"]+span {
+    display: inline-block;
+    padding: 0.4em;
+}
+
+:checked+span {
+    display: inline-block;
+}

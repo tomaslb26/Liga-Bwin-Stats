@@ -1,0 +1,14 @@
+.YAxisBar line {
+    stroke: white;
+    stroke-width: 0%;
+}
+
+.YAxisBar path {
+    stroke: white;
+    stroke-width: 0%;
+}
+
+.YAxisBar text {
+    color: white;
+    font-size: 140%;
+}

@@ -1,0 +1,338 @@
+.player-stats--nav {
+    padding: 0.2% 0.2%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    background-color: #2a2e30ad;
+    border-radius: 0.25em;
+    box-shadow: 0px 6px 6px -8px #000000;
+    color: white;
+    font-family: "Inter", sans-serif;
+}
+
+.player-stats--nav>img {
+    height: 45px;
+    margin-left: 1%;
+}
+
+.player-stats--main {
+    margin: 4.5% 0%;
+    width: 100%;
+    display: flex;
+}
+
+.pitch {
+    margin-top: 1%;
+}
+
+.stats-section {
+    display: flex;
+    flex-direction: column;
+    width: 28vw;
+    height: fit-content;
+    background-color: #2a2e30ad;
+    box-shadow: 0px 6px 6px -8px #000000;
+    border-radius: 0.25em;
+}
+
+.svg-section {
+    width: inherit;
+}
+
+
+.svg-section>h1 {
+    margin: 1% 3%;
+    font-family: "Inter", sans-serif;
+    font-weight: bold;
+    white-space: nowrap;
+    color: white;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 130%;
+}
+
+.buttons {
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1%;
+    width: 100%;
+}
+
+
+.button {
+    font-family: "Inter", sans-serif;
+    font-size: 115%;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    padding: 1.8% 2.5%;
+    box-shadow: 0px 8px 8px -8px #000000;
+    border-radius: 0.25em;
+    cursor: pointer;
+    transition: background-color 0.5s linear;
+}
+
+.checkboxes {
+    align-self: center;
+    vertical-align: middle;
+    width: fit-content;
+    font-family: "Inter", sans-serif;
+    font-size: 100%;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.checkboxes label {
+    margin-left: 1%;
+    vertical-align: middle;
+}
+
+.checkboxes label:first-child {
+    margin-left: 0%;
+}
+
+.checkboxes input {
+    margin-left: 1.5%;
+}
+
+.button:hover {
+    transform: scale(1.1);
+    transition-duration: 0.5s;
+}
+
+.stats--grid {
+    margin: 1% 3%;
+    display: grid;
+    grid-template-rows: 1fr;
+    gap: 1%;
+}
+
+.stats-display {
+    margin-top: 1%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    padding: 0.5% 0.5%;
+}
+
+.stat-short {
+    color: white;
+    font-family: "Inter", sans-serif;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat {
+    box-shadow: 0px 6px 6px -8px #000000;
+    border: 1px solid white;
+    border-radius: 0.25em;
+    display: flex;
+    flex-direction: column;
+}
+
+.stats-section>h1 {
+    color: white;
+    font-family: "Inter", sans-serif;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    margin-left: 3%;
+}
+
+.stat>h5 {
+    text-align: center;
+    margin: 2% auto;
+    align-self: center;
+    color: white;
+    font-family: "Inter", sans-serif;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    font-weight: 400;
+}
+
+.stat>h1 {
+    align-self: center;
+    color: white;
+    font-family: "Inter", sans-serif;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    font-size: 310%;
+    margin: 2% 0;
+}
+
+.pitch-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 65vw;
+    margin-left: 2%;
+    background-color: #2a2e30ad;
+    box-shadow: 0px 6px 6px -8px #000000;
+    border-radius: 0.25em;
+    padding-bottom: 1%;
+}
+
+.def-action {
+    box-shadow: 0px 6px 6px -8px #000000;
+    width: fit-content;
+    padding-right: 1%;
+    display: inline-block;
+    margin-left: 1%;
+    padding-left: 1%;
+    white-space: nowrap;
+}
+
+.def-action>label {
+    color: white;
+    font-family: "Inter", sans-serif;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    font-weight: bold;
+    margin-right: 1%;
+}
+
+@media only screen and (max-width: 768px) {
+    .checkboxes label {
+        margin-left: 1%;
+        vertical-align: middle;
+        font-size: 70%;
+    }
+
+    .checkboxes {
+        margin: 0 auto;
+        white-space: normal;
+        align-self: center;
+    }
+
+    .checkbox-flip {
+        width: 15px;
+        height: 15px;
+    }
+
+
+    .player-stats--main {
+        margin-top: 14%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stats-section {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        height: fit-content;
+        background-color: #2a2e30ad;
+        box-shadow: 0px 6px 6px -8px #000000;
+        border-radius: 0.25em;
+        margin: 0 auto;
+    }
+
+    .pitch-section {
+        width: 90vw;
+        margin: 0 auto;
+    }
+
+    .stat>h5 {
+        font-size: 70%;
+    }
+
+    .stat>h1 {
+        font-size: 250%;
+    }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .stats-section {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        height: fit-content;
+        background-color: #2a2e30ad;
+        box-shadow: 0px 6px 6px -8px #000000;
+        border-radius: 0.25em;
+        margin: 0 auto;
+    }
+
+    .checkboxes label {
+        margin-left: 1%;
+        vertical-align: middle;
+        font-size: 70%;
+    }
+
+    .checkboxes {
+        white-space: nowrap;
+        align-self: center;
+    }
+
+    .checkbox-flip {
+        width: 15px;
+        height: 15px;
+    }
+
+    .pitch {
+        align-self: middle;
+    }
+
+
+    .player-stats--main {
+        margin-top: 14%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stats-section {
+        display: flex;
+        flex-direction: column;
+        width: 90vw;
+        height: fit-content;
+        background-color: #2a2e30ad;
+        box-shadow: 0px 6px 6px -8px #000000;
+        border-radius: 0.25em;
+        margin: 0 auto;
+    }
+
+    .pitch-section {
+        width: 90vw;
+        margin: 0 auto;
+    }
+
+    .player-stats--main {
+        margin-top: 8%;
+    }
+
+}
+
+@media only screen and (min-width: 992px) {}
+
+.tooltip3 {
+    font-family: "Inter", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    white-space: nowrap;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    font-size: 130%;
+    background: #2a2e30fd;
+    color: white;
+    border: 2px solid #cf261f;
+    border-radius: 0.25em;
+    z-index: 2;
+}

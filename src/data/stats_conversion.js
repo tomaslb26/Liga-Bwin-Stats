@@ -1,0 +1,20 @@
+export default {
+    "Prog. Passes Per 90'": "prog_passes",
+    "Prog. Carries Per 90'": "prog_carries",
+    "Def. Actions Per 90'": "defensive_actions",
+    "xT Per 90'": "xt",
+    "Final Third Entries Per 90'": "final_third_entries",
+    "Final Third Passes Per 90'": "final_third_passes",
+    "Penalty Box Entries Per 90'": "penalty_box_entries",
+    "Penalty Box Passes Per 90'": "penalty_box_passes",
+    "Key Passes Per 90'": "key_passes",
+    "Goals": "Goals",
+    "Assists": "Assists",
+    "Shots Per 90'": "Shots",
+    "xG Per 90'": "xG",
+    "xA Per 90'": "xA",
+    "xGOT Per 90'": "xGOT",
+    "Chances Created Per 90'": "ChancesCreated",
+    "Pass Percentage": "Pass Percentage",
+    "Take-On Percentage": "Take-On Percentage"
+}

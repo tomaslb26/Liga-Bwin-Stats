@@ -1,0 +1,113 @@
+.global {
+    display: flex;
+    margin-top: 7%;
+    margin-left: 0%;
+}
+
+.global--nav {
+    padding: 0.2% 0.2%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-items: flex-start;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    background-color: #1A1A1A;
+    border-radius: 0.25em;
+    box-shadow: 0px 6px 6px -8px #000000;
+    color: white;
+    font-family: "Inter", sans-serif;
+}
+
+.global--nav>h1 {
+    font-family: "Inter", sans-serif;
+    margin-left: 2%;
+    font-size: 100%;
+}
+
+.global--nav>span {
+    font-size: 100%;
+    margin-left: 0.5%;
+}
+
+.global--nav>img {
+    height: 75px;
+}
+
+.global-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 3%;
+    width: 100%;
+}
+
+.classification {
+    background: #1A1A1A;
+    border: 2px solid #ffb404;
+    border-radius: .45em;
+    box-shadow: 0px 8px 8px -8px #000000;
+    width: fit-content;
+    height: fit-content;
+}
+
+.misc {
+    background: #1A1A1A;
+    border: 2px solid #ffb404;
+    border-radius: .45em;
+    box-shadow: 0px 8px 8px -8px #000000;
+    width: fit-content;
+    height: fit-content;
+    padding: 1% 0%;
+}
+
+.YAxisBarMisc line {
+    stroke: white;
+    stroke-width: 1px;
+}
+
+.YAxisBarMisc path {
+    stroke: white;
+    stroke-width: 1px;
+}
+
+.YAxisBarMisc text {
+    font-family: "Inter", sans-serif;
+    color: white;
+    font-size: 140%;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 768px) {
+    .global-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1%;
+        width: 100%;
+    }
+
+
+    .global {
+        display: flex;
+        padding: 20% 0%;
+    }
+
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .global-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 1%;
+        width: 100%;
+    }
+
+    .global {
+        display: flex;
+        padding: 10% 0%;
+    }
+}
