@@ -12,7 +12,7 @@
     font-weight: bold;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     white-space: nowrap;
 }
 
@@ -23,7 +23,7 @@
 .sub-menu-parent-hide {
     position: relative;
     list-style: none;
-    cursor: pointer;
+    cursor: poRoboto;
 }
 
 .sub-menu-hide {

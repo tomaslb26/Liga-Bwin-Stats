@@ -9,7 +9,7 @@
 .XAxis text {
     stroke: none;
     color: white;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 90%;
 }
 
@@ -25,14 +25,14 @@
 
 .YAxis text {
     color: white;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 div.tooltip {
     padding: 0.1% 0.5%;
     display: flex;
     justify-content: center;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     position: absolute;
     width: fit-content;
     white-space: nowrap;

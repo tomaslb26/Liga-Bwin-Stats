@@ -2,7 +2,7 @@
     margin-left: 0%;
     position: relative;
     list-style: none;
-    cursor: pointer;
+    cursor: poRoboto;
 }
 
 .dropdown {
@@ -64,7 +64,7 @@
     border-radius: 0.25em;
     padding: 0.8em 0.8em;
     white-space: nowrap;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .placeholder:hover {
@@ -74,7 +74,7 @@
 
 ul,
 ul li {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     list-style-type: none;
     z-index: 2;
     padding: 0;
@@ -96,7 +96,7 @@ ul li {
 
 label {
     position: relative;
-    cursor: pointer;
+    cursor: poRoboto;
 }
 
 label [type="checkbox"] {
