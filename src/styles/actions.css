@@ -1,5 +1,5 @@
 .actions-header {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     color: white;
     font-weight: bold;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
@@ -15,7 +15,7 @@
 }
 
 .button {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     font-size: 115%;
     color: white;
     font-weight: bold;
@@ -49,7 +49,7 @@
     display: inline-block;
     vertical-align: middle;
     margin-left: 3%;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     font-size: 100%;
     font-weight: bold;
     color: white;
@@ -148,7 +148,7 @@ div.tooltip_2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     position: absolute;
     width: fit-content;
     height: fit-content;
@@ -163,7 +163,7 @@ div.tooltip_2 {
 
 
 div.tooltip_3 {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     display: flex;
     align-items: center;
     justify-content: center;
@@ -172,7 +172,7 @@ div.tooltip_3 {
     height: fit-content;
     white-space: nowrap;
     font-weight: bold;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     font-size: 130%;
     background: #2a2e30fd;
     color: white;

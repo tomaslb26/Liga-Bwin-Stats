@@ -5,7 +5,7 @@
 }
 
 .text-d3 {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
 }
 
 .global--nav {
@@ -22,11 +22,11 @@
     border-radius: 0.25em;
     box-shadow: 0px 6px 6px -8px #000000;
     color: white;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
 }
 
 .global--nav>h1 {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     margin-left: 2%;
     font-size: 100%;
 }
@@ -78,7 +78,7 @@
 }
 
 .YAxisBarMisc text {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto";
     color: white;
     font-size: 140%;
     font-weight: bold;
