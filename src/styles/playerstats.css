@@ -12,7 +12,7 @@
     border-radius: 0.25em;
     box-shadow: 0px 6px 6px -8px #000000;
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
 }
 
 .player-stats--nav>img {
@@ -47,7 +47,7 @@
 
 .svg-section>h1 {
     margin: 1% 3%;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     font-weight: bold;
     white-space: nowrap;
     color: white;
@@ -67,7 +67,7 @@
 
 
 .button {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     font-size: 115%;
     color: white;
     font-weight: bold;
@@ -85,7 +85,7 @@
     align-self: center;
     vertical-align: middle;
     width: fit-content;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     font-size: 100%;
     font-weight: bold;
     color: white;
@@ -129,7 +129,7 @@
 
 .stat-short {
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
     font-weight: bold;
@@ -148,7 +148,7 @@
 
 .stats-section>h1 {
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
     margin-left: 3%;
@@ -159,7 +159,7 @@
     margin: 2% auto;
     align-self: center;
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
     font-weight: 400;
@@ -168,7 +168,7 @@
 .stat>h1 {
     align-self: center;
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
     font-size: 310%;
@@ -199,7 +199,7 @@
 
 .def-action>label {
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
     font-weight: bold;
@@ -321,14 +321,14 @@
 @media only screen and (min-width: 992px) {}
 
 .tooltip3 {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
     white-space: nowrap;
     font-weight: bold;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     font-size: 130%;
     background: #2a2e30fd;
     color: white;

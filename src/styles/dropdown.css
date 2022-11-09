@@ -64,7 +64,7 @@
     border-radius: 0.25em;
     padding: 0.8em 0.8em;
     white-space: nowrap;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
 }
 
 .placeholder:hover {
@@ -74,7 +74,7 @@
 
 ul,
 ul li {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     list-style-type: none;
     z-index: 2;
     padding: 0;

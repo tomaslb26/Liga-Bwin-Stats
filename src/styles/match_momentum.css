@@ -17,7 +17,7 @@ body {
     border-radius: 0.25em;
     box-shadow: 0px 6px 6px -8px #000000;
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     z-index: 2;
 }
 
@@ -66,7 +66,7 @@ body {
 }
 
 .YAxisFlowChart2 text {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     stroke: white;
 }
 
@@ -79,7 +79,7 @@ body {
 }
 
 .YAxisFlowChart text {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     stroke: white;
 }
 
@@ -92,7 +92,7 @@ body {
 }
 
 .XAxisFlowChart text {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     color: rgb(255, 255, 255);
     transform: translateY(45%);
     font-size: 150%;
@@ -110,7 +110,7 @@ body {
 }
 
 .result-div>h1 {
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     color: white;
     font-size: 250%;
     white-space: nowrap;
@@ -138,7 +138,7 @@ body {
 .result>span {
     white-space: nowrap;
     color: white;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
     margin: 0 5%;
     align-self: center;
     font-size: 190%;
