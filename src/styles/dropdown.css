@@ -2,7 +2,7 @@
     margin-left: 0%;
     position: relative;
     list-style: none;
-    cursor: poRoboto;
+    cursor: pointer;
 }
 
 .dropdown {
@@ -96,7 +96,7 @@ ul li {
 
 label {
     position: relative;
-    cursor: poRoboto;
+    cursor: pointer;
 }
 
 label [type="checkbox"] {

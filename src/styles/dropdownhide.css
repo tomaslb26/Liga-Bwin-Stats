@@ -23,7 +23,7 @@
 .sub-menu-parent-hide {
     position: relative;
     list-style: none;
-    cursor: poRoboto;
+    cursor: pointer;
 }
 
 .sub-menu-hide {
