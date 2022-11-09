@@ -37,7 +37,7 @@
 }
 
 .title-container>h1 {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     text-shadow: 4px 2px 6px #000000;
     margin: 0 0;
     font-size: 500%;
@@ -45,7 +45,7 @@
 }
 
 .title-container>span {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     text-shadow: 4px 2px 6px #000000;
     margin: 0 0;
     font-size: 190%;
@@ -63,7 +63,7 @@
 }
 
 .button-container>h4 {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     text-shadow: 4px 2px 6px #000000;
     margin: 0 0;
     font-size: 190%;
@@ -76,7 +76,7 @@
     border-radius: 0px;
     padding: 3% 2%;
     margin-top: 3%;
-    cursor: pointer;
+    cursor: poRoboto;
 
 }
 
@@ -95,7 +95,7 @@ footer>a:hover {
 }
 
 .button-landing>h5 {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     text-shadow: 4px 2px 6px #000000;
     font-size: 100%;
     white-space: nowrap;
@@ -116,7 +116,7 @@ footer>a:hover {
     text-shadow: 4px 2px 6px #000000;
     margin-left: 2%;
     margin-top: 2%;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     color: rgba(255, 255, 255, 0.901);
 }
 
@@ -195,7 +195,7 @@ footer>img {
 }
 
 footer>h5 {
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     text-shadow: 4px 2px 6px #000000;
     font-size: 120%;
     margin-left: 0;
@@ -204,7 +204,7 @@ footer>h5 {
 
 footer>a {
     color: white;
-    font-family: "Inter", sans-serif;
+    font-family: "Roboto", sans-serif;
     text-shadow: 4px 2px 6px #000000;
     font-size: 150%;
     white-space: nowrap;
