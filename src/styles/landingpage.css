@@ -22,7 +22,7 @@
 }
 
 .text-container {
-    margin: 8% auto;
+    margin: 3% auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -129,6 +129,7 @@ footer>a:hover {
 
 .image-container {
     margin-right: 15%;
+    margin-top: 1%;
 }
 
 .image-grid {
@@ -141,8 +142,8 @@ footer>a:hover {
 .photo-container {
     background-color: white;
     border: 1px solid white;
-    width: 160px;
-    height: 160px;
+    width: 18vh;
+    height: 18vh;
     border-radius: 30% 20%;
     box-shadow: rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     overflow: hidden;
@@ -300,4 +301,11 @@ footer>a>i {
         margin: 0 auto;
     }
 
+}
+
+@media only screen and (min-width: 968px) and (max-width: 1366px) {
+    .photo-container {
+        width: 16vh;
+        height: 16vh;
+    }
 }
