@@ -85,6 +85,7 @@
     align-self: center;
     vertical-align: middle;
     width: fit-content;
+    text-align: center;
     font-family: "Roboto", sans-serif;
     font-size: 100%;
     font-weight: bold;
@@ -217,6 +218,7 @@
         margin: 0 auto;
         white-space: normal;
         align-self: center;
+        text-align: center;
     }
 
     .checkbox-flip {
@@ -278,6 +280,7 @@
     .checkboxes {
         white-space: nowrap;
         align-self: center;
+        text-align: center;
     }
 
     .checkbox-flip {
@@ -318,7 +321,19 @@
 
 }
 
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) and (max-width: 1366px) {
+    .checkboxes {
+        text-align: center;
+        width: 100%;
+        font-size: 70%;
+        white-space: normal;
+        margin: 0 auto;
+    }
+
+    .player-stats--main {
+        margin-top: 6%;
+    }
+}
 
 .tooltip3 {
     font-family: "Roboto", sans-serif;

@@ -28,7 +28,7 @@ export default function PlotActions(props) {
     }
     else {
         var svgWidth = props.win_width - 120
-        var svgHeight = props.win_height - 250;
+        var svgHeight = 600;
         var margin = { top: 10, right: 9, bottom: 0, left: 0 }
         var mode = true
         var pitchMultiplier = 5.5
