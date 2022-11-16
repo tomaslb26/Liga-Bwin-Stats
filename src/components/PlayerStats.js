@@ -239,7 +239,7 @@ export default function PlayerStats() {
                         </div>
                     </div>
                     <div className="svg-section">
-                        <h1>Shooting</h1>
+                        <h1>Defending</h1>
                         <div style={{ gridTemplateColumns: "1fr" }} className="stats--grid">
                             <StatContainer stat={"defensive_actions"} title={"Defensive Actions"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} /></div>
                     </div>
