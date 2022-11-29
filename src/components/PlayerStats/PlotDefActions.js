@@ -1,16 +1,16 @@
 import * as d3 from "d3";
-export function plot_def_actions(svg, data, color, pitchMultiplier, mode) {
+export function plot_def_actions(svg, data, color, width, height, mode) {
     svg.selectAll('.progressiveCircles')
         .data(data)
         .enter().append('circle')
         .attr("id", "progressive")
         .attr("cx", function (d) {
-            if (mode) return (68 - Number(d.y)) * pitchMultiplier
-            else return (Number(d.x)) * pitchMultiplier
+            if (mode) return (68 - Number(d.y)) * 5
+            else return (Number(d.x)) * width / 105
         })
         .attr("cy", function (d) {
-            if (mode) return (105 - Number(d.x)) * pitchMultiplier
-            else return (68 - Number(d.y)) * pitchMultiplier
+            if (mode) return (105 - Number(d.x)) * 5
+            else return (68 - Number(d.y)) * height / 68
         })
         .attr('r', 5)
         .transition()

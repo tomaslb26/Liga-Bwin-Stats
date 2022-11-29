@@ -28,6 +28,9 @@
 
 .pitch {
     margin-top: 1%;
+    align-self: center;
+    width: fit-content;
+    height: fit-content;
 }
 
 .stats-section {
