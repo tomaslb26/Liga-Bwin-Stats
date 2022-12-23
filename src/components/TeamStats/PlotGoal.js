@@ -2,7 +2,17 @@ import * as d3 from "d3";
 import { create_glow } from "../CreateGlow";
 import "./../../styles/playerstats.css"
 
-export function plot_goal(event, d, color, tooltip) {
+export function plot_goal(event, d, color) {
+    d3.select("body").selectAll("#tooltip_shots").remove()
+
+    let tooltip = d3.select("body").append("div").attr("id", "tooltip_shots")
+        .attr("class", "tooltip3")
+        .style("border", "2px solid " + color).style("opacity", 0).style("visibility", "hidden");
+
+    d3.select("body").on("click", function () {
+        d3.select("div#tooltip_shots").style("opacity", 0).style("visibility", "hidden");
+    });
+
     tooltip.select("svg").remove()
 
     tooltip.transition()

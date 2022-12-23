@@ -5,15 +5,6 @@ import "./../../styles/playerstats.css"
 
 export function plot_shot_circles(svg, data, color, width, height, mode, team_color) {
 
-    d3.select("body").selectAll("#tooltip_shots").remove()
-    let tooltip_shots = d3.select("body").append("div").attr("id", "tooltip_shots")
-        .attr("class", "tooltip3")
-        .style("border", "2px solid " + team_color).style("opacity", 0).style("visibility", "hidden");
-
-    d3.select("body").on("click", function () {
-        d3.select("div#tooltip_shots").style("opacity", 0).style("visibility", "hidden");
-    });
-
     var lineWidth = 1.8
 
     function handleMouseOver(event, d) {
@@ -70,7 +61,7 @@ export function plot_shot_circles(svg, data, color, width, height, mode, team_co
     }
 
     function handleClick(event, d) {
-        plot_goal(event, d, team_color, tooltip_shots);
+        plot_goal(event, d, team_color);
     }
 
     svg.selectAll('.progressiveCircles')
