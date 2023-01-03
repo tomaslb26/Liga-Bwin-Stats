@@ -29,19 +29,28 @@ export default function PlotActions(props) {
     });
 
     var lineWidth = 1.8
-    var pitchMultiplier = 5.5
     var margin = { top: 0, right: 60, bottom: 0, left: 30 }
 
-    var width = 560
-    if (props.win_width > 1400) var height = props.win_width / 4 + 50
-    else if (props.win_width > 1150) var height = props.win_width / 3
-    else if (props.win_width > 700) var height = props.win_width / 3 + 120
-    else var height = props.win_width - 50
+    if (props.win_width > 1400) {
+        var svgWidth = props.win_width / 3 - 200;
+        var svgHeight = props.win_height - 350;
+    }
+    else if (props.win_width > 992) {
+        var svgWidth = props.win_width / 3 - 100;
+        var svgHeight = props.win_height - 180;
+    }
+    else if (props.win_width > 768) {
+        var svgWidth = props.win_width / 2 - 50
+        var svgHeight = 650;
+
+    }
+    else {
+        var svgWidth = props.win_width - 70
+        var svgHeight = 600;
+
+    }
 
     const svgRef = React.useRef(null);
-    const svgHeight = width + margin.left + margin.right;
-    const svgWidth = height + margin.top + margin.bottom;
-
 
 
     function plotLines(svg, data) {
@@ -49,10 +58,10 @@ export default function PlotActions(props) {
             .data(data)
             .enter().append("line")
             .attr("id", "progressive")
-            .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-            .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
-            .attr("x2", d => (68 - Number(d.endY)) * pitchMultiplier)
-            .attr("y2", d => (105 - Number(d.endX)) * pitchMultiplier)
+            .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+            .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
+            .attr("x2", d => (68 - Number(d.endY)) * (svgWidth / 68))
+            .attr("y2", d => (105 - Number(d.endX)) * (svgHeight - 20) / 105)
             .style("filter", "url(#glow)")
             .attr("stroke", "white")
             .attr("stroke-width", lineWidth)
@@ -88,8 +97,8 @@ export default function PlotActions(props) {
             .data(data)
             .enter().append('circle')
             .attr("id", "progressive")
-            .attr('cy', d => (105 - d.endX) * pitchMultiplier)
-            .attr('cx', d => (68 - d.endY) * pitchMultiplier)
+            .attr('cy', d => (105 - d.endX) * (svgHeight - 20) / 105)
+            .attr('cx', d => (68 - d.endY) * (svgWidth / 68))
             .attr('r', 7)
             .style('stroke-width', lineWidth)
             .style("filter", "url(#glow)")
@@ -105,10 +114,10 @@ export default function PlotActions(props) {
 
         d3.select(svgRef.current).selectAll("*").remove();
         const svg = d3.select(svgRef.current).append("svg")
-            .attr("height", width + margin.left + margin.right)
-            .attr("width", height + margin.top + margin.bottom);
+            .attr("width", svgWidth)
+            .attr("height", svgHeight)
 
-        var pitch = CreatePitch(svg, width, height, margin)
+        var pitch = CreatePitch(svg, svgWidth, svgHeight - 20)
 
         create_glow(pitch)
         createTriangle(pitch, "triangle2", 0.1)
@@ -117,8 +126,8 @@ export default function PlotActions(props) {
         if (props.data == null) {
             pitch
                 .append("text")
-                .attr("x", (34 * pitchMultiplier))
-                .attr("y", (70 * pitchMultiplier))
+                .attr("x", (34 * (svgWidth / 68)))
+                .attr("y", (70 * (svgHeight - 20) / 105))
                 .attr("class", "text-d3")
                 .attr("text-anchor", "middle")
                 .style("font-size", "50px")
@@ -139,10 +148,10 @@ export default function PlotActions(props) {
                         .data(unsuccesful)
                         .enter().append("line")
                         .attr("id", "progressive")
-                        .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-                        .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
-                        .attr("x2", d => (68 - Number(d.endY)) * pitchMultiplier)
-                        .attr("y2", d => (105 - Number(d.endX)) * pitchMultiplier)
+                        .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+                        .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
+                        .attr("x2", d => (68 - Number(d.endY)) * (svgWidth / 68))
+                        .attr("y2", d => (105 - Number(d.endX)) * (svgHeight - 20) / 105)
                         .style("filter", "url(#glow)")
                         .attr("stroke", "white")
                         .style("stroke-opacity", 0.1)
@@ -160,10 +169,10 @@ export default function PlotActions(props) {
                         .data(passes)
                         .enter().append("line")
                         .attr("id", "progressive")
-                        .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-                        .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
-                        .attr("x2", d => (68 - Number(d.endY)) * pitchMultiplier)
-                        .attr("y2", d => (105 - Number(d.endX)) * pitchMultiplier)
+                        .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+                        .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
+                        .attr("x2", d => (68 - Number(d.endY)) * (svgWidth / 68))
+                        .attr("y2", d => (105 - Number(d.endX)) * (svgHeight - 20) / 105)
                         .style("filter", "url(#glow)")
                         .attr("stroke", "white")
                         .style("stroke-opacity", 0.8)
@@ -181,10 +190,10 @@ export default function PlotActions(props) {
                         .data(passes)
                         .enter().append("line")
                         .attr("id", "progressive")
-                        .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-                        .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
-                        .attr("x2", d => (68 - Number(d.endY)) * pitchMultiplier)
-                        .attr("y2", d => (105 - Number(d.endX)) * pitchMultiplier)
+                        .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+                        .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
+                        .attr("x2", d => (68 - Number(d.endY)) * (svgWidth / 68))
+                        .attr("y2", d => (105 - Number(d.endX)) * (svgHeight - 20) / 105)
                         .style("filter", "url(#glow)")
                         .attr("stroke", "white")
                         .style("stroke-opacity", 0.8)
@@ -214,10 +223,10 @@ export default function PlotActions(props) {
                         .data(carries)
                         .enter().append("line")
                         .attr("id", "progressive")
-                        .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-                        .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
-                        .attr("x2", d => (68 - Number(d.endY)) * pitchMultiplier)
-                        .attr("y2", d => (105 - Number(d.endX)) * pitchMultiplier)
+                        .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+                        .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
+                        .attr("x2", d => (68 - Number(d.endY)) * (svgWidth / 68))
+                        .attr("y2", d => (105 - Number(d.endX)) * (svgHeight - 20) / 105)
                         .style("filter", "url(#glow)")
                         .attr("stroke", "white")
                         .style("stroke-opacity", 0.8)
@@ -235,10 +244,10 @@ export default function PlotActions(props) {
                         .data(carries)
                         .enter().append("line")
                         .attr("id", "progressive")
-                        .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-                        .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
-                        .attr("x2", d => (68 - Number(d.endY)) * pitchMultiplier)
-                        .attr("y2", d => (105 - Number(d.endX)) * pitchMultiplier)
+                        .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+                        .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
+                        .attr("x2", d => (68 - Number(d.endY)) * (svgWidth / 68))
+                        .attr("y2", d => (105 - Number(d.endX)) * (svgHeight - 20) / 105)
                         .style("filter", "url(#glow)")
                         .attr("stroke", "white")
                         .style("stroke-opacity", 0.8)
@@ -271,17 +280,17 @@ export default function PlotActions(props) {
                             .data([d])
                             .enter().append("line")
                             .attr("id", "remove")
-                            .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-                            .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
+                            .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+                            .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
                             .attr("x2", d => {
-                                if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * pitchMultiplier
-                                else return (68 - Number(d.blockedY)) * pitchMultiplier
+                                if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * (svgWidth / 68)
+                                else return (68 - Number(d.blockedY)) * (svgWidth / 68)
                             })
                             .attr("y2", d => {
                                 if (d.blockedX == "") {
-                                    return (105 - 105) * pitchMultiplier
+                                    return (105 - 105) * (svgHeight - 20) / 105
                                 }
-                                else return (105 - Number(d.blockedX)) * pitchMultiplier
+                                else return (105 - Number(d.blockedX)) * (svgHeight - 20) / 105
                             })
                             .style("filter", "url(#glow)")
                             .attr("stroke", "white")
@@ -311,8 +320,8 @@ export default function PlotActions(props) {
                         .data(data)
                         .enter().append('circle')
                         .attr("id", "shots")
-                        .attr('cy', d => (105 - d.x) * pitchMultiplier)
-                        .attr('cx', d => (68 - d.y) * pitchMultiplier)
+                        .attr('cy', d => (105 - d.x) * (svgHeight - 20) / 105)
+                        .attr('cx', d => (68 - d.y) * (svgWidth / 68))
                         .attr('r', d => 20 * d.expectedGoals)
                         .style('stroke-width', 0.5)
                         .style('stroke', "white")
@@ -331,8 +340,8 @@ export default function PlotActions(props) {
                     circles = pitch.selectAll('.progressiveCircles')
                         .data(_data)
                         .enter().append('circle')
-                        .attr('cy', d => (105 - d.x) * pitchMultiplier)
-                        .attr('cx', d => (68 - d.y) * pitchMultiplier)
+                        .attr('cy', d => (105 - d.x) * (svgHeight - 20) / 105)
+                        .attr('cx', d => (68 - d.y) * (svgWidth / 68))
                         .attr('r', d => 20 * d.expectedGoals)
                         .style('stroke-width', 0.5)
                         .style('stroke', "white")
@@ -347,8 +356,8 @@ export default function PlotActions(props) {
 
                     function appendText(x, y, text) {
                         pitch.append("text")
-                            .attr("y", d => (((105 - x) * pitchMultiplier) - 20))
-                            .attr("x", d => ((68 - y) * pitchMultiplier) - 15)
+                            .attr("y", d => (((105 - x) * (svgHeight - 20) / 105) - 20))
+                            .attr("x", d => ((68 - y) * (svgWidth / 68)) - 15)
                             .attr("dy", "-.55em")
                             .attr("class", "text-d3")
                             .style("font-size", 12)
@@ -359,8 +368,8 @@ export default function PlotActions(props) {
                     }
 
                     pitch.selectAll('text').data(_data).enter().append("text")
-                        .attr("y", d => (((105 - d.x) * pitchMultiplier) + 40))
-                        .attr("x", d => ((68 - d.y) * pitchMultiplier) - 5)
+                        .attr("y", d => (((105 - d.x) * (svgHeight - 20) / 105) + 40))
+                        .attr("x", d => ((68 - d.y) * (svgWidth / 68)) - 5)
                         .attr("class", "text-d3")
                         .attr("dy", "-.55em")
                         .style("font-size", 12)
@@ -417,8 +426,8 @@ export default function PlotActions(props) {
                     .data(def_actions)
                     .enter().append('circle')
                     .attr("id", "def")
-                    .attr('cy', d => (105 - d.x) * pitchMultiplier)
-                    .attr('cx', d => (68 - d.y) * pitchMultiplier)
+                    .attr('cy', d => (105 - d.x) * (svgHeight - 20) / 105)
+                    .attr('cx', d => (68 - d.y) * (svgWidth / 68))
                     .attr('r', d => 7)
                     .style('stroke-width', 0)
                     .style('stroke', "white")

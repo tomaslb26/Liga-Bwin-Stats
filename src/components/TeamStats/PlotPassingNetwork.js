@@ -24,26 +24,38 @@ export default function PlotPassingNetwork(props) {
 
     var lineWidth = 1.8
     var pitchMultiplier = 5.5
-    var margin = { top: 10, right: 9, bottom: 0, left: 30 }
 
-    var width = 590
-    if (props.win_width > 1400) var height = props.win_width / 4 + 50
-    else if (props.win_width > 1150) var height = props.win_width / 3
-    else if (props.win_width > 700) var height = props.win_width / 3 + 120
-    else var height = props.win_width - 50
+    if (props.win_width > 1400) {
+        var svgWidth = props.win_width / 3 - 200;
+        var svgHeight = props.win_height - 350;
+    }
+    else if (props.win_width > 992) {
+        var svgWidth = props.win_width / 3 - 100;
+        var svgHeight = props.win_height - 180;
+    }
+    else if (props.win_width > 768) {
+        var svgWidth = props.win_width / 2 - 50
+        var svgHeight = 650;
+
+    }
+    else {
+        var svgWidth = props.win_width - 70
+        var svgHeight = 600;
+
+    }
 
     const svgRef = React.useRef(null);
-    const svgHeight = width + margin.left + margin.right;
-    const svgWidth = height + margin.top + margin.bottom;
 
     React.useEffect(() => {
 
         d3.select(svgRef.current).selectAll("*").remove();
-        const svg = d3.select(svgRef.current).append("svg")
-            .attr("height", width + margin.left + margin.right)
-            .attr("width", height + margin.top + margin.bottom);
+        var svg = d3.select(svgRef.current)
+            .append("svg")
+            .attr("width", svgWidth)
+            .attr("height", svgHeight)
 
-        var pitch = CreatePitch(svg, width, height, margin)
+        var pitch = CreatePitch(svg, svgWidth, svgHeight - 20)
+
         if (props.data != null) {
             var positions = [];
             dataset.filter(function (d) {
@@ -75,10 +87,10 @@ export default function PlotPassingNetwork(props) {
                 .data(lines)
                 .enter().append("line")
                 .attr("id", "passing")
-                .attr("x1", d => (68 - Number(d.y)) * pitchMultiplier)
-                .attr("y1", d => (105 - Number(d.x)) * pitchMultiplier)
-                .attr("x2", d => (68 - Number(d.mid_y)) * pitchMultiplier)
-                .attr("y2", d => (105 - Number(d.mid_x)) * pitchMultiplier)
+                .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
+                .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
+                .attr("x2", d => (68 - Number(d.mid_y)) * (svgWidth / 68))
+                .attr("y2", d => (105 - Number(d.mid_x)) * (svgHeight - 20) / 105)
                 .style("filter", "url(#glow)")
                 .attr("stroke", "white")
                 .attr("stroke-width", d => (Number(d.pass_count) * 2.5) / max)
@@ -88,10 +100,10 @@ export default function PlotPassingNetwork(props) {
                 .data(lines)
                 .enter().append("line")
                 .attr("id", "passing")
-                .attr("x1", d => (68 - Number(d.mid_y)) * pitchMultiplier)
-                .attr("y1", d => (105 - Number(d.mid_x)) * pitchMultiplier)
-                .attr("x2", d => (68 - Number(d.y_end)) * pitchMultiplier)
-                .attr("y2", d => (105 - Number(d.x_end)) * pitchMultiplier)
+                .attr("x1", d => (68 - Number(d.mid_y)) * (svgWidth / 68))
+                .attr("y1", d => (105 - Number(d.mid_x)) * (svgHeight - 20) / 105)
+                .attr("x2", d => (68 - Number(d.y_end)) * (svgWidth / 68))
+                .attr("y2", d => (105 - Number(d.x_end)) * (svgHeight - 20) / 105)
                 .style("filter", "url(#glow)")
                 .attr("stroke", "white")
                 .attr("stroke-width", d => (Number(d.pass_count) * 2.5) / max)
@@ -172,8 +184,8 @@ export default function PlotPassingNetwork(props) {
                 .data(positions)
                 .enter().append('circle')
                 .attr("id", "nodes")
-                .attr('cy', d => (105 - d.x) * pitchMultiplier)
-                .attr('cx', d => (68 - d.y) * pitchMultiplier)
+                .attr('cy', d => (105 - d.x) * (svgHeight - 20) / 105)
+                .attr('cx', d => (68 - d.y) * (svgWidth / 68))
                 .attr('r', 15)
                 .style('stroke-width', lineWidth)
                 .style('stroke', "white")
@@ -189,8 +201,8 @@ export default function PlotPassingNetwork(props) {
                 .data(positions).enter()
                 .append("text")
                 .attr("id", "numbers")
-                .attr("x", d => (68 - d.y) * pitchMultiplier)
-                .attr("y", d => (105 - d.x) * pitchMultiplier + 5)
+                .attr("x", d => (68 - d.y) * (svgWidth / 68))
+                .attr("y", d => (105 - d.x) * (svgHeight - 20) / 105 + 5)
                 .attr("class", "text-d3")
                 .attr("text-anchor", "middle")
                 .style("font-size", "16px")
@@ -208,8 +220,8 @@ export default function PlotPassingNetwork(props) {
 
             pitch
                 .append("text")
-                .attr("x", (7 * pitchMultiplier))
-                .attr("y", (102 * pitchMultiplier))
+                .attr("x", (7 * (svgWidth / 68)))
+                .attr("y", (102 * (svgHeight - 20) / 105))
                 .attr("class", "text-d3")
                 .attr("text-anchor", "middle")
                 .style("font-size", "20px")
@@ -220,8 +232,8 @@ export default function PlotPassingNetwork(props) {
         else {
             pitch
                 .append("text")
-                .attr("x", (34 * pitchMultiplier))
-                .attr("y", (70 * pitchMultiplier))
+                .attr("x", (34 * (svgWidth / 68)))
+                .attr("y", (70 * (svgHeight - 20) / 105))
                 .attr("class", "text-d3")
                 .attr("text-anchor", "middle")
                 .style("font-size", "50px")

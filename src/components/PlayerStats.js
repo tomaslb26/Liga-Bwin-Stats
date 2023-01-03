@@ -275,72 +275,85 @@ export default function PlayerStats() {
                     <div className="checkboxes">
                         {plotOption === "actions" &&
                             <>
-
-                                <label htmlFor="unsuccessful_passes">Unsuccessful Passes</label>
-                                <input
-                                    className="checkbox-flip"
-                                    type="checkbox"
-                                    id="unsuccessful_passes"
-                                    checked={unsuccessfulPasses}
-                                    onChange={() => setUnsuccessfulPasses((prev) => (!prev))}
-                                    name="unsuccessful_passes"
-                                />
-                                <label htmlFor="all_passes">All Passes</label>
-                                <input
-                                    className="checkbox-flip"
-                                    type="checkbox"
-                                    id="all_passes"
-                                    checked={allPasses}
-                                    onChange={() => setAllPasses((prev) => (!prev))}
-                                    name="all_passes"
-                                />
-                                <label htmlFor="prog_passes">Progressive Passes</label>
-                                <input
-                                    className="checkbox-flip"
-                                    type="checkbox"
-                                    id="prog_passes"
-                                    checked={progPasses}
-                                    onChange={() => setProgPasses((prev) => (!prev))}
-                                    name="prog_passes"
-                                    style={{ border: "1px solid " + teams_colors.filter((item) => (item.team === team))[0]["color"] }}
-                                />
-                                <label htmlFor="all_carries">All Carries</label>
-                                <input
-                                    className="checkbox-flip"
-                                    type="checkbox"
-                                    id="all_carries"
-                                    checked={allCarries}
-                                    onChange={() => setAllCarries((prev) => (!prev))}
-                                    name="all_carries"
-                                />
-                                <label htmlFor="prog_carries">Progressive Carries</label>
-                                <input
-                                    className="checkbox-flip"
-                                    type="checkbox"
-                                    id="prog_carries"
-                                    checked={progCarries}
-                                    onChange={() => setProgCarries((prev) => (!prev))}
-                                    name="prog_carries"
-                                    style={{ border: "1px solid #48EDDB" }}
-                                />
-                                <label htmlFor="all_touches">All Touches</label>
-                                <input
-                                    className="checkbox-flip"
-                                    type="checkbox"
-                                    id="all_touches"
-                                    checked={allTouches}
-                                    onChange={() => setAllTouches((prev) => (!prev))}
-                                    name="all_touches"
-                                />
-                                <label htmlFor="heatmap">Heatmap</label>
-                                <input
-                                    className="checkbox-flip"
-                                    type="checkbox"
-                                    id="heatmap"
-                                    checked={heatmap}
-                                    onChange={() => setHeatmap((prev) => (!prev))}
-                                    name="heatmap"
-                                />
+                                <div className="def-action">
+                                    <label htmlFor="unsuccessful_passes">Unsuccessful Passes</label>
+                                    <input
+                                        className="checkbox-flip"
+                                        type="checkbox"
+                                        id="unsuccessful_passes"
+                                        checked={unsuccessfulPasses}
+                                        onChange={() => setUnsuccessfulPasses((prev) => (!prev))}
+                                        name="unsuccessful_passes"
+                                    />
+                                </div>
+                                <div className="def-action">
+                                    <label htmlFor="all_passes">All Passes</label>
+                                    <input
+                                        className="checkbox-flip"
+                                        type="checkbox"
+                                        id="all_passes"
+                                        checked={allPasses}
+                                        onChange={() => setAllPasses((prev) => (!prev))}
+                                        name="all_passes"
+                                    />
+                                </div>
+                                <div className="def-action">
+                                    <label htmlFor="prog_passes">Progressive Passes</label>
+                                    <input
+                                        className="checkbox-flip"
+                                        type="checkbox"
+                                        id="prog_passes"
+                                        checked={progPasses}
+                                        onChange={() => setProgPasses((prev) => (!prev))}
+                                        name="prog_passes"
+                                        style={{ border: "1px solid " + teams_colors.filter((item) => (item.team === team))[0]["color"] }}
+                                    />
+                                </div>
+                                <div className="def-action">
+                                    <label htmlFor="all_carries">All Carries</label>
+                                    <input
+                                        className="checkbox-flip"
+                                        type="checkbox"
+                                        id="all_carries"
+                                        checked={allCarries}
+                                        onChange={() => setAllCarries((prev) => (!prev))}
+                                        name="all_carries"
+                                    />
+                                </div>
+                                <div className="def-action">
+                                    <label htmlFor="prog_carries">Progressive Carries</label>
+                                    <input
+                                        className="checkbox-flip"
+                                        type="checkbox"
+                                        id="prog_carries"
+                                        checked={progCarries}
+                                        onChange={() => setProgCarries((prev) => (!prev))}
+                                        name="prog_carries"
+                                        style={{ border: "1px solid #48EDDB" }}
+                                    />
+                                </div>
+                                <div className="def-action">
+                                    <label htmlFor="all_touches">All Touches</label>
+                                    <input
+                                        className="checkbox-flip"
+                                        type="checkbox"
+                                        id="all_touches"
+                                        checked={allTouches}
+                                        onChange={() => setAllTouches((prev) => (!prev))}
+                                        name="all_touches"
+                                    />
+                                </div>
+                                <div className="def-action">
+                                    <label htmlFor="heatmap">Heatmap</label>
+                                    <input
+                                        className="checkbox-flip"
+                                        type="checkbox"
+                                        id="heatmap"
+                                        checked={heatmap}
+                                        onChange={() => setHeatmap((prev) => (!prev))}
+                                        name="heatmap"
+                                    />
+                                </div>
                             </>}
                         {plotOption === "shots" &&
                             <>
