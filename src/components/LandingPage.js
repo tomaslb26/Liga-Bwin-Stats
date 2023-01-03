@@ -100,7 +100,7 @@ export default function LandingPage() {
                         </div>
                         <footer>
                             <img src={require(`./../data/LigaBwin.png`)} ></img>
-                            <h5 style={{ color: "white" }}>Last updated on: <span style={{ color: "#FFB700" }}>15/11/2022</span></h5>
+                            <h5 style={{ color: "white" }}>Last updated on: <span style={{ color: "#FFB700" }}>03/01/2023</span></h5>
                             <a href="https://twitter.com/positioniskeypt" className="services--functions"><i className="fab fa-twitter-square fa-lg"></i></a>
                             <a href="https://linkedin.com/in/tomás-sequeira" className="services--functions"><i className="fab fa-linkedin fa-lg"></i></a>
                         </footer>
