@@ -1,24 +1,21 @@
 import * as d3 from "d3";
 
-export function plot_circles(svg, data, color, pitchMultiplier, mode) {
+export function plot_circles(svg, data, color, width, height, mode) {
     var lineWidth = 1.8
-
-    if (pitchMultiplier === 5.5) var r = 4
-    else r = 7
 
     svg.selectAll('.progressiveCircles')
         .data(data)
         .enter().append('circle')
         .attr("id", "progressive")
         .attr('cx', function (d) {
-            if (mode) return (68 - Number(d.endY)) * pitchMultiplier
-            else return (Number(d.endX)) * pitchMultiplier
+            if (mode) return (68 - Number(d.endY)) * (width + 80) / 68
+            else return (Number(d.endX)) * width / 105
         })
         .attr('cy', function (d) {
-            if (mode) return (105 - Number(d.endX)) * pitchMultiplier
-            else return (68 - Number(d.endY)) * pitchMultiplier
+            if (mode) return (105 - Number(d.endX)) * height / 105
+            else return (68 - Number(d.endY)) * height / 68
         })
-        .attr('r', r)
+        .attr('r', 7)
         .style('stroke-width', lineWidth)
         .style("filter", "url(#glow)")
         .style('stroke', color)

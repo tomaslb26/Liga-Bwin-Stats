@@ -1,26 +1,26 @@
 import * as d3 from "d3";
 
-export function plot_lines(svg, data, pitchMultiplier, mode) {
+export function plot_lines(svg, data, width, height, mode) {
     var lineWidth = 1.8
     svg.selectAll('.progressiveLines')
         .data(data)
         .enter().append("line")
         .attr("id", "progressive")
         .attr("x1", function (d) {
-            if (mode) return (68 - Number(d.y)) * pitchMultiplier
-            else return (Number(d.x)) * pitchMultiplier
+            if (mode) return (68 - Number(d.y)) * (width + 80) / 68
+            else return (Number(d.x)) * width / 105
         })
         .attr("y1", function (d) {
-            if (mode) return (105 - Number(d.x)) * pitchMultiplier
-            else return (68 - Number(d.y)) * pitchMultiplier
+            if (mode) return (105 - Number(d.x)) * height / 105
+            else return (68 - Number(d.y)) * height / 68
         })
         .attr("x2", function (d) {
-            if (mode) return (68 - Number(d.endY)) * pitchMultiplier
-            else return (Number(d.endX)) * pitchMultiplier
+            if (mode) return (68 - Number(d.endY)) * (width + 80) / 68
+            else return (Number(d.endX)) * width / 105
         })
         .attr("y2", function (d) {
-            if (mode) return (105 - Number(d.endX)) * pitchMultiplier
-            else return (68 - Number(d.endY)) * pitchMultiplier
+            if (mode) return (105 - Number(d.endX)) * height / 105
+            else return (68 - Number(d.endY)) * height / 68
         })
         .style("filter", "url(#glow)")
         .transition()

@@ -1,6 +1,6 @@
 .team-stats {
     display: flex;
-    padding: 5% 0%;
+    margin-top: 5%;
 }
 
 .team-grid {
@@ -19,20 +19,32 @@
 }
 
 .second-rectangle {
-    width: 100%;
     background: #2a2e30de;
     border-radius: .45em;
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: fit-content;
+    padding: 0 10%;
 }
 
 .third-rectangle {
-    width: 100%;
     background: #2a2e30de;
     border-radius: .45em;
     display: flex;
     flex-direction: column;
+    width: fit-content;
+    padding: 0 10%;
+}
+
+.inputs {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+}
+
+#actions_svg {
+    align-self: center;
 }
 
 .first-rectangle>img {
@@ -101,10 +113,16 @@
 
     .second-rectangle {
         width: fit-content;
+        padding: 0 3%;
     }
 
     .third-rectangle {
         width: fit-content;
+        padding: 0 3%;
+    }
+
+    #chart {
+        padding: 0 5%;
     }
 
 }
@@ -163,16 +181,35 @@ div.tooltip_2 {
     .second-rectangle {
         width: fit-content;
         grid-column: span 1;
+        padding: 0 2%;
     }
 
     .third-rectangle {
         width: fit-content;
         grid-column: span 1;
+        padding: 0 2%;
     }
+
+    #chart {}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {}
+@media only screen and (min-width: 992px) and (max-width: 1366px) {
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+    .second-rectangle {
+        padding: 0 4%;
+    }
+
+    .third-rectangle {
+        padding: 0 1%;
+    }
+
+    .inputs>label {
+        font-size: 70%;
+    }
+
+    .inputs>input {
+        width: 20px;
+        height: 20px;
+    }
+}

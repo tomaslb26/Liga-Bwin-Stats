@@ -3,16 +3,7 @@ import { plot_goal } from "./../TeamStats/PlotGoal"
 import "./../../styles/playerstats.css"
 
 
-export function plot_shot_circles(svg, data, color, pitchMultiplier, mode, team_color) {
-
-    d3.select("body").selectAll("#tooltip_shots").remove()
-    let tooltip_shots = d3.select("body").append("div").attr("id", "tooltip_shots")
-        .attr("class", "tooltip3")
-        .style("border", "2px solid " + team_color).style("opacity", 0).style("visibility", "hidden");
-
-    d3.select("body").on("click", function () {
-        d3.select("div#tooltip_shots").style("opacity", 0).style("visibility", "hidden");
-    });
+export function plot_shot_circles(svg, data, color, width, height, mode, team_color) {
 
     var lineWidth = 1.8
 
@@ -27,33 +18,33 @@ export function plot_shot_circles(svg, data, color, pitchMultiplier, mode, team_
             .enter().append("line")
             .attr("id", "remove")
             .attr("x1", function (d) {
-                if (mode) return (68 - Number(d.y)) * pitchMultiplier
-                else return (Number(d.x)) * pitchMultiplier
+                if (mode) return (68 - Number(d.y)) * (width + 80) / 68
+                else return (Number(d.x)) * width / 105
             })
             .attr("y1", function (d) {
-                if (mode) return (105 - Number(d.x)) * pitchMultiplier
-                else return (68 - Number(d.y)) * pitchMultiplier
+                if (mode) return (105 - Number(d.x)) * height / 105
+                else return (68 - Number(d.y)) * height / 68
             })
             .attr("y2", d => {
                 if (mode) {
-                    if (d.blockedX == "") return (105 - 105) * pitchMultiplier
-                    else return (105 - Number(d.blockedX)) * pitchMultiplier
+                    if (d.blockedX == "") return (105 - 105) * height / 105
+                    else return (105 - Number(d.blockedX)) * height / 105
                 }
                 else {
-                    if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * pitchMultiplier
-                    else return (68 - Number(d.blockedY)) * pitchMultiplier
+                    if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * height / 68
+                    else return (68 - Number(d.blockedY)) * height / 68
                 }
             })
             .attr("x2", d => {
                 if (mode) {
-                    if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * pitchMultiplier
-                    else return (68 - Number(d.blockedY)) * pitchMultiplier
+                    if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * (width + 80) / 68
+                    else return (68 - Number(d.blockedY)) * (width + 80) / 68
                 }
                 else {
                     if (d.blockedX == "") {
-                        return 105 * pitchMultiplier
+                        return 105 * width / 105
                     }
-                    else return (Number(d.blockedX)) * pitchMultiplier
+                    else return (Number(d.blockedX)) * width / 105
                 }
             })
             .style("filter", "url(#glow)")
@@ -70,19 +61,19 @@ export function plot_shot_circles(svg, data, color, pitchMultiplier, mode, team_
     }
 
     function handleClick(event, d) {
-        plot_goal(event, d, team_color, tooltip_shots);
+        plot_goal(event, d, team_color);
     }
 
     svg.selectAll('.progressiveCircles')
         .data(data)
         .enter().append('circle')
         .attr("cx", function (d) {
-            if (mode) return (68 - Number(d.y)) * pitchMultiplier
-            else return (Number(d.x)) * pitchMultiplier
+            if (mode) return (68 - Number(d.y)) * (width + 80) / 68
+            else return (Number(d.x)) * width / 105
         })
         .attr("cy", function (d) {
-            if (mode) return (105 - Number(d.x)) * pitchMultiplier
-            else return (68 - Number(d.y)) * pitchMultiplier
+            if (mode) return (105 - Number(d.x)) * height / 105
+            else return (68 - Number(d.y)) * height / 68
         })
         .attr('r', d => 30 * d.expectedGoals)
         .on("click", handleClick)

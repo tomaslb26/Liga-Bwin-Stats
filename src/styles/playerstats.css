@@ -28,6 +28,9 @@
 
 .pitch {
     margin-top: 1%;
+    align-self: center;
+    width: fit-content;
+    height: fit-content;
 }
 
 .stats-section {
@@ -82,31 +85,18 @@
 }
 
 .checkboxes {
-    align-self: center;
-    vertical-align: middle;
-    width: fit-content;
-    text-align: center;
     font-family: "Roboto", sans-serif;
     font-size: 100%;
     font-weight: bold;
     color: white;
-    white-space: nowrap;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
+    align-self: center;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.checkboxes label {
-    margin-left: 1%;
-    vertical-align: middle;
-}
-
-.checkboxes label:first-child {
-    margin-left: 0%;
-}
-
-.checkboxes input {
-    margin-left: 1.5%;
-}
 
 .button:hover {
     transform: scale(1.1);
@@ -180,22 +170,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 65vw;
     margin-left: 2%;
     background-color: #2a2e30ad;
     box-shadow: 0px 6px 6px -8px #000000;
     border-radius: 0.25em;
     padding-bottom: 1%;
+    width: 65%;
 }
 
 .def-action {
-    box-shadow: 0px 6px 6px -8px #000000;
-    width: fit-content;
-    padding-right: 1%;
-    display: inline-block;
-    margin-left: 1%;
-    padding-left: 1%;
+    display: flex;
     white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5%;
 }
 
 .def-action>label {
@@ -204,28 +192,12 @@
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
     font-weight: bold;
-    margin-right: 1%;
 }
 
 @media only screen and (max-width: 768px) {
-    .checkboxes label {
-        margin-left: 1%;
-        vertical-align: middle;
-        font-size: 70%;
-    }
-
     .checkboxes {
-        margin: 0 auto;
-        white-space: normal;
-        align-self: center;
-        text-align: center;
+        flex-direction: column;
     }
-
-    .checkbox-flip {
-        width: 15px;
-        height: 15px;
-    }
-
 
     .player-stats--main {
         margin-top: 14%;
@@ -271,22 +243,11 @@
         margin: 0 auto;
     }
 
-    .checkboxes label {
-        margin-left: 1%;
-        vertical-align: middle;
-        font-size: 70%;
-    }
-
     .checkboxes {
-        white-space: nowrap;
-        align-self: center;
-        text-align: center;
+        flex-direction: column;
+        font-size: 150%;
     }
 
-    .checkbox-flip {
-        width: 15px;
-        height: 15px;
-    }
 
     .pitch {
         align-self: middle;
@@ -323,11 +284,8 @@
 
 @media only screen and (min-width: 992px) and (max-width: 1366px) {
     .checkboxes {
-        text-align: center;
-        width: 100%;
-        font-size: 70%;
-        white-space: normal;
-        margin: 0 auto;
+        font-size: 80%;
+        gap: 1px;
     }
 
     .player-stats--main {

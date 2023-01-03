@@ -10,19 +10,19 @@ import { plot_def_actions } from "./PlotDefActions"
 import { plot_shot_circles } from "./PlotShots"
 import GetData from "../GetData";
 import PlotAllTouches from "./PlotAllTouches";
+import PlotHeatmap from "./PlotHeatmap.js";
 
 export default function PlotActions(props) {
     var svgRef = React.useRef(null);
     if (props.win_width > 992) {
-        var svgWidth = props.win_width / 2 + 150;
-        var svgHeight = props.win_height / 2 + 120;
+        var svgWidth = props.win_width / 2;
+        var svgHeight = props.win_height / 2 + 50;
         var mode = false
         var pitchMultiplier = props.win_width * 8.3 / 1920
     }
     else if (props.win_width > 768) {
-        var svgWidth = props.win_width / 2 + 80
-        var svgHeight = 610;
-        var margin = { top: 10, right: 9, bottom: 0, left: 100 }
+        var svgWidth = props.win_width / 2
+        var svgHeight = 750;
         var mode = true
         var pitchMultiplier = 5.5
     }
@@ -38,20 +38,24 @@ export default function PlotActions(props) {
         d3.select(svgRef.current).selectAll("*").remove();
         var svg = d3.select(svgRef.current)
             .append("svg")
-            .attr("width", svgWidth)
+            .attr("width", "100%")
             .attr("height", svgHeight)
 
 
-        if (props.win_width > 990) var pitch = CreatePitchHorizontal(svg, pitchMultiplier)
-        else var pitch = CreatePitch(svg, 0, 0, margin)
+        if (props.win_width > 990) var pitch = CreatePitchHorizontal(svg, svgWidth - 80, svgHeight - 20)
+        else var pitch = CreatePitch(svg, svgWidth, svgHeight - 20)
 
         create_glow(pitch)
         createTriangle(pitch, "triangle3", 0.8)
         createTriangle(pitch, "triangle2", 0.3)
 
+        if (props.heatmap) {
+            var touches = GetData(props.data, ["Carry", "Pass", "Aerial", "BallTouch", "BallRecovery", "Interception", "Tackle", "BlockedPass", "Clearance", "MissedShots", "ShotOnPost", "Goal", "SavedShot", "TakeOn"], null, null, props.playerId)
+            PlotHeatmap(touches, pitch, mode, pitchMultiplier, props.color, svgWidth - 80, svgHeight - 20)
+        }
         if (props.allTouches) {
             var touches = GetData(props.data, ["Carry", "Pass", "Aerial", "BallTouch", "BallRecovery", "Interception", "Tackle", "BlockedPass", "Clearance", "MissedShots", "ShotOnPost", "Goal", "SavedShot", "TakeOn"], null, null, props.playerId)
-            PlotAllTouches(touches, pitch, mode, pitchMultiplier, props.color)
+            PlotAllTouches(touches, pitch, mode, pitchMultiplier, props.color, svgWidth - 80, svgHeight - 20)
         }
         if (props.allPasses) {
             if (props.progPasses) var passes = GetData(props.data, "Pass", "Successful", "False", props.playerId)
@@ -62,20 +66,20 @@ export default function PlotActions(props) {
                 .enter().append("line")
                 .attr("id", "progressive")
                 .attr("x1", function (d) {
-                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
-                    else return (Number(d.x)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.y)) * (svgWidth / 68)
+                    else return (Number(d.x)) * (svgWidth - 80) / 105
                 })
                 .attr("y1", function (d) {
-                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
-                    else return (68 - Number(d.y)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.x)) * (svgHeight - 20) / 105
+                    else return (68 - Number(d.y)) * (svgHeight - 20) / 68
                 })
                 .attr("x2", function (d) {
-                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
-                    else return (Number(d.endX)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.endY)) * (svgWidth / 68)
+                    else return (Number(d.endX)) * (svgWidth - 80) / 105
                 })
                 .attr("y2", function (d) {
-                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
-                    else return (68 - Number(d.endY)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.endX)) * (svgHeight - 20) / 105
+                    else return (68 - Number(d.endY)) * (svgHeight - 20) / 68
                 })
                 .style("filter", "url(#glow)")
                 .attr("stroke", "white")
@@ -85,8 +89,8 @@ export default function PlotActions(props) {
         }
         if (props.progPasses) {
             var passes = GetData(props.data, "Pass", "Successful", "True", props.playerId)
-            plot_lines(pitch, passes, pitchMultiplier, mode)
-            plot_circles(pitch, passes, props.color, pitchMultiplier, mode)
+            plot_lines(pitch, passes, svgWidth - 80, svgHeight - 20, mode)
+            plot_circles(pitch, passes, props.color, svgWidth - 80, svgHeight - 20, mode)
         }
         if (props.unsuccessfulPasses) {
             passes = GetData(props.data, "Pass", "Unsuccessful", null, props.playerId)
@@ -95,20 +99,20 @@ export default function PlotActions(props) {
                 .enter().append("line")
                 .attr("id", "progressive")
                 .attr("x1", function (d) {
-                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
-                    else return (Number(d.x)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.y)) * (svgWidth / 68)
+                    else return (Number(d.x)) * (svgWidth - 80) / 105
                 })
                 .attr("y1", function (d) {
-                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
-                    else return (68 - Number(d.y)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.x)) * (svgHeight - 20) / 105
+                    else return (68 - Number(d.y)) * (svgHeight - 20) / 68
                 })
                 .attr("x2", function (d) {
-                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
-                    else return (Number(d.endX)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.endY)) * (svgWidth / 68)
+                    else return (Number(d.endX)) * (svgWidth - 80) / 105
                 })
                 .attr("y2", function (d) {
-                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
-                    else return (68 - Number(d.endY)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.endX)) * (svgHeight - 20) / 105
+                    else return (68 - Number(d.endY)) * (svgHeight - 20) / 68
                 })
                 .style("filter", "url(#glow)")
                 .attr("stroke", "white")
@@ -125,20 +129,20 @@ export default function PlotActions(props) {
                 .enter().append("line")
                 .attr("id", "progressive")
                 .attr("x1", function (d) {
-                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
-                    else return (Number(d.x)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.y)) * (svgWidth / 68)
+                    else return (Number(d.x)) * (svgWidth - 80) / 105
                 })
                 .attr("y1", function (d) {
-                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
-                    else return (68 - Number(d.y)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.x)) * (svgHeight - 20) / 105
+                    else return (68 - Number(d.y)) * (svgHeight - 20) / 68
                 })
                 .attr("x2", function (d) {
-                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
-                    else return (Number(d.endX)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.endY)) * (svgWidth / 68)
+                    else return (Number(d.endX)) * (svgWidth - 80) / 105
                 })
                 .attr("y2", function (d) {
-                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
-                    else return (68 - Number(d.endY)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.endX)) * (svgHeight - 20) / 105
+                    else return (68 - Number(d.endY)) * (svgHeight - 20) / 68
                 })
                 .style("filter", "url(#glow)")
                 .attr("stroke", "white")
@@ -149,54 +153,54 @@ export default function PlotActions(props) {
         }
         if (props.progCarries) {
             var carries = GetData(props.data, "Carry", null, "True", props.playerId)
-            plot_lines(pitch, carries, pitchMultiplier, mode)
-            plot_circles(pitch, carries, "#48EDDB", pitchMultiplier, mode)
+            plot_lines(pitch, carries, svgWidth - 80, svgHeight - 20, mode)
+            plot_circles(pitch, carries, "#48EDDB", svgWidth - 80, svgHeight - 20, mode)
         }
         if (props.ballRecoveries) {
             var touches = GetData(props.data, "BallRecovery", null, null, props.playerId)
-            plot_def_actions(pitch, touches, "#42DC60", pitchMultiplier, mode)
+            plot_def_actions(pitch, touches, "#42DC60", svgWidth - 80, svgHeight - 20, mode)
         }
         if (props.blockedPasses) {
             var touches = GetData(props.data, "BlockedPass", null, null, props.playerId)
-            plot_def_actions(pitch, touches, "#42DCD5", pitchMultiplier, mode)
+            plot_def_actions(pitch, touches, "#42DCD5", svgWidth - 80, svgHeight - 20, mode)
         }
         if (props.interceptions) {
             var touches = GetData(props.data, "Interception", null, null, props.playerId)
-            plot_def_actions(pitch, touches, "red", pitchMultiplier, mode)
+            plot_def_actions(pitch, touches, "red", svgWidth - 80, svgHeight - 20, mode)
         }
         if (props.clearances) {
             var touches = GetData(props.data, "Clearance", null, null, props.playerId)
-            plot_def_actions(pitch, touches, "#D047D6", pitchMultiplier, mode)
+            plot_def_actions(pitch, touches, "#D047D6", svgWidth - 80, svgHeight - 20, mode)
         }
 
         if (props.tackles) {
             var touches = GetData(props.data, "Tackle", null, null, props.playerId)
-            plot_def_actions(pitch, touches, "#E38A18", pitchMultiplier, mode)
+            plot_def_actions(pitch, touches, "#E38A18", svgWidth - 80, svgHeight - 20, mode)
         }
 
         if (props.goals) {
             var goals = props.data.filter(item => item["eventType"] === "Goal" && Number(item["playerId"]) === props.fotmobPlayerId)
             console.log(goals)
-            plot_shot_circles(pitch, goals, "#55DD31", pitchMultiplier, mode, props.color)
+            plot_shot_circles(pitch, goals, "#55DD31", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
         if (props.attemptSaved) {
             var attempts = props.data.filter(item => item["eventType"] === "AttemptSaved" && Number(item["playerId"]) === props.fotmobPlayerId)
-            plot_shot_circles(pitch, attempts, "#DD9131", pitchMultiplier, mode, props.color)
+            plot_shot_circles(pitch, attempts, "#DD9131", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
         if (props.misses) {
             var miss = props.data.filter(item => item["eventType"] === "Miss" && Number(item["playerId"]) === props.fotmobPlayerId)
-            plot_shot_circles(pitch, miss, "#DD3131", pitchMultiplier, mode, props.color)
+            plot_shot_circles(pitch, miss, "#DD3131", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
         if (props.post) {
             var post = props.data.filter(item => item["eventType"] === "Post" && Number(item["playerId"]) === props.fotmobPlayerId)
-            plot_shot_circles(pitch, post, "#31B1DD", pitchMultiplier, mode, props.color)
+            plot_shot_circles(pitch, post, "#31B1DD", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
     }, [props.data, props.win_width, props.win_height, props.playerId, props.allTouches, props.allPasses, props.progPasses, props.unsuccessfulPasses, props.allCarries, props.progCarries,
-    props.ballRecoveries, props.blockedPasses, props.interceptions, props.clearances, props.tackles, props.goals, props.attemptSaved, props.misses, props.post, props.color]);
+    props.ballRecoveries, props.blockedPasses, props.interceptions, props.clearances, props.tackles, props.goals, props.attemptSaved, props.misses, props.post, props.color, props.heatmap]);
 
 
     return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;
