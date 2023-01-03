@@ -18,17 +18,17 @@ export function plot_shot_circles(svg, data, color, width, height, mode, team_co
             .enter().append("line")
             .attr("id", "remove")
             .attr("x1", function (d) {
-                if (mode) return (68 - Number(d.y)) * 5
+                if (mode) return (68 - Number(d.y)) * (width + 80) / 68
                 else return (Number(d.x)) * width / 105
             })
             .attr("y1", function (d) {
-                if (mode) return (105 - Number(d.x)) * 5
+                if (mode) return (105 - Number(d.x)) * height / 105
                 else return (68 - Number(d.y)) * height / 68
             })
             .attr("y2", d => {
                 if (mode) {
-                    if (d.blockedX == "") return (105 - 105) * 5
-                    else return (105 - Number(d.blockedX)) * 5
+                    if (d.blockedX == "") return (105 - 105) * height / 105
+                    else return (105 - Number(d.blockedX)) * height / 105
                 }
                 else {
                     if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * height / 68
@@ -37,8 +37,8 @@ export function plot_shot_circles(svg, data, color, width, height, mode, team_co
             })
             .attr("x2", d => {
                 if (mode) {
-                    if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * 5
-                    else return (68 - Number(d.blockedY)) * 5
+                    if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * (width + 80) / 68
+                    else return (68 - Number(d.blockedY)) * (width + 80) / 68
                 }
                 else {
                     if (d.blockedX == "") {
@@ -68,11 +68,11 @@ export function plot_shot_circles(svg, data, color, width, height, mode, team_co
         .data(data)
         .enter().append('circle')
         .attr("cx", function (d) {
-            if (mode) return (68 - Number(d.y)) * 5
+            if (mode) return (68 - Number(d.y)) * (width + 80) / 68
             else return (Number(d.x)) * width / 105
         })
         .attr("cy", function (d) {
-            if (mode) return (105 - Number(d.x)) * 5
+            if (mode) return (105 - Number(d.x)) * height / 105
             else return (68 - Number(d.y)) * height / 68
         })
         .attr('r', d => 30 * d.expectedGoals)

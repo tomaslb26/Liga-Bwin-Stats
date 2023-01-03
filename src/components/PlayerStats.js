@@ -166,6 +166,7 @@ export default function PlayerStats() {
     const [progCarries, setProgCarries] = React.useState(false)
     const [allTouches, setAllTouches] = React.useState(false)
     const [ballRecoveries, setBallRecoveries] = React.useState(false)
+    const [heatmap, setHeatmap] = React.useState(false)
     const [blockedPasses, setBlockedPasses] = React.useState(false)
     const [interceptions, setInterceptions] = React.useState(false)
     const [clearances, setClearances] = React.useState(false)
@@ -269,7 +270,7 @@ export default function PlayerStats() {
                         <PlotActions color={teams_colors.filter((item) => (item.team === team))[0]["color"]} win_width={windowWidth} win_height={windowHeight} data={dataPlot} playerId={playerId} fotmobPlayerId={fotmobPlayerId}
                             allTouches={allTouches} allPasses={allPasses} progPasses={progPasses} unsuccessfulPasses={unsuccessfulPasses} allCarries={allCarries} progCarries={progCarries}
                             ballRecoveries={ballRecoveries} blockedPasses={blockedPasses} interceptions={interceptions} clearances={clearances} tackles={tackles}
-                            goals={goals} attemptSaved={attemptSaved} misses={misses} post={post} />
+                            goals={goals} attemptSaved={attemptSaved} misses={misses} post={post} heatmap={heatmap} />
                     </div>
                     <div className="checkboxes">
                         {plotOption === "actions" &&
@@ -330,6 +331,15 @@ export default function PlayerStats() {
                                     checked={allTouches}
                                     onChange={() => setAllTouches((prev) => (!prev))}
                                     name="all_touches"
+                                />
+                                <label htmlFor="heatmap">Heatmap</label>
+                                <input
+                                    className="checkbox-flip"
+                                    type="checkbox"
+                                    id="heatmap"
+                                    checked={heatmap}
+                                    onChange={() => setHeatmap((prev) => (!prev))}
+                                    name="heatmap"
                                 />
                             </>}
                         {plotOption === "shots" &&

@@ -7,19 +7,19 @@ export function plot_lines(svg, data, width, height, mode) {
         .enter().append("line")
         .attr("id", "progressive")
         .attr("x1", function (d) {
-            if (mode) return (68 - Number(d.y)) * 5
+            if (mode) return (68 - Number(d.y)) * (width + 80) / 68
             else return (Number(d.x)) * width / 105
         })
         .attr("y1", function (d) {
-            if (mode) return (105 - Number(d.x)) * 5
+            if (mode) return (105 - Number(d.x)) * height / 105
             else return (68 - Number(d.y)) * height / 68
         })
         .attr("x2", function (d) {
-            if (mode) return (68 - Number(d.endY)) * 5
+            if (mode) return (68 - Number(d.endY)) * (width + 80) / 68
             else return (Number(d.endX)) * width / 105
         })
         .attr("y2", function (d) {
-            if (mode) return (105 - Number(d.endX)) * 5
+            if (mode) return (105 - Number(d.endX)) * height / 105
             else return (68 - Number(d.endY)) * height / 68
         })
         .style("filter", "url(#glow)")

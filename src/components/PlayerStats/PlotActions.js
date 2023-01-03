@@ -10,6 +10,7 @@ import { plot_def_actions } from "./PlotDefActions"
 import { plot_shot_circles } from "./PlotShots"
 import GetData from "../GetData";
 import PlotAllTouches from "./PlotAllTouches";
+import PlotHeatmap from "./PlotHeatmap.js";
 
 export default function PlotActions(props) {
     var svgRef = React.useRef(null);
@@ -20,9 +21,8 @@ export default function PlotActions(props) {
         var pitchMultiplier = props.win_width * 8.3 / 1920
     }
     else if (props.win_width > 768) {
-        var svgWidth = props.win_width / 2 + 80
-        var svgHeight = 610;
-        var margin = { top: 10, right: 9, bottom: 0, left: 100 }
+        var svgWidth = props.win_width / 2
+        var svgHeight = 750;
         var mode = true
         var pitchMultiplier = 5.5
     }
@@ -43,12 +43,16 @@ export default function PlotActions(props) {
 
 
         if (props.win_width > 990) var pitch = CreatePitchHorizontal(svg, svgWidth - 80, svgHeight - 20)
-        else var pitch = CreatePitch(svg, 0, 0, margin)
+        else var pitch = CreatePitch(svg, svgWidth, svgHeight - 20)
 
         create_glow(pitch)
         createTriangle(pitch, "triangle3", 0.8)
         createTriangle(pitch, "triangle2", 0.3)
 
+        if (props.heatmap) {
+            var touches = GetData(props.data, ["Carry", "Pass", "Aerial", "BallTouch", "BallRecovery", "Interception", "Tackle", "BlockedPass", "Clearance", "MissedShots", "ShotOnPost", "Goal", "SavedShot", "TakeOn"], null, null, props.playerId)
+            PlotHeatmap(touches, pitch, mode, pitchMultiplier, props.color, svgWidth - 80, svgHeight - 20)
+        }
         if (props.allTouches) {
             var touches = GetData(props.data, ["Carry", "Pass", "Aerial", "BallTouch", "BallRecovery", "Interception", "Tackle", "BlockedPass", "Clearance", "MissedShots", "ShotOnPost", "Goal", "SavedShot", "TakeOn"], null, null, props.playerId)
             PlotAllTouches(touches, pitch, mode, pitchMultiplier, props.color, svgWidth - 80, svgHeight - 20)
@@ -62,19 +66,19 @@ export default function PlotActions(props) {
                 .enter().append("line")
                 .attr("id", "progressive")
                 .attr("x1", function (d) {
-                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.y)) * (svgWidth / 68)
                     else return (Number(d.x)) * (svgWidth - 80) / 105
                 })
                 .attr("y1", function (d) {
-                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.x)) * (svgHeight - 20) / 105
                     else return (68 - Number(d.y)) * (svgHeight - 20) / 68
                 })
                 .attr("x2", function (d) {
-                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.endY)) * (svgWidth / 68)
                     else return (Number(d.endX)) * (svgWidth - 80) / 105
                 })
                 .attr("y2", function (d) {
-                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.endX)) * (svgHeight - 20) / 105
                     else return (68 - Number(d.endY)) * (svgHeight - 20) / 68
                 })
                 .style("filter", "url(#glow)")
@@ -95,19 +99,19 @@ export default function PlotActions(props) {
                 .enter().append("line")
                 .attr("id", "progressive")
                 .attr("x1", function (d) {
-                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.y)) * (svgWidth / 68)
                     else return (Number(d.x)) * (svgWidth - 80) / 105
                 })
                 .attr("y1", function (d) {
-                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.x)) * (svgHeight - 20) / 105
                     else return (68 - Number(d.y)) * (svgHeight - 20) / 68
                 })
                 .attr("x2", function (d) {
-                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.endY)) * (svgWidth / 68)
                     else return (Number(d.endX)) * (svgWidth - 80) / 105
                 })
                 .attr("y2", function (d) {
-                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.endX)) * (svgHeight - 20) / 105
                     else return (68 - Number(d.endY)) * (svgHeight - 20) / 68
                 })
                 .style("filter", "url(#glow)")
@@ -125,19 +129,19 @@ export default function PlotActions(props) {
                 .enter().append("line")
                 .attr("id", "progressive")
                 .attr("x1", function (d) {
-                    if (mode) return (68 - Number(d.y)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.y)) * (svgWidth / 68)
                     else return (Number(d.x)) * (svgWidth - 80) / 105
                 })
                 .attr("y1", function (d) {
-                    if (mode) return (105 - Number(d.x)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.x)) * (svgHeight - 20) / 105
                     else return (68 - Number(d.y)) * (svgHeight - 20) / 68
                 })
                 .attr("x2", function (d) {
-                    if (mode) return (68 - Number(d.endY)) * pitchMultiplier
+                    if (mode) return (68 - Number(d.endY)) * (svgWidth / 68)
                     else return (Number(d.endX)) * (svgWidth - 80) / 105
                 })
                 .attr("y2", function (d) {
-                    if (mode) return (105 - Number(d.endX)) * pitchMultiplier
+                    if (mode) return (105 - Number(d.endX)) * (svgHeight - 20) / 105
                     else return (68 - Number(d.endY)) * (svgHeight - 20) / 68
                 })
                 .style("filter", "url(#glow)")
@@ -196,7 +200,7 @@ export default function PlotActions(props) {
         }
 
     }, [props.data, props.win_width, props.win_height, props.playerId, props.allTouches, props.allPasses, props.progPasses, props.unsuccessfulPasses, props.allCarries, props.progCarries,
-    props.ballRecoveries, props.blockedPasses, props.interceptions, props.clearances, props.tackles, props.goals, props.attemptSaved, props.misses, props.post, props.color]);
+    props.ballRecoveries, props.blockedPasses, props.interceptions, props.clearances, props.tackles, props.goals, props.attemptSaved, props.misses, props.post, props.color, props.heatmap]);
 
 
     return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;

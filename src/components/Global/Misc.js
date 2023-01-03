@@ -92,18 +92,12 @@ export default function Misc(props) {
             .attr("y", d => y(d.stat) - 0)
             .attr("rx", 2)
             .attr("width", x.bandwidth())
-            .transition()
-            .ease(d3.easeLinear)
-            .duration(800)
             .attr("height", function (d) { return svgHeight + 0 - y(d.stat); })
             .style("filter", "url(#glow)")
             .style("opacity", 0.8)
             .style("stroke", function (d) {
                 return "white"
             })
-            .transition()
-            .ease(d3.easeLinear)
-            .duration(800)
             .style("fill", d => teams_colors.filter((item) => (item.team === d.name))[0]["color"])
 
         try {
@@ -119,8 +113,6 @@ export default function Misc(props) {
                 .attr('height', logosize)
                 .attr('width', logosize)
                 .attr("xlink:href", d => require("./../../data/" + props.season + "/" + d.name.replaceAll(" ", "-") + ".png"))
-                .transition()
-                .duration(1600)
                 .attr("opacity", 1)
         }
         catch (e) {

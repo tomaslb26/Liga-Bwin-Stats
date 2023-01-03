@@ -20,8 +20,10 @@
     left: 0;
     transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
     list-style: none;
-    height: 10vh;
+    height: 30vh;
     width: fit-content;
+    overflow: scroll;
+    overflow-x: hidden;
     z-index: 2;
 }
 
@@ -40,7 +42,7 @@
 .dropdown--elem:hover {
     background-color: #000000;
     transition: scale 1s linear;
-    transform: scale(1.1);
+    transform: scale(1.02);
 }
 
 .dropdown--elem>img {

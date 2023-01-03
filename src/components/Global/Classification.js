@@ -15,9 +15,6 @@ export default function Classification(props) {
             .attr("x", x)
             .attr("y", y)
             .attr("rx", 2)
-            .transition()
-            .ease(d3.easeLinear)
-            .duration(800)
             .attr("height", height)
             .style("filter", "url(#glow)")
             .style("fill", color)
@@ -107,9 +104,6 @@ export default function Classification(props) {
                     .attr('height', 25)
                     .attr('width', 25)
                     .attr("xlink:href", d => require("./../../data/" + props.season + "/" + dataset[i - 1]["Team"].replaceAll(" ", "-") + ".png"))
-                    .transition()
-                    .ease(d3.easeLinear)
-                    .duration(800)
                     .attr("opacity", 1)
             }
             catch (e) {

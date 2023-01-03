@@ -8,11 +8,11 @@ export function plot_circles(svg, data, color, width, height, mode) {
         .enter().append('circle')
         .attr("id", "progressive")
         .attr('cx', function (d) {
-            if (mode) return (68 - Number(d.endY)) * 5
+            if (mode) return (68 - Number(d.endY)) * (width + 80) / 68
             else return (Number(d.endX)) * width / 105
         })
         .attr('cy', function (d) {
-            if (mode) return (105 - Number(d.endX)) * 5
+            if (mode) return (105 - Number(d.endX)) * height / 105
             else return (68 - Number(d.endY)) * height / 68
         })
         .attr('r', 7)

@@ -5,11 +5,11 @@ export function plot_def_actions(svg, data, color, width, height, mode) {
         .enter().append('circle')
         .attr("id", "progressive")
         .attr("cx", function (d) {
-            if (mode) return (68 - Number(d.y)) * 5
+            if (mode) return (68 - Number(d.y)) * (width + 80) / 68
             else return (Number(d.x)) * width / 105
         })
         .attr("cy", function (d) {
-            if (mode) return (105 - Number(d.x)) * 5
+            if (mode) return (105 - Number(d.x)) * height / 105
             else return (68 - Number(d.y)) * height / 68
         })
         .attr('r', 5)
