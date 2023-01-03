@@ -37,10 +37,15 @@
     padding: 0 10%;
 }
 
+.actions-header {
+    font-family: "Roboto", sans-serif;
+}
+
 .inputs {
     align-self: flex-start;
     display: flex;
     align-items: center;
+    font-family: "Roboto", sans-serif;
 }
 
 #actions_svg {
