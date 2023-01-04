@@ -33,7 +33,7 @@ export default function PlayerStats() {
     const [displayTeams, setDisplayTeams] = useState(false)
     const [teams, setTeams] = useState(teams_data[1]["teams"])
 
-    const [player, setPlayer] = useState("Alejandro Grimaldo")
+    const [player, setPlayer] = useState("Álex Grimaldo")
     const [playerId, setPlayerId] = useState(107252)
     const [fotmobPlayerId, setFotmobPlayerId] = React.useState(288406)
     const [players, setPlayers] = useState([])
@@ -73,7 +73,7 @@ export default function PlayerStats() {
                 .then((data) => {
                     setData(data)
                     setPlayers(GetPlayers(data, team.replaceAll(" ", "-")))
-                    setPlayer(GetPlayers(data, team.replaceAll(" ", "-"))[0])
+                    setPlayer(GetPlayers(data, team.replaceAll(" ", "-"))[0].name)
                     return () => undefined;
                 })
 
@@ -191,9 +191,9 @@ export default function PlayerStats() {
                 <div style={{ marginLeft: "0.5%" }}>
                     <Dropdown placeholder={player} displayFlag={displayPlayers} li_elements={players.map((item) => {
                         try {
-                            return <li className="dropdown--elem" onClick={(event) => handlePlayerChange(event)}><img src={require(`./../data/Photos/${team.replaceAll(" ", "-")}/${item}.png`)}></img>{item}</li>
+                            return <li className="dropdown--elem" onClick={(event) => handlePlayerChange(event)}><img src={item.photo}></img>{item.name}</li>
                         } catch (e) {
-                            return <li className="dropdown--elem" onClick={(event) => handlePlayerChange(event)}><img src={require(`./../data/${season}/${team.replaceAll(" ", "-")}.png`)}></img>{item}</li>
+                            return <li className="dropdown--elem" onClick={(event) => handlePlayerChange(event)}><img src={require(`./../data/${season}/${team.replaceAll(" ", "-")}.png`)}></img>{item.name}</li>
                         }
                     })}
                         styles={{ border: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"] }} textStyles={{ textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === team))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }} handleInputChange={handlePlayerDropdownChange} />

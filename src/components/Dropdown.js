@@ -16,7 +16,7 @@ export default function Dropdown(props) {
         opacity: props.displayFlag ? 1 : 0,
         transition: "opacity .5s ease-in-out, visibility 0s ease-in-out 0.3s",
     }
-
+    console.log(props.placeholder)
     return (
         <div className="dropdown">
             <li className="sub-menu-parent" tab-index="0">

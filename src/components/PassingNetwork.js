@@ -78,7 +78,7 @@ export default function PassingNetwork(props) {
                 </div>
             </div>
             <div id="chart">
-                <PlotPassingNetwork data={data} team={props.team} win_width={props.win_width} win_height={props.win_height} color={props.color} />
+                <PlotPassingNetwork data={data} team={props.team} win_width={props.win_width} win_height={props.win_height} color={props.color} season={props.season} />
             </div>
         </>
     )

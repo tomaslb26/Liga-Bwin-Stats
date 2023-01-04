@@ -116,8 +116,6 @@ export default function PlotPassingNetwork(props) {
                     .style("opacity", 1).style("visibility", "visible").style("left", event.x + "px")
                     .style("top", event.y + "px");
 
-                var photoSrc = require(`./../../data/Photos/${props.team.replaceAll(" ", "-")}/${String(d.name)}.png`)
-
                 tooltip.selectAll("*").remove()
                 var svg_t = tooltip.append("svg")
                     .attr("width", 150)
@@ -125,12 +123,19 @@ export default function PlotPassingNetwork(props) {
                     .attr('transform', `translate(${20},${20})`)
 
 
-                svg_t.append("svg:image")
-                    .attr("width", 80)
-                    .attr("height", 80)
-                    .attr("x", 12)
-                    .attr("y", 10)
-                    .attr("xlink:href", photoSrc);
+                d3.csv(require("./../../data/" + props.season + "/calcs.csv"))
+                    .then((data) => {
+                        data = data.filter((item) => {
+                            if (item.team === props.team.replaceAll(" ", "-") && Number(item.shirtNo) === Number(d.shirtNo)) return item
+                        })[0]
+
+                        svg_t.append("svg:image")
+                            .attr("width", 80)
+                            .attr("height", 80)
+                            .attr("x", 12)
+                            .attr("y", 10)
+                            .attr("xlink:href", data.photo);
+                    })
 
                 svg_t
                     .append("text")

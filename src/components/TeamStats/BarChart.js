@@ -15,10 +15,10 @@ export default function BarChart(props) {
     const svgHeight = height + margin.top + margin.bottom;
 
     React.useEffect(() => {
-        if (props.stat == "Goals" || props.stat == "Assists") var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o[props.stat]) }))
-        else if (props.stat == "Pass Percentage") var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o["suc_passes"] / o["total_passes"]) * 100 }))
-        else if (props.stat == "Take-On Percentage") var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o["suc_take_ons"] / o["take_ons"]) * 100 }))
-        else var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o[props.stat] * 90) / o.minutes }))
+        if (props.stat == "Goals" || props.stat == "Assists") var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o[props.stat]), photo: o.photo }))
+        else if (props.stat == "Pass Percentage") var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o["suc_passes"] / o["total_passes"]) * 100, photo: o.photo }))
+        else if (props.stat == "Take-On Percentage") var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o["suc_take_ons"] / o["take_ons"]) * 100, photo: o.photo }))
+        else var data_selected = props.data.map(o => new Object({ name: o.name, stat: (o[props.stat] * 90) / o.minutes, photo: o.photo }))
 
         data_selected = data_selected.sort(function (a, b) {
             var keyA = Number(a["stat"]),
@@ -83,7 +83,7 @@ export default function BarChart(props) {
             .attr("y", d => y(d.name) - 45)
             .attr('height', 30)
             .attr("xlink:href", d => {
-                try { return require("./../../data/Photos/" + props.team.replaceAll(" ", "-") + "/" + d.name + ".png") }
+                try { return d.photo }
                 catch (e) {
                     console.log(e)
                 }
