@@ -84,20 +84,6 @@
     transition: background-color 0.5s linear;
 }
 
-.checkboxes {
-    font-family: "Roboto", sans-serif;
-    font-size: 100%;
-    font-weight: bold;
-    color: white;
-    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
-        0px -4px 10px rgba(0, 0, 0, 0.3);
-    align-self: center;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-
 .button:hover {
     transform: scale(1.1);
     transition-duration: 0.5s;
@@ -116,6 +102,8 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     padding: 0.5% 0.5%;
+    background-color: #2a2e30;
+    border-radius: 10px;
 }
 
 .stat-short {
@@ -174,30 +162,37 @@
     background-color: #2a2e30ad;
     box-shadow: 0px 6px 6px -8px #000000;
     border-radius: 0.25em;
-    padding-bottom: 1%;
-    width: 65%;
+    padding: 2%;
 }
 
-.def-action {
+.row-pitch {
     display: flex;
-    white-space: nowrap;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5%;
+    gap: 20px;
 }
 
-.def-action>label {
+.options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding-top: 2%;
+}
+
+.options>h2 {
     color: white;
-    font-family: "Roboto", sans-serif;
+    font-family: Roboto, sans-serif;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
-    font-weight: bold;
+    margin: 1%;
 }
 
+.options-dropdown {
+    display: flex;
+    flex-direction: column;
+}
+
+
 @media only screen and (max-width: 768px) {
-    .checkboxes {
-        flex-direction: column;
-    }
 
     .player-stats--main {
         margin-top: 14%;
@@ -229,6 +224,14 @@
         font-size: 250%;
     }
 
+    .row-pitch {
+        flex-direction: column;
+    }
+
+    .options {
+        order: 1;
+    }
+
 }
 
 @media only screen and (min-width: 768px) and (max-width: 992px) {
@@ -243,10 +246,6 @@
         margin: 0 auto;
     }
 
-    .checkboxes {
-        flex-direction: column;
-        font-size: 150%;
-    }
 
 
     .pitch {
@@ -280,13 +279,20 @@
         margin-top: 8%;
     }
 
+    .row-pitch {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .options {
+        width: 100%;
+        order: 1;
+    }
+
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1366px) {
-    .checkboxes {
-        font-size: 80%;
-        gap: 1px;
-    }
+
 
     .player-stats--main {
         margin-top: 6%;

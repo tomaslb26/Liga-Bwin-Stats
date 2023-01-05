@@ -49,16 +49,16 @@ export default function PlotActions(props) {
         createTriangle(pitch, "triangle3", 0.8)
         createTriangle(pitch, "triangle2", 0.3)
 
-        if (props.heatmap) {
+        if (props.options.heatmap) {
             var touches = GetData(props.data, ["Carry", "Pass", "Aerial", "BallTouch", "BallRecovery", "Interception", "Tackle", "BlockedPass", "Clearance", "MissedShots", "ShotOnPost", "Goal", "SavedShot", "TakeOn"], null, null, props.playerId)
             PlotHeatmap(touches, pitch, mode, pitchMultiplier, props.color, svgWidth - 80, svgHeight - 20)
         }
-        if (props.allTouches) {
+        if (props.options.all_touches) {
             var touches = GetData(props.data, ["Carry", "Pass", "Aerial", "BallTouch", "BallRecovery", "Interception", "Tackle", "BlockedPass", "Clearance", "MissedShots", "ShotOnPost", "Goal", "SavedShot", "TakeOn"], null, null, props.playerId)
             PlotAllTouches(touches, pitch, mode, pitchMultiplier, props.color, svgWidth - 80, svgHeight - 20)
         }
-        if (props.allPasses) {
-            if (props.progPasses) var passes = GetData(props.data, "Pass", "Successful", "False", props.playerId)
+        if (props.options.all_passes) {
+            if (props.options.progressive_passes) var passes = GetData(props.data, "Pass", "Successful", "False", props.playerId)
             else var passes = GetData(props.data, "Pass", "Successful", null, props.playerId)
 
             pitch.selectAll('.progressiveLines')
@@ -87,12 +87,12 @@ export default function PlotActions(props) {
                 .attr("stroke-width", 1.8)
                 .attr("marker-end", "url(#triangle3)");
         }
-        if (props.progPasses) {
+        if (props.options.progressive_passes) {
             var passes = GetData(props.data, "Pass", "Successful", "True", props.playerId)
             plot_lines(pitch, passes, svgWidth - 80, svgHeight - 20, mode)
             plot_circles(pitch, passes, props.color, svgWidth - 80, svgHeight - 20, mode)
         }
-        if (props.unsuccessfulPasses) {
+        if (props.options.unsuccessful_passes) {
             passes = GetData(props.data, "Pass", "Unsuccessful", null, props.playerId)
             pitch.selectAll('.progressiveLines')
                 .data(passes)
@@ -120,8 +120,8 @@ export default function PlotActions(props) {
                 .attr("stroke-width", 1.8)
                 .attr("marker-end", "url(#triangle2)");
         }
-        if (props.allCarries) {
-            if (props.progCarries) var carries = GetData(props.data, "Carry", null, "False", props.playerId)
+        if (props.options.all_carries) {
+            if (props.options.progressive_carries) var carries = GetData(props.data, "Carry", null, "False", props.playerId)
             else var carries = GetData(props.data, "Carry", null, null, props.playerId)
 
             pitch.selectAll('.progressiveLines')
@@ -151,56 +151,55 @@ export default function PlotActions(props) {
                 .attr("marker-end", "url(#triangle3)");
 
         }
-        if (props.progCarries) {
+        if (props.options.progressive_carries) {
             var carries = GetData(props.data, "Carry", null, "True", props.playerId)
             plot_lines(pitch, carries, svgWidth - 80, svgHeight - 20, mode)
             plot_circles(pitch, carries, "#48EDDB", svgWidth - 80, svgHeight - 20, mode)
         }
-        if (props.ballRecoveries) {
+        if (props.options.ball_recovery) {
             var touches = GetData(props.data, "BallRecovery", null, null, props.playerId)
             plot_def_actions(pitch, touches, "#42DC60", svgWidth - 80, svgHeight - 20, mode)
         }
-        if (props.blockedPasses) {
+        if (props.options.blocked_pass) {
             var touches = GetData(props.data, "BlockedPass", null, null, props.playerId)
             plot_def_actions(pitch, touches, "#42DCD5", svgWidth - 80, svgHeight - 20, mode)
         }
-        if (props.interceptions) {
+        if (props.options.interception) {
             var touches = GetData(props.data, "Interception", null, null, props.playerId)
             plot_def_actions(pitch, touches, "red", svgWidth - 80, svgHeight - 20, mode)
         }
-        if (props.clearances) {
+        if (props.options.clearance) {
             var touches = GetData(props.data, "Clearance", null, null, props.playerId)
             plot_def_actions(pitch, touches, "#D047D6", svgWidth - 80, svgHeight - 20, mode)
         }
 
-        if (props.tackles) {
+        if (props.options.tackle) {
             var touches = GetData(props.data, "Tackle", null, null, props.playerId)
             plot_def_actions(pitch, touches, "#E38A18", svgWidth - 80, svgHeight - 20, mode)
         }
 
-        if (props.goals) {
+        if (props.options.goal) {
             var goals = props.data.filter(item => item["eventType"] === "Goal" && Number(item["playerId"]) === props.fotmobPlayerId)
             console.log(goals)
             plot_shot_circles(pitch, goals, "#55DD31", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
-        if (props.attemptSaved) {
+        if (props.options.saved) {
             var attempts = props.data.filter(item => item["eventType"] === "AttemptSaved" && Number(item["playerId"]) === props.fotmobPlayerId)
             plot_shot_circles(pitch, attempts, "#DD9131", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
-        if (props.misses) {
+        if (props.options.miss) {
             var miss = props.data.filter(item => item["eventType"] === "Miss" && Number(item["playerId"]) === props.fotmobPlayerId)
             plot_shot_circles(pitch, miss, "#DD3131", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
-        if (props.post) {
+        if (props.options.post) {
             var post = props.data.filter(item => item["eventType"] === "Post" && Number(item["playerId"]) === props.fotmobPlayerId)
             plot_shot_circles(pitch, post, "#31B1DD", svgWidth - 80, svgHeight - 20, mode, props.color)
         }
 
-    }, [props.data, props.win_width, props.win_height, props.playerId, props.allTouches, props.allPasses, props.progPasses, props.unsuccessfulPasses, props.allCarries, props.progCarries,
-    props.ballRecoveries, props.blockedPasses, props.interceptions, props.clearances, props.tackles, props.goals, props.attemptSaved, props.misses, props.post, props.color, props.heatmap]);
+    }, [props.data, props.win_width, props.win_height, props.playerId, props.options, props.color]);
 
 
     return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;

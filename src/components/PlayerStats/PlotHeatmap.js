@@ -43,7 +43,6 @@ export default function PlotHeatmap(touches, pitch, mode, pitchMultiplier, color
         .enter().append("path")
         .attr("d", d3.geoPath())
         .attr("fill", function (d) {
-            console.log(d)
             return color_kde(Number(d.value));
         })
 

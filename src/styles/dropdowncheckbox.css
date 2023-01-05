@@ -1,0 +1,89 @@
+.menu-dropdown-checkbox {
+    background-color: yellow;
+    width: fit-content;
+    border-radius: 15px;
+    width: 100%;
+    padding: 7%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 6px 6px -8px #000000;
+    background-color: #2a2e30;
+}
+
+.dropdown-checkbox {
+    font-family: Roboto, sans-serif;
+    color: white;
+    border-radius: 15px;
+    box-shadow: 0px 6px 6px -8px #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 150%;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    padding: 3% 5%;
+    width: 120px;
+}
+
+.dropdown-checkbox>span {
+    font-weight: bold;
+    display: flex;
+    gap: 10px;
+}
+
+.dropdown-checkbox-submenu {
+    list-style-type: none;
+    font-family: Roboto, sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+}
+
+.dropdown-checkbox-element {
+    background-color: #2a2e30;
+    border-radius: 15px;
+    text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
+        0px -4px 10px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    padding: 3% 5%;
+    height: 40px;
+    width: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.check {
+    position: absolute;
+    top: 25%;
+    right: 2%;
+    padding: 2%;
+    border-radius: 50%;
+    box-shadow: 0px 6px 6px -8px #000000;
+}
+
+
+
+.dropdown-checkbox-element:hover {
+    background-color: #1c1c1d;
+    box-shadow: 0px 6px 6px -8px #000000;
+    transition: background-color 0.5s;
+}
+
+@media only screen and (max-width: 768px) {
+    .menu-dropdown-checkbox {
+        width: 30%;
+        padding: 3%;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .menu-dropdown-checkbox {
+        width: 20%;
+        padding: 1%;
+    }
+}
