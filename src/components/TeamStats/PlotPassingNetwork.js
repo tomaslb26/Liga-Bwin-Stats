@@ -30,7 +30,7 @@ export default function PlotPassingNetwork(props) {
         var svgHeight = props.win_height - 350;
     }
     else if (props.win_width > 992) {
-        var svgWidth = props.win_width / 3 - 100;
+        var svgWidth = props.win_width / 3 - 120;
         var svgHeight = props.win_height - 180;
     }
     else if (props.win_width > 768) {

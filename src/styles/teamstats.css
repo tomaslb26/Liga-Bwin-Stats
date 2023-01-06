@@ -1,21 +1,21 @@
 .team-stats {
     display: flex;
     margin-top: 5%;
+    justify-content: center;
 }
 
 .team-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr;
+    display: flex;
     gap: 1%;
     width: 100%;
+    justify-content: center;
 }
 
 .first-rectangle {
     background: #2a2e30de;
     border-radius: .45em;
     box-shadow: 0px 8px 8px -8px #000000;
-    width: 100%;
+    width: fit-content;
 }
 
 .second-rectangle {
@@ -25,7 +25,8 @@
     flex-direction: column;
     align-items: center;
     width: fit-content;
-    padding: 0 10%;
+    padding: 0 2%;
+    align-items: center;
 }
 
 .third-rectangle {
@@ -34,7 +35,8 @@
     display: flex;
     flex-direction: column;
     width: fit-content;
-    padding: 0 10%;
+    padding: 0 2%;
+    align-items: center;
 }
 
 .actions-header {
@@ -65,7 +67,6 @@
 }
 
 .choose-game {
-    margin-left: 3%;
     display: flex;
     align-items: center;
     gap: 1%;
@@ -156,7 +157,6 @@ div.tooltip_2 {
     font-weight: bold;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
-    margin-left: 3%;
     align-self: flex-start;
 }
 
@@ -167,7 +167,8 @@ div.tooltip_2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
-        gap: 1%;
+        column-gap: 1%;
+        place-content: center;
         width: 100%;
     }
 
@@ -186,13 +187,11 @@ div.tooltip_2 {
     .second-rectangle {
         width: fit-content;
         grid-column: span 1;
-        padding: 0 2%;
     }
 
     .third-rectangle {
         width: fit-content;
         grid-column: span 1;
-        padding: 0 2%;
     }
 
     #chart {}
@@ -201,13 +200,9 @@ div.tooltip_2 {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) and (max-width: 1366px) {
 
-    .second-rectangle {
-        padding: 0 4%;
-    }
+    .second-rectangle {}
 
-    .third-rectangle {
-        padding: 0 1%;
-    }
+    .third-rectangle {}
 
     .inputs>label {
         font-size: 70%;

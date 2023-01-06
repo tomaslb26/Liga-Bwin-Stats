@@ -10,19 +10,20 @@
 
 .buttons-team {
     display: flex;
+    align-self: flex-start;
+    gap: 2%;
     align-items: center;
-    gap: 1%;
 }
 
-.button {
+.button-teamstats {
     font-family: "Roboto";
     font-size: 115%;
+    white-space: nowrap;
     color: white;
     font-weight: bold;
-    white-space: nowrap;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
-    padding: 1.8% 2.5%;
+    padding: 2.5% 2.5%;
     box-shadow: 0px 8px 8px -8px #000000;
     border-radius: 0.25em;
     cursor: pointer;

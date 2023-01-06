@@ -28,14 +28,14 @@ export default function Actions(props) {
     React.useEffect(() => {
         try {
             if (props.side == "Home") {
-                d3.csv(require("./../data/" + props.season + "/" + props.team + "/" + props.team + " - " + props.oppTeam + ".csv"))
+                d3.csv(require("./../data/" + props.season + "/" + props.team.replaceAll(" ", "-") + "/" + props.team + " - " + props.oppTeam + ".csv"))
                     .then((data) => {
                         setData(data)
                         return () => undefined;
                     })
             }
             else {
-                d3.csv(require("./../data/" + props.season + "/" + props.team + "/" + props.oppTeam + " - " + props.team + ".csv"))
+                d3.csv(require("./../data/" + props.season + "/" + props.team.replaceAll(" ", "-") + "/" + props.oppTeam + " - " + props.team + ".csv"))
                     .then((data) => {
                         setData(data)
                         return () => undefined;
@@ -57,9 +57,9 @@ export default function Actions(props) {
         <>
             <div className="buttons-team">
                 <h1 className="actions-header">Plot:</h1>
-                <div style={{ border: '2px solid ' + props.color, backgroundColor: backgroundActions }} onClick={() => handleInputChange("actions")} id="actions" className="button">Actions</div>
-                <div style={{ border: '2px solid ' + props.color, backgroundColor: backgroundShots }} onClick={() => handleInputChange("shots")} id="shots" className="button">Shots</div>
-                <div style={{ border: '2px solid ' + props.color, backgroundColor: backgroundDef }} onClick={() => handleInputChange("def_actions")} id="def_actions" className="button">Def. Actions</div>
+                <div style={{ border: '2px solid ' + props.color, backgroundColor: backgroundActions }} onClick={() => handleInputChange("actions")} id="actions" className="button-teamstats">Actions</div>
+                <div style={{ border: '2px solid ' + props.color, backgroundColor: backgroundShots }} onClick={() => handleInputChange("shots")} id="shots" className="button-teamstats">Shots</div>
+                <div style={{ border: '2px solid ' + props.color, backgroundColor: backgroundDef }} onClick={() => handleInputChange("def_actions")} id="def_actions" className="button-teamstats">Def. Actions</div>
             </div>
             <div id="actions_svg">
                 <PlotActions data={data} team={props.team} win_width={props.win_width} win_height={props.win_height} color={props.color} option={option} progPasses={progPasses} allPasses={allPasses} unsuccessfulPasses={unsuccessfulPasses} allCarries={allCarries} progressiveCarries={progCarries} teamId={props.teamId} side={props.side} oppTeam={props.oppTeam} season={props.season} />

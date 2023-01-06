@@ -43,7 +43,7 @@ export default function TeamStatsDisplay(props) {
         const event_team = array[1].data
         setTeam(event_team.replaceAll("-", " "))
 
-        setTeamId(team_ids[event_team])
+        setTeamId(team_ids[event_team.replaceAll(" ", "-")])
 
         setColor(
             () => {
