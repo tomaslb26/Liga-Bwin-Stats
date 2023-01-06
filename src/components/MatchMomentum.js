@@ -204,7 +204,7 @@ export default function MatchMomentum(props) {
                     </div>
                 </div>
                 <div style={{ border: "2px solid " + teams_colors.filter((item) => (item.team === team))[0]["color"] }} className="svg--container">
-                    <MatchMomentumChart team={team} oppTeam={oppTeam} dataHome={dataHome} dataAway={dataAway} win_width={windowWidth} win_height={windowHeight} teamId={teamId} oppTeamId={oppTeamId} />
+                    <MatchMomentumChart season={season} team={team} oppTeam={oppTeam} dataHome={dataHome} dataAway={dataAway} win_width={windowWidth} win_height={windowHeight} teamId={teamId} oppTeamId={oppTeamId} />
                 </div>
             </main>
             <div style={background_styles} id="background_div"></div>

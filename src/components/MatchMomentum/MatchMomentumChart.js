@@ -35,7 +35,6 @@ export default function MatchMomentumChart(props) {
         var goals = props.dataHome.filter((item) => item.type === "Goal" && Number(item.teamId == props.teamId))
         var away_goals = props.dataAway.filter((item) => item.type === "Goal" && Number(item.teamId == props.oppTeamId))
         goals = goals.concat(away_goals)
-        console.log(goals)
 
         var data_home = props.dataHome.filter(d => { if ((Number(d.teamId) === props.teamId && d.type === "Pass" && d.outcomeType === "Successful") || d.type === "Carry") return d })
         data_home = d3.rollup(data_home, v => d3.sum(v, d => d.xT), d => d.minute);
@@ -142,27 +141,39 @@ export default function MatchMomentumChart(props) {
             .attr("opacity", 1)
 
         try {
-            svg.selectAll("XAxisScatter .tick")
-                .data(goals).enter()
-                .append("image")
-                .attr("x", d => x(Number(d['minute'])) - 15)
-                .attr('y', function (d) {
-                    var change = 1
-                    if (d.isOwnGoal == "True") change = -1
+            d3.csv(require("./../../data/" + props.season + "/calcs.csv"))
+                .then((data) => {
 
-                    if (Number(d.teamId) == props.teamId) return y(0.5 * change + 0.03)
-                    else if (Number(d.teamId) == props.oppTeamId) return y(-0.5 * change + 0.03)
+                    function getPhotoLink(team, shirtNo) {
+                        var player = data.filter((item) => {
+                            if (item.team === team.replaceAll(" ", "-") && Number(item.shirtNo) === Number(shirtNo)) return item
+                        })[0]
+                        return player.photo
+                    }
 
+                    svg.selectAll("XAxisScatter .tick")
+                        .data(goals).enter()
+                        .append("image")
+                        .attr("x", d => x(Number(d['minute'])) - 10)
+                        .attr('y', function (d) {
+                            var change = 1
+                            if (d.isOwnGoal == "True") change = -1
+
+                            if (Number(d.teamId) == props.teamId) return y(0.5 * change + 0.03)
+                            else if (Number(d.teamId) == props.oppTeamId) return y(-0.5 * change + 0.03)
+
+                        })
+                        .attr('height', 50)
+                        .attr("xlink:href", function (d) {
+                            if (Number(d.teamId) == props.teamId) return getPhotoLink(props.team, d.shirtNo)
+                            else if (Number(d.teamId) == props.oppTeamId) return getPhotoLink(props.oppTeam, d.shirtNo)
+                        })
+                        .transition()
+                        .ease(d3.easeBack)
+                        .duration(800)
+                        .attr("opacity", 1)
                 })
-                .attr('height', 50)
-                .attr("xlink:href", function (d) {
-                    if (Number(d.teamId) == props.teamId) return require("./../../data/Photos/" + props.team.replaceAll(" ", "-") + "/" + d.name + ".png")
-                    else if (Number(d.teamId) == props.oppTeamId) return require("./../../data/Photos/" + props.oppTeam.replaceAll(" ", "-") + "/" + d.name + ".png")
-                })
-                .transition()
-                .ease(d3.easeBack)
-                .duration(800)
-                .attr("opacity", 1)
+
         }
         catch (e) {
             console.log(e)
