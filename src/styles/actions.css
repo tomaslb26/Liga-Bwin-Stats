@@ -16,7 +16,7 @@
 }
 
 .button-teamstats {
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     font-size: 115%;
     white-space: nowrap;
     color: white;
