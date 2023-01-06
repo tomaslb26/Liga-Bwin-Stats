@@ -10,11 +10,7 @@ export default function Actions(props) {
 
     function handleInputChange(option) {
         setOption(option)
-        setAllCarries(false)
-        setAllPasses(false)
-        setUnsuccessfulPasses(false)
-        setProgCarries(false)
-        setProgPasses(false)
+        setOptions({})
     }
 
     var backgroundActions, backgroundShots, backgroundDef = "transparent"
@@ -47,11 +43,44 @@ export default function Actions(props) {
         }
     }, [props.team, props.season, props.side, props.oppTeam]);
 
-    const [progPasses, setProgPasses] = React.useState(false)
-    const [allPasses, setAllPasses] = React.useState(false)
-    const [unsuccessfulPasses, setUnsuccessfulPasses] = React.useState(false)
-    const [allCarries, setAllCarries] = React.useState(false)
-    const [progCarries, setProgCarries] = React.useState(false)
+    const [options, setOptions] = React.useState({})
+
+    function handleOptionChange(event) {
+        const array = [...event.target.childNodes]
+        const option_actions = array[0].data
+        setOptions((prev) => {
+            return {
+                ...prev,
+                [option_actions.toLowerCase().replaceAll(" ", "_")]: !options[option_actions.toLowerCase().replaceAll(" ", "_")]
+            }
+        })
+    }
+
+    function ActionsInputs() {
+        const input_options = ["All Carries", "All Passes", "Progressive Carries", "Progressive Passes", "Unsuccessful Passes"]
+        return (
+            <>
+                {
+                    input_options.map((item) => {
+                        return <div onClick={handleOptionChange} style={{ border: '2px solid ' + props.color, backgroundColor: options[item.toLowerCase().replaceAll(" ", "_")] ? props.color + "53" : "#2a2e30" }} className="actions-option">{item}</div>
+                    })
+                }
+            </>
+        )
+    }
+
+    function DefActions() {
+        const input_options = [["Ball Recovery", "#42DC60"], ["Interception", "red"], ["Blocked Pass", "#42DCD5"], ["Clearance", "#D047D6"], ["Tackle", "#E38A18"]]
+        return (
+            <>
+                {
+                    input_options.map((item) => {
+                        return <div style={{ backgroundColor: item[1] }} className="actions-option">{item[0]}</div>
+                    })
+                }
+            </>
+        )
+    }
 
     return (
         <>
@@ -62,93 +91,16 @@ export default function Actions(props) {
                 <div style={{ border: '2px solid ' + props.color, backgroundColor: backgroundDef }} onClick={() => handleInputChange("def_actions")} id="def_actions" className="button-teamstats">Def. Actions</div>
             </div>
             <div id="actions_svg">
-                <PlotActions data={data} team={props.team} win_width={props.win_width} win_height={props.win_height} color={props.color} option={option} progPasses={progPasses} allPasses={allPasses} unsuccessfulPasses={unsuccessfulPasses} allCarries={allCarries} progressiveCarries={progCarries} teamId={props.teamId} side={props.side} oppTeam={props.oppTeam} season={props.season} />
+                <PlotActions data={data} team={props.team} win_width={props.win_width} win_height={props.win_height} color={props.color} option={option} options={options} teamId={props.teamId} side={props.side} oppTeam={props.oppTeam} season={props.season} />
             </div>
             <div id="inputs" className="inputs">
                 {option === "actions" &&
                     <>
-                        <label htmlFor="unsuccessful_passes">Unsuccessful Passes</label>
-                        <input
-                            className="checkbox-flip"
-                            type="checkbox"
-                            id="unsuccessful_passes"
-                            checked={unsuccessfulPasses}
-                            onChange={() => setUnsuccessfulPasses((prev) => (!prev))}
-                            name="unsuccessful_passes"
-                        />
-                        <label htmlFor="all_passes">All Passes</label>
-                        <input
-                            className="checkbox-flip"
-                            type="checkbox"
-                            id="all_passes"
-                            checked={allPasses}
-                            onChange={() => setAllPasses((prev) => (!prev))}
-                            name="all_passes"
-                        />
-                        <label htmlFor="prog_passes">Progressive Passes</label>
-                        <input
-                            className="checkbox-flip"
-                            type="checkbox"
-                            id="prog_passes"
-                            checked={progPasses}
-                            onChange={() => setProgPasses((prev) => (!prev))}
-                            name="prog_passes"
-                            style={{ border: "1px solid " + props.color }}
-                        />
-                        <br></br>
-                        <label htmlFor="all_carries">All Carries</label>
-                        <input
-                            className="checkbox-flip"
-                            type="checkbox"
-                            id="all_carries"
-                            checked={allCarries}
-                            onChange={() => setAllCarries((prev) => (!prev))}
-                            name="all_carries"
-                        />
-                        <label htmlFor="prog_carries">Progressive Carries</label>
-                        <input
-                            className="checkbox-flip"
-                            type="checkbox"
-                            id="prog_carries"
-                            checked={progCarries}
-                            onChange={() => setProgCarries((prev) => (!prev))}
-                            name="prog_carries"
-                            style={{ border: "1px solid #48EDDB" }}
-                        />
+                        <ActionsInputs />
                     </>}
                 {option === "def_actions" &&
                     <>
-                        <label htmlFor="ball_recovery">Ball Recovery</label>
-                        <div
-                            className="def_action"
-                            style={{ backgroundColor: "#42DC60" }}
-                            id="ball_recovery"
-                        />
-                        <label htmlFor="interception">Interception</label>
-                        <div
-                            className="def_action"
-                            style={{ backgroundColor: "red" }}
-                            id="interception"
-                        />
-                        <label htmlFor="blocked_pass">Blocked Pass</label>
-                        <div
-                            className="def_action"
-                            style={{ backgroundColor: "#42DCD5" }}
-                            id="blocked_pass"
-                        />
-                        <br></br>
-                        <label htmlFor="clearance">Clearance</label>
-                        <div
-                            className="def_action"
-                            style={{ backgroundColor: "#D047D6" }}
-                            id="clearance"
-                        />
-                        <label htmlFor="tackle">Tackle</label>
-                        <div
-                            className="def_action"
-                            style={{ backgroundColor: "#E38A18" }}
-                            id="tackle"
-                        />
+                        <DefActions />
                     </>}
             </div>
         </>

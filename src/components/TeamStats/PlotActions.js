@@ -137,7 +137,7 @@ export default function PlotActions(props) {
         }
         else {
             if (props.option === "actions") {
-                if (props.unsuccessfulPasses) {
+                if (props.options.unsuccessful_passes) {
                     var unsuccesful = dataset.filter(function (d) {
                         if (d.type === "Pass" && d.outcomeType === "Unsuccessful" && Number(d.teamId) === props.teamId) {
                             return d;
@@ -158,7 +158,7 @@ export default function PlotActions(props) {
                         .attr("stroke-width", lineWidth)
                         .attr("marker-end", "url(#triangle2)");
                 }
-                if (props.allPasses && !props.ProgressivePasses) {
+                if (props.options.all_passes && !props.options.progressive_passes) {
                     var passes = props.data.filter(function (d) {
                         if (d.type === "Pass" && d.outcomeType === "Successful" && Number(d.teamId) === props.teamId) {
                             return d;
@@ -179,7 +179,7 @@ export default function PlotActions(props) {
                         .attr("stroke-width", lineWidth)
                         .attr("marker-end", "url(#triangle3)");
                 }
-                else if (props.allPasses) {
+                else if (props.options.all_passes) {
                     var passes = dataset.filter(function (d) {
                         if (d.type === "Pass" && d.outcomeType === "Successful" && d.progressive === "False" && Number(d.teamId) === props.teamId) {
                             return d;
@@ -200,7 +200,7 @@ export default function PlotActions(props) {
                         .attr("stroke-width", lineWidth)
                         .attr("marker-end", "url(#triangle3)");
                 }
-                if (props.progPasses) {
+                if (props.options.progressive_passes) {
                     var progressive = props.data.filter(function (d) {
                         if (d.type === "Pass" && d.outcomeType === "Successful" && d.progressive === "True" && Number(d.teamId) === props.teamId) {
                             return d;
@@ -213,7 +213,7 @@ export default function PlotActions(props) {
                     plotCircles(pitch, progressive, props.color)
 
                 }
-                if (props.allCarries && !props.progressiveCarries) {
+                if (props.options.all_carries && !props.options.progressive_carries) {
                     var carries = dataset.filter(function (d) {
                         if (d.type == "Carry") {
                             return d;
@@ -234,7 +234,7 @@ export default function PlotActions(props) {
                         .attr("stroke-width", lineWidth)
                         .attr("marker-end", "url(#triangle3)");
                 }
-                else if (props.allCarries) {
+                else if (props.options.all_carries) {
                     var carries = dataset.filter(function (d) {
                         if (d.type == "Carry" && d.progressive == "False") {
                             return d;
@@ -255,7 +255,7 @@ export default function PlotActions(props) {
                         .attr("stroke-width", lineWidth)
                         .attr("marker-end", "url(#triangle3)");
                 }
-                if (props.progressiveCarries) {
+                if (props.options.progressive_carries) {
                     var progressiveC = dataset.filter(function (d) {
                         if (d.type === "Carry" && d.progressive === "True") {
                             return d;
@@ -458,7 +458,7 @@ export default function PlotActions(props) {
         }
 
 
-    }, [props.data, props.win_width, props.win_height, props.progPasses, props.allPasses, props.unsuccessfulPasses, props.allCarries, props.progressiveCarries, props.option]);
+    }, [props.data, props.win_width, props.win_height, props.options, props.option]);
 
     return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;
 }

@@ -1,5 +1,5 @@
 .actions-header {
-    font-family: "Roboto";
+    font-family: "Roboto", sans-serif;
     color: white;
     font-weight: bold;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
@@ -45,18 +45,30 @@
     margin-right: 2%;
 }
 
-#inputs {
-    width: fit-content;
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 3%;
-    font-family: "Roboto";
-    font-size: 100%;
-    font-weight: bold;
+.actions-option {
+    display: flex;
+    justify-content: center;
     color: white;
-    white-space: nowrap;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    padding: 2% 0;
+    border-radius: 10px;
+    cursor: pointer;
     text-shadow: 2px 7px 5px rgba(0, 0, 0, 0.3),
         0px -4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#inputs {
+    align-self: center;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    place-content: center;
+    gap: 2%;
+    row-gap: 5%;
+    margin-top: 1%;
+    margin-bottom: 2%;
 }
 
 #inputs label {
