@@ -74,6 +74,10 @@
     align-self: flex-start;
 }
 
+p{
+    font-family: "Roboto", sans-serif;
+}
+
 .choose-game>span {
     font-size: 110%;
     font-family: "Roboto", sans-serif;
