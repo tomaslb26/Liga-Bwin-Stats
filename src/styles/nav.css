@@ -1,21 +1,26 @@
 nav {
-    padding: 0.2% 0.2%;
-    position: fixed;
-    top: 0;
-    left: 0;
     display: flex;
-    justify-items: flex-start;
     align-items: center;
-    height: 60px;
+    justify-content: center;
+    height: 45px;
     width: 100%;
-    background-color: #2a2e30ad;
-    border-radius: 0.25em;
-    box-shadow: 0px 6px 6px -8px #000000;
+    background-color: transparent;
     color: white;
-    font-family: "Roboto", sans-serif;
+    font-family: "Heavitas";
 }
 
-nav>img {
-    height: 45px;
-    margin-left: 1%;
+.nav-items{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    white-space: nowrap;
+}
+
+@media only screen and (max-width: 768px) {
+    .nav-items{
+        font-size: 70%;
+        gap: 10px;
+    }
 }

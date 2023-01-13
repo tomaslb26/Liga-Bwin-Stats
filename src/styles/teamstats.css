@@ -1,7 +1,11 @@
 .team-stats {
     display: flex;
-    margin-top: 5%;
     justify-content: center;
+    margin-top: 1%;
+}
+
+#background_div{
+    margin: 0;
 }
 
 .team-grid {
@@ -107,14 +111,15 @@ p{
 
     .team-stats {
         display: flex;
-        padding: 15% 0%;
+        padding: 1% 0;
     }
 
     .team-grid {
         display: grid;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr;
-        gap: 1%;
+        justify-content: center;
+        padding-left: 1%;
     }
 
     .first-rectangle {
@@ -171,14 +176,13 @@ div.tooltip_2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr 1fr;
-        column-gap: 1%;
         place-content: center;
         width: 100%;
+        padding: 0 0 0 2%;
     }
 
     .team-stats {
-        display: flex;
-        padding: 10% 0%;
+        place-content: center;
         grid-column-start: 1;
         grid-column-end: 3;
     }
@@ -215,5 +219,9 @@ div.tooltip_2 {
     .inputs>input {
         width: 20px;
         height: 20px;
+    }
+
+    .team-stats{
+        padding: 0 5%;  
     }
 }

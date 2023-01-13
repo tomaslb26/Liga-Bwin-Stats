@@ -21,19 +21,30 @@ export default function Nav(props) {
         props.setDisplayTeams(false)
     }
 
-    const styles = {
-        border: '2px solid ' + props.color,
-    }
+    return(
+        <nav>
+            <div className="nav-items">
+                <Link className="nav-item" style={{ color: props.option === "home" ? props.color : "rgba(255, 255, 255, 0.7)",
+                                                    textDecoration: "none" 
+                                                    }} smooth to={"/"}>{"Home"}</Link>
+                <Link className="nav-item" style={{ color: props.option === "classification" ? props.color : "rgba(255, 255, 255, 0.7)",
+                                                    textDecoration: "none" 
+                                                    }} smooth to={"/global"}>{"Classification"}</Link>
+                <Link className="nav-item" style={{ color: props.option === "match momentum" ? props.color : "rgba(255, 255, 255, 0.7)",
+                                                    textDecoration: "none" 
+                                                    }} smooth to={"/match_momentum"}>{"Match Momentum"}</Link>
+                <Link className="nav-item" style={{ color: props.option === "player_stats" ? props.color : "rgba(255, 255, 255, 0.7)",
+                                                    textDecoration: "none" 
+                                                    }} smooth to={"/player_stats"}>{"Player Stats"}</Link>
+                <Link className="nav-item" style={{ color: props.option === "team_stats" ? props.color : "rgba(255, 255, 255, 0.7)",
+                                                    textDecoration: "none" 
+                                                    }} smooth to={"/team_stats"}>{"Team Stats"}</Link>
+            </div>
+        </nav>
+    )
 
-    const textStyles = {
-        textShadow: "1px 0px 5px " + props.color + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)",
-    }
 
-    const underline = {
-        textDecoration: "underline " + props.color
-    }
-
-
+    /*
     return (
         <nav>
             <img src={require(`./../data/${props.season}/${props.team.replaceAll(" ", "-")}.png`)} ></img>
@@ -48,4 +59,5 @@ export default function Nav(props) {
             <DropdownHide links={[{ "text": "Global", "link": "/global" }, { "text": "Player Stats", "link": "/player_stats" }, { "text": "Match Momentum", "link": "/match_momentum" }]} color={props.color} />
         </nav >
     )
+    */
 }

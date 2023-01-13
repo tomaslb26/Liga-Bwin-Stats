@@ -1,0 +1,107 @@
+.dropdown-section{
+    margin-top: 0.5%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Heavitas";
+    color: white;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    gap: 20px;
+}
+
+.dropdown-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.dropdown-box>h2{
+    font-size: 110%;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    font-weight: normal;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-simple{
+    display: flex;
+    position: relative;
+}
+
+.dropdown-label{
+    border-radius: 10px;
+    background-color: #2A2E30;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    padding: 5% 10%;
+    gap: 10px;
+    cursor: pointer;
+    width: 180px;
+    margin: 0;
+}
+
+.dropdown-expand{
+    position: absolute;
+    top: 115%;
+    border-radius: 10px;
+    padding: 5%;
+    left: 0%;
+    width: 190px;
+    height: 200px;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: #3e4244;
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    z-index: 2;
+}
+
+.dropdown-item{
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4% 2% 4% 4%;
+    border-radius: 10px;
+    gap: 5px;
+    font-size: 100%;
+}
+
+.dropdown-item:hover{
+    background-color: #151616;
+}
+
+.dropdown-image, .dropdown-item-image{
+    height: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .dropdown-section{
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .dropdown-box{
+    }
+
+    .dropdown-label{
+        width: 150px;
+        font-size: 80%;
+    }
+
+    .dropdown-label>span>i{
+        display: none;
+    }
+
+    .dropdown-image, .dropdown-item-image{
+        height: 15px;
+    }
+
+}

@@ -8,6 +8,8 @@ import { useState, useEffect } from "react";
 import { HashLink as Link } from 'react-router-hash-link';
 import misc_stats from "./../data/misc_stats"
 import * as d3 from "d3";
+import Nav from "./Nav";
+import DropdownSection from "./DropdownSection";
 
 export default function Global(props) {
 
@@ -24,7 +26,6 @@ export default function Global(props) {
     }
 
     const [season, setSeason] = useState("22-23")
-    const [displaySeasons, setDisplaySeasons] = useState(false)
 
     const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
     const [windowHeight, setWindowHeight] = React.useState(window.innerHeight)
@@ -40,16 +41,14 @@ export default function Global(props) {
         }
     }, [])
 
-    function handleInputChange() {
-        setDisplaySeasons((prev) => { return !prev })
-    }
 
     function handleSeasonChange(event) {
-        setSeason(event.target.innerHTML)
+        let season = ""
+        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
-        setDisplaySeasons((prev) => {
-            return !prev
-        })
+        setSeason(season)
     }
 
     const [dataClassification, setDataClassification] = React.useState([])
@@ -88,12 +87,11 @@ export default function Global(props) {
 
     return (
         <>
-            <nav className="global--nav">
-                <img src={require(`./../data/LigaBwin.png`)} ></img>
-                <Dropdown placeholder={season} displayFlag={displaySeasons} li_elements={<><li className="dropdown--elem" onClick={(event) => handleSeasonChange(event)}>21-22</li><li className="dropdown--elem" onClick={(event) => handleSeasonChange(event)}>22-23</li></>}
-                    styles={styles} textStyles={textStyles} handleInputChange={handleInputChange} />
-                <DropdownHide links={[{ "text": "Team Stats", "link": "/team_stats" }, { "text": "Player Stats", "link": "/player_stats" }, { "text": "Match Momentum", "link": "/match_momentum" }]} color={"#ffb404"} />
-            </nav>
+            <Nav option = "classification" color = {"#FFB700"} />
+            <DropdownSection season = {season} handleSeasonChange = {handleSeasonChange}
+                            options = {{season: true, teams: false, players : false}}
+                            color={"#FFB700"}
+                            />
             <main className="global">
                 <div className="global-grid">
                     <div className="classification">

@@ -22,7 +22,7 @@ export function CreatePitch(svg, width, height) {
         .attr('x2', d => d['y2'] * width / 68)
         .style('stroke-width', lineWidth)
         .style('stroke', lineColor)
-        .style("stroke-dasharray", ("10,3"));
+        //.style("stroke-dasharray", ("10,3"));
 
 
     const pitchCircleData = getPitchCircles;
@@ -35,7 +35,7 @@ export function CreatePitch(svg, width, height) {
         .style('stroke-width', lineWidth)
         .style('stroke', lineColor)
         .style('fill', d => d['color'])
-        .style("stroke-dasharray", ("10,3"));
+        //.style("stroke-dasharray", ("10,3"));
 
 
     const pitchArcData = getArcs;
@@ -47,7 +47,7 @@ export function CreatePitch(svg, width, height) {
         .attr('transform', d => `translate(${d.x * width / 68},${d.y * height / 105})`)
         .style('fill', "none")
         .style('stroke', lineColor)
-        .style("stroke-dasharray", ("10,3"));
+        //.style("stroke-dasharray", ("10,3"));
 
 
     return pitch

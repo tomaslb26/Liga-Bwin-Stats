@@ -3,12 +3,14 @@ import "./../styles/teamstats.css"
 import * as d3 from "d3";
 import LineXG from "./TeamStats/LineXG";
 import BarChart from "./TeamStats/BarChart";
+import Nav from "./Nav";
 import Dropdown from "./Dropdown"
 import stats from "./../data/stats"
 import stats_conversion from "./../data/stats_conversion";
 import PassingNetwork from "./PassingNetwork";
 import Actions from "./Actions";
 import teams_data from "./../data/teams"
+import DropdownSection from "./DropdownSection";
 
 export default function TeamStats(props) {
 
@@ -86,25 +88,33 @@ export default function TeamStats(props) {
 
 
     return (
-        <main className="team-stats">
-            <div className="team-grid">
-                <div style={{ border: '2px solid ' + props.color }} className="first-rectangle">
-                    <LineXG data={data} team={props.team} color={props.color} season={props.season} win_width={windowWidth} win_height={windowHeight} />
-                    <div className="stat-container">
-                        <span>Rank By Stat:</span>
-                        <div style={{ marginLeft: "1%" }}>
-                            <Dropdown placeholder={stat} displayFlag={displayStat} li_elements={stats.map((item) => <li className="dropdown--elem" style={{ fontSize: "70%" }} onClick={(event) => handleStatChange(event)}>{item}</li>)} styles={styles} textStyles={textStyles} handleInputChange={handleInputChange} />
+        <>
+            <Nav option = "team_stats" color = {props.color} />
+            <DropdownSection teams = {props.teams} team = {props.team} handleTeamChange = {props.handleTeamChange} 
+                            season = {props.season} handleSeasonChange = {props.handleSeasonChange}
+                            options = {{season: true, teams: true, players : false}}
+                            color={props.color}
+                            />
+            <main className="team-stats">
+                <div className="team-grid">
+                    <div style={{ border: '2px solid ' + props.color }} className="first-rectangle">
+                        <LineXG data={data} team={props.team} color={props.color} season={props.season} win_width={windowWidth} win_height={windowHeight} />
+                        <div className="stat-container">
+                            <span>Rank By Stat:</span>
+                            <div style={{ marginLeft: "1%" }}>
+                                <Dropdown placeholder={stat} displayFlag={displayStat} li_elements={stats.map((item) => <li className="dropdown--elem" style={{ fontSize: "70%" }} onClick={(event) => handleStatChange(event)}>{item}</li>)} styles={styles} textStyles={textStyles} handleInputChange={handleInputChange} />
+                            </div>
                         </div>
+                        <BarChart data={dataBar} team={props.team} color={props.color} season={props.season} win_width={windowWidth} win_height={windowHeight} stat={stats_conversion[stat]} />
                     </div>
-                    <BarChart data={dataBar} team={props.team} color={props.color} season={props.season} win_width={windowWidth} win_height={windowHeight} stat={stats_conversion[stat]} />
+                    <div style={styles} className="second-rectangle">
+                        <PassingNetwork team={props.team} season={props.season} color={props.color} win_width={windowWidth} win_height={windowHeight} side={side} oppTeam={oppTeam} setSide={setSide} setOppTeam={setOppTeam} teams={teams} />
+                    </div>
+                    <div style={styles} className="third-rectangle" id="third_rectangle">
+                        <Actions teamId={props.teamId} team={props.team} season={props.season} color={props.color} win_width={windowWidth} win_height={windowHeight} side={side} oppTeam={oppTeam} setSide={setSide} setOppTeam={setOppTeam} />
+                    </div>
                 </div>
-                <div style={styles} className="second-rectangle">
-                    <PassingNetwork team={props.team} season={props.season} color={props.color} win_width={windowWidth} win_height={windowHeight} side={side} oppTeam={oppTeam} setSide={setSide} setOppTeam={setOppTeam} teams={teams} />
-                </div>
-                <div style={styles} className="third-rectangle" id="third_rectangle">
-                    <Actions teamId={props.teamId} team={props.team} season={props.season} color={props.color} win_width={windowWidth} win_height={windowHeight} side={side} oppTeam={oppTeam} setSide={setSide} setOppTeam={setOppTeam} />
-                </div>
-            </div>
-        </main>
+            </main>
+        </>
     )
 }

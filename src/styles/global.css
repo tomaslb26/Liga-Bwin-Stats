@@ -1,6 +1,7 @@
 .global {
     display: flex;
-    margin-top: 7%;
+    justify-content: center;
+    margin-top: 1%;
     margin-left: 0%;
 }
 
@@ -45,7 +46,7 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 3%;
-    width: 100%;
+    place-content: center;
 }
 
 .classification {
@@ -90,13 +91,13 @@
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
         gap: 1%;
-        width: 100%;
     }
 
 
     .global {
         display: flex;
-        padding: 20% 0%;
+        margin-top: 3%;
+        padding-bottom: 5%;
     }
 
 }
@@ -107,11 +108,11 @@
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr;
         gap: 1%;
-        width: 100%;
     }
 
     .global {
         display: flex;
-        padding: 10% 0%;
+        margin-top: 3%;
+        padding-bottom: 5%;
     }
 }

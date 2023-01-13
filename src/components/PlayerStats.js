@@ -11,20 +11,21 @@ import GetPlayers from "./GetPlayers";
 import GetPlayerId from "./GetPlayerId";
 import StatContainer from "./PlayerStats/StatContainer";
 import PitchSection from "./PlayerStats/PitchSection";
+import Nav from "./Nav";
+import DropdownSection from "./DropdownSection";
 
 export default function PlayerStats() {
 
     const [season, setSeason] = useState("22-23")
-    const [displaySeasons, setDisplaySeasons] = useState(false)
-
-    function handleSeasonDropDownChange() {
-        setDisplaySeasons((prev) => { return !prev })
-    }
 
     function handleSeasonChange(event) {
-        setSeason(event.target.innerHTML)
-        setTeams(teams_data.filter((item) => item.season === event.target.innerHTML)[0]["teams"])
-        setDisplaySeasons(false)
+        let season = ""
+        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
+
+        setSeason(season)
+        setTeams(teams_data.filter((item) => item.season === season)[0]["teams"])
     }
 
     const [team, setTeam] = useState("Benfica")
@@ -39,29 +40,24 @@ export default function PlayerStats() {
     const [displayPlayers, setDisplayPlayers] = useState(false)
 
     function handleTeamChange(event) {
-        const array = [...event.target.childNodes]
-        const event_team = array[1].data
-        setTeam(event_team.replaceAll("-", " "))
-        setTeamId(team_ids[event_team])
-        setDisplayTeams(false)
+        let team = ""
+        if(event.target.tagName.toLowerCase() == "li") team = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() == "span") team = event.target.innerHTML
+        else team = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
+
+        setTeam(team)
+        setTeamId(team_ids[team])
     }
 
-    function handleTeamDropdownChange() {
-        setDisplayTeams((prev) => { return !prev })
-    }
+    function handlePlayerChange(event) {    
+        let player = ""
+        if(event.target.tagName.toLowerCase() == "li") player = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() == "span") player = event.target.innerHTML
+        else return
 
-
-    function handlePlayerChange(event) {
-        const array = [...event.target.childNodes]
-        const event_player = array[1].data
-        setPlayer(event_player)
-        setDisplayPlayers(false)
-        setPlayerId(Number(GetPlayerId(data, team.replaceAll(" ", "-"), event_player)["playerId"]))
-        setFotmobPlayerId(Number(GetPlayerId(data, team.replaceAll(" ", "-"), event_player)["fotmob_player_id"]))
-    }
-
-    function handlePlayerDropdownChange() {
-        setDisplayPlayers((prev) => { return !prev })
+        setPlayer(player)
+        setPlayerId(Number(GetPlayerId(data, team.replaceAll(" ", "-"), player)["playerId"]))
+        setFotmobPlayerId(Number(GetPlayerId(data, team.replaceAll(" ", "-"), player)["fotmob_player_id"]))
     }
 
     const [data, setData] = React.useState([])
@@ -83,13 +79,28 @@ export default function PlayerStats() {
     }, [season, team]);
 
 
-    const background_styles = {
+    const styles = {
+        backgroundColor: "#2A2E30",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        position: "absolute",
+        opacity: 0.95,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        content: "",
+        zIndex: -1
+    }
+
+    const styles2 = {
         backgroundImage: 'url(' + require(`./../data/${season}/estadio_${team.replaceAll(" ", "-")}.jpg`) + ')',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         position: "absolute",
-        opacity: 0.2,
+        opacity: 1,
         top: 0,
         left: 0,
         bottom: 0,
@@ -124,28 +135,13 @@ export default function PlayerStats() {
 
     return (
         <>
-            <nav className="player-stats--nav">
-                <img src={require(`./../data/${season}/${team.replaceAll(" ", "-")}.png`)} ></img>
-                <div style={{ marginLeft: "0.5%" }}>
-                    <Dropdown placeholder={season} displayFlag={displaySeasons} li_elements={<><li className="dropdown--elem" onClick={(event) => handleSeasonChange(event)}>21-22</li><li className="dropdown--elem" onClick={(event) => handleSeasonChange(event)}>22-23</li></>}
-                        styles={{ border: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"] }} textStyles={{ textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === team))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }} handleInputChange={handleSeasonDropDownChange} />
-                </div>
-                <div style={{ marginLeft: "0.5%" }}>
-                    <Dropdown placeholder={team} displayFlag={displayTeams} li_elements={teams.map((item) => <li className="dropdown--elem" onClick={(event) => handleTeamChange(event)}><img src={require(`./../data/${season}/${item.replaceAll(" ", "-")}.png`)}></img>{item}</li>)}
-                        styles={{ border: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"] }} textStyles={{ textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === team))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }} handleInputChange={handleTeamDropdownChange} />
-                </div>
-                <div style={{ marginLeft: "0.5%" }}>
-                    <Dropdown placeholder={player} displayFlag={displayPlayers} li_elements={players.map((item) => {
-                        try {
-                            return <li className="dropdown--elem" onClick={(event) => handlePlayerChange(event)}><img src={item.photo}></img>{item.name}</li>
-                        } catch (e) {
-                            return <li className="dropdown--elem" onClick={(event) => handlePlayerChange(event)}><img src={require(`./../data/${season}/${team.replaceAll(" ", "-")}.png`)}></img>{item.name}</li>
-                        }
-                    })}
-                        styles={{ border: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"] }} textStyles={{ textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === team))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }} handleInputChange={handlePlayerDropdownChange} />
-                </div>
-                <DropdownHide links={[{ "text": "Global", "link": "/global" }, { "text": "Team Stats", "link": "/team_stats" }, { "text": "Match Momentum", "link": "/match_momentum" }]} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} />
-            </nav>
+            <Nav option = "player_stats" color = {teams_colors.filter((item) => (item.team === team))[0]["color"]} />
+            <DropdownSection teams = {teams} team = {team} handleTeamChange = {handleTeamChange} 
+                             players = {players} player = {player} handlePlayerChange = {handlePlayerChange} 
+                             season = {season} handleSeasonChange = {handleSeasonChange}
+                             options = {{season: true, teams: true, players : true}}
+                             color={teams_colors.filter((item) => (item.team === team))[0]["color"]}
+                            />
             <main className="player-stats--main">
                 <div style={{ border: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"] }} className="stats-section">
                     <div className="buttons">
@@ -195,7 +191,8 @@ export default function PlayerStats() {
                 </div>
                 <PitchSection season={season} team={team} data={data} playerId={playerId} fotmobPlayerId={fotmobPlayerId} windowWidth={windowWidth} windowHeight={windowHeight} />
             </main>
-            <div style={background_styles} id="background_div"></div>
+            <div style={styles2} id="background_div"></div>
+            <div style={styles} id="background_div"></div>
         </>
     )
 }

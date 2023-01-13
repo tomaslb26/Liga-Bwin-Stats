@@ -10,6 +10,8 @@ import * as d3 from "d3";
 import "./../styles/match_momentum.css"
 import GetScore from "./GetScore";
 import MatchMomentumChart from "./MatchMomentum/MatchMomentumChart"
+import Nav from "./Nav";
+import DropdownSection from "./DropdownSection";
 
 export default function MatchMomentum(props) {
 
@@ -34,40 +36,30 @@ export default function MatchMomentum(props) {
         textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === team))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)",
     }
 
-
     const [season, setSeason] = useState("22-23")
-    const [displaySeasons, setDisplaySeasons] = useState(false)
-
-    function handleSeasonDropDownChange() {
-        setDisplaySeasons((prev) => { return !prev })
-        setDisplayOppTeams(false)
-        setDisplayTeams(false)
-    }
 
     function handleTeamDropDownChange() {
         setDisplayTeams((prev) => { return !prev })
         setDisplayOppTeams(false)
-        setDisplaySeasons(false)
     }
 
     function handleOppTeamDropDownChange() {
         setDisplayOppTeams((prev) => { return !prev })
         setDisplayTeams(false)
-        setDisplaySeasons(false)
     }
 
     function handleSeasonChange(event) {
-        setSeason(event.target.innerHTML)
+        let season = ""
+        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
-        setOppTeams(teams_data.filter((item) => item.season === event.target.innerHTML)[0]["teams"].filter((item) => item !== team.replaceAll("-", " ")))
-        setTeams(teams_data.filter((item) => item.season === event.target.innerHTML)[0]["teams"].filter((item) => item !== oppTeam.replaceAll("-", " ")))
+        setSeason(season)
 
-        setDisplaySeasons((prev) => {
-            return !prev
-        })
+        setOppTeams(teams_data.filter((item) => item.season === season)[0]["teams"].filter((item) => item !== team.replaceAll("-", " ")))
+        setTeams(teams_data.filter((item) => item.season === season)[0]["teams"].filter((item) => item !== oppTeam.replaceAll("-", " ")))
 
         setDisplayTeams(false)
-
         setDisplayOppTeams(false)
 
     }
@@ -120,6 +112,21 @@ export default function MatchMomentum(props) {
         right: 0,
         content: "",
         zIndex: -2
+    }
+
+    const styles_2 = {
+        backgroundColor: "#2A2E30",
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        position: "absolute",
+        opacity: 0.80,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        content: "",
+        zIndex: -1
     }
 
     const rect_styles = {
@@ -177,13 +184,11 @@ export default function MatchMomentum(props) {
 
     return (
         <>
-            <nav className="match-momentum--nav">
-                <img src={require(`./../data/LigaBwin.png`)} ></img>
-                <Dropdown placeholder={season} displayFlag={displaySeasons} li_elements={<><li className="dropdown--elem" onClick={(event) => handleSeasonChange(event)}>21-22</li><li className="dropdown--elem" onClick={(event) => handleSeasonChange(event)}>22-23</li></>}
-                    styles={{ border: '2px solid #ffb404' }} textStyles={{ textShadow: "1px 0px 5px #ffb404, 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }} handleInputChange={handleSeasonDropDownChange} />
-                <DropdownHide links={[{ "text": "Global", "link": "/global" }, { "text": "Team Stats", "link": "/team_stats" }, { "text": "Player Stats", "link": "/player_stats" }]} color={"#ffb404"} />
-            </nav>
-
+            <Nav option = "match momentum" color = {"#FFB700"} />
+            <DropdownSection season = {season} handleSeasonChange = {handleSeasonChange}
+                            options = {{season: true, teams: false, players : false}}
+                            color={"#FFB700"}
+                            />
             <main className="match-momentum--main">
                 <div style={rect_styles} className="result--container">
                     <div style={rect_styles} className="circle">
@@ -207,7 +212,8 @@ export default function MatchMomentum(props) {
                     <MatchMomentumChart season={season} team={team} oppTeam={oppTeam} dataHome={dataHome} dataAway={dataAway} win_width={windowWidth} win_height={windowHeight} teamId={teamId} oppTeamId={oppTeamId} />
                 </div>
             </main>
-            <div style={background_styles} id="background_div"></div>
+            <div style={styles_2}></div>
+            <div style={background_styles}></div>
         </>
     )
 }

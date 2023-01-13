@@ -21,9 +21,10 @@
 }
 
 .player-stats--main {
-    margin: 4.5% 0%;
+    margin: 1% 0%;
     width: 100%;
     display: flex;
+    justify-content: center;
 }
 
 .pitch {
@@ -195,15 +196,16 @@
 @media only screen and (max-width: 768px) {
 
     .player-stats--main {
-        margin-top: 14%;
         flex-direction: column;
         align-items: center;
+        gap: 5px;
+        padding-bottom: 2%;
     }
 
     .stats-section {
         display: flex;
         flex-direction: column;
-        width: 90vw;
+        width: 95%;
         height: fit-content;
         background-color: #2a2e30ad;
         box-shadow: 0px 6px 6px -8px #000000;
@@ -212,7 +214,7 @@
     }
 
     .pitch-section {
-        width: 90vw;
+        width: 90%;
         margin: 0 auto;
     }
 
@@ -254,9 +256,10 @@
 
 
     .player-stats--main {
-        margin-top: 14%;
         flex-direction: column;
         align-items: center;
+        gap: 10px;
+        padding-bottom: 2%;
     }
 
     .stats-section {
@@ -275,10 +278,6 @@
         margin: 0 auto;
     }
 
-    .player-stats--main {
-        margin-top: 8%;
-    }
-
     .row-pitch {
         flex-direction: column;
         width: 100%;
@@ -295,7 +294,8 @@
 
 
     .player-stats--main {
-        margin-top: 6%;
+        margin-top: 1%;
+        padding-bottom: 1%;
     }
 }
 

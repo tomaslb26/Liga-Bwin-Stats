@@ -19,51 +19,51 @@ export default function TeamStatsDisplay(props) {
 
     const [color, setColor] = useState("#cf261f")
 
-    const [displayTeams, setDisplayTeams] = useState(false)
-
-    const [displaySeasons, setDisplaySeasons] = useState(false)
-
     function handleSeasonChange(event) {
-        setSeason(event.target.innerHTML)
+
+        let season = ""
+        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
+
+        setSeason(season)
 
         setTeams(
             () => {
-                return (teams_data.filter((item) => (item.season === event.target.innerHTML))[0]["teams"])
+                return (teams_data.filter((item) => (item.season === season))[0]["teams"])
             }
         )
-
-        setDisplaySeasons((prev) => {
-            return !prev
-        })
 
     }
 
     function handleTeamChange(event) {
-        const array = [...event.target.childNodes]
-        const event_team = array[1].data
-        setTeam(event_team.replaceAll("-", " "))
+        let team = ""
 
-        setTeamId(team_ids[event_team.replaceAll(" ", "-")])
+        if(event.target.tagName.toLowerCase() == "li") team = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() == "span") team = event.target.innerHTML
+        else team = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
+
+        setTeam(team.replaceAll("-", " "))
+
+        setTeamId(team_ids[team.replaceAll(" ", "-")])
 
         setColor(
             () => {
-                return (teams_colors.filter((item) => (item.team === event_team.replaceAll("-", " ")))[0]["color"])
+                return (teams_colors.filter((item) => (item.team === team.replaceAll("-", " ")))[0]["color"])
             }
         )
 
-        setDisplayTeams((prev) => {
-            return !prev
-        })
+
 
     }
 
     const styles = {
-        backgroundImage: 'url(' + require(`./../data/${season}/estadio_${team.replaceAll(" ", "-")}.jpg`) + ')',
+        backgroundColor: "#2A2E30",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         position: "absolute",
-        opacity: 0.2,
+        opacity: 0.95,
         top: 0,
         left: 0,
         bottom: 0,
@@ -72,15 +72,28 @@ export default function TeamStatsDisplay(props) {
         zIndex: -1
     }
 
+    const styles2 = {
+        backgroundImage: 'url(' + require(`./../data/${season}/estadio_${team.replaceAll(" ", "-")}.jpg`) + ')',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        position: "absolute",
+        opacity: 1,
+        top: 0,
+        left: 0,
+        bottom: 0,
+        right: 0,
+        content: "",
+        zIndex: -2
+    }
 
 
 
 
     return (
         <>
-            <Nav team={team} setTeam={setTeam} teams={teams} setTeams={setTeams} season={season} setSeason={setSeason} color={color} setColor={setColor} displayTeams={displayTeams}
-                setDisplayTeams={setDisplayTeams} displaySeasons={displaySeasons} setDisplaySeasons={setDisplaySeasons} handleSeasonChange={handleSeasonChange} handleTeamChange={handleTeamChange} />
-            <TeamStats team={team} season={season} color={color} teamId={teamId} />
+            <TeamStats team={team} season={season} color={color} teamId={teamId} teams = {teams} handleTeamChange = {handleTeamChange} handleSeasonChange = {handleSeasonChange} />
+            <div style={styles2} id="background_div"></div>
             <div style={styles} id="background_div"></div>
         </>
     )
