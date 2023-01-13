@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Dropdown from "./Dropdown"
-import DropdownHide from "./DropdownHide";
 import teams_data from "./../data/teams"
 import teams_colors from "./../data/teams_colors"
 import teams_ids from "./../data/team_ids"
@@ -50,8 +49,8 @@ export default function MatchMomentum(props) {
 
     function handleSeasonChange(event) {
         let season = ""
-        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
-        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        if(event.target.tagName.toLowerCase() === "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() === "span") season = event.target.innerHTML
         else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
         setSeason(season)

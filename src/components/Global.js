@@ -1,11 +1,9 @@
 import React from "react";
 import "./../styles/global.css"
 import Dropdown from "./Dropdown"
-import DropdownHide from "./DropdownHide";
 import Classification from "./Global/Classification";
 import Misc from "./Global/Misc";
-import { useState, useEffect } from "react";
-import { HashLink as Link } from 'react-router-hash-link';
+import { useState } from "react";
 import misc_stats from "./../data/misc_stats"
 import * as d3 from "d3";
 import Nav from "./Nav";
@@ -19,10 +17,6 @@ export default function Global(props) {
 
     const textStyles = {
         textShadow: "1px 0px 5px #ffb404, 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)",
-    }
-
-    const underline = {
-        textDecoration: "underline #ffb404"
     }
 
     const [season, setSeason] = useState("22-23")
@@ -44,8 +38,8 @@ export default function Global(props) {
 
     function handleSeasonChange(event) {
         let season = ""
-        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
-        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        if(event.target.tagName.toLowerCase() === "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() === "span") season = event.target.innerHTML
         else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
         setSeason(season)
@@ -82,8 +76,6 @@ export default function Global(props) {
         setStat(event.target.innerHTML)
         setDisplayStat(false)
     }
-
-    const date = new Date()
 
     return (
         <>

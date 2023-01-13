@@ -19,7 +19,7 @@ export default function PitchSection(props) {
     React.useEffect(() => {
         try {
             if (plotOption == "actions") {
-                d3.csv(require("./../../data/" + props.season + "/" + props.team.replace(/\s+/g, '-') + "/events_" + props.team.replace(" ", "-") + ".csv"))
+                d3.csv(require("./../../data/" + props.season + "/" + props.team.replaceAll(" ", '-') + "/events_" + props.team.replaceAll(" ", "-") + ".csv"))
                     .then((data) => {
                         setDataPlot(data)
                         return () => undefined;

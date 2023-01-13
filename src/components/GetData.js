@@ -1,12 +1,8 @@
 export default function GetData(dataset, type, outcome, progressive, playerId) {
 
 
-
-    var temp = dataset.filter(item => {
-        if(Number(item["playerId"]) === Number(playerId)) return item
-                                        })
+    var temp = dataset.filter(item => Number(item["playerId"]) === Number(playerId))                  
     
-
     if (Array.isArray(type)) {
         temp = temp.filter(item => type.includes(item["type"]))
     }
