@@ -22,11 +22,13 @@ export default function LandingPage() {
         return () => clearInterval(interval);
     }, [currentPosition]);
 
-    /*let navigate = useNavigate();
-    function routeChange(path) {
-        navigate(path);
-        window.scrollTo(0, 0);
-    }*/
+    React.useEffect(() => {
+        const faceArray = ["1", "2", "3", "4","5","6","7","8"]
+        faceArray.forEach((face) => {
+            const img = new Image();
+            img.src = require(`./../data/landing_page_${face}.jpg`);
+        });
+    }, []);
 
     function Card(props){
         let first_place = get_first_place()
