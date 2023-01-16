@@ -3,6 +3,7 @@ import "./../styles/landingpage.css"
 import { get_first_place } from "./LandingPage/GetStats";
 import Nav from "./Nav";
 import * as d3 from "d3";
+import { useNavigate } from "react-router";
 
 export default function LandingPage() {
 
@@ -30,12 +31,16 @@ export default function LandingPage() {
         });
     }, []);
 
+    let navigate = useNavigate();
+
     function Card(props){
-        let first_place = get_first_place()
-        console.log(first_place)
         return(
-            <div className="block">
-                <h2 className="block-content">{first_place}</h2>
+            <div onClick = {() => navigate(props.redirect)} className="card glow">
+                <img src={require("./../images/" + props.photo + ".jpg")} />
+                <h2>{props.header}</h2>
+                <div className="card-bullets">
+                    {props.bullets.map((item) => <li>{item}</li>)}
+                </div>
             </div>
         )
     }
@@ -57,6 +62,10 @@ export default function LandingPage() {
                     </h1>
                 </div>
                 <div className="cards-container">
+                    <Card redirect = "global" photo = "classification" header = "Classification" bullets = {["classification table", "general stats", "attendance"]} />
+                    <Card redirect = "match_momentum" photo = "match_momentum" header = "match momentum" bullets = {["threat created", "match dominance", "all games"]} />
+                    <Card redirect = "player_stats" photo = "player_stats" header = "player stats" bullets = {["rank amongst the league", "plot passes, shots and others", "and more"]} />
+                    <Card redirect = "team_stats" photo = "team_stats" header = "team stats" bullets = {["Passing network", "xG Performance", "and more"]} />
                 </div>
                 <div style = 
                 {{
