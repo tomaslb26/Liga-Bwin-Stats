@@ -23,11 +23,8 @@ export function plot_goal(event, d, color) {
         .style("top", event.y - 140 + "px").style("border", "2px solid " + color);
 
     var lineColor = "white"
-    var lineWidth = 1.8
     var pitchColor = "#eee"
     var pitchMultiplier = 25.5
-    var goalWidth = 7.5
-    var goalHeight = 2.5
 
     var margin = {
         top: 20,
@@ -67,14 +64,14 @@ export function plot_goal(event, d, color) {
         .attr('y1', d => d['y1'] * pitchMultiplier)
         .attr('y2', d => d['y2'] * pitchMultiplier)
         .style('stroke-width', d => {
-            if (d.type == "underline") return 1
+            if (d.type ==="underline") return 1
             else return 2.2
         })
         .style('stroke', lineColor)
-        .style("stroke-dasharray", d => { if (d.type == "underline") return ("10,3") });
+        .style("stroke-dasharray", d => { if (d.type ==="underline") return ("10,3") });
 
 
-    if (d.blockedX == "") {
+    if (d.blockedX ==="") {
         event = d.eventType
         goal.selectAll('.goalCircles')
             .data([d])
@@ -90,9 +87,9 @@ export function plot_goal(event, d, color) {
             .style('stroke', "white")
             .style("filter", "url(#glow)")
             .style("fill", function (d) {
-                if (d.eventType == "Goal") return "#42DC60"
-                else if (d.eventType == "AttemptSaved") return "red"
-                else if (d.eventType == "Post") return "#42DCD5"
+                if (d.eventType ==="Goal") return "#42DC60"
+                else if (d.eventType ==="AttemptSaved") return "red"
+                else if (d.eventType ==="Post") return "#42DCD5"
                 else return "red"
             })
     }
@@ -115,7 +112,7 @@ export function plot_goal(event, d, color) {
             .style("filter", "url(#glow)")
             .style("stroke", color)
             .style("fill", function (d) {
-                if (i == 0) i = 1
+                if (i ===0) i = 1
                 else {
                     i = 0
                 }

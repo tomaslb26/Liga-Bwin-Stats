@@ -4,9 +4,10 @@ import "./../../styles/linechart.css"
 import { create_glow } from './../CreateGlow';
 
 export default function LineXG(props) {
-    if (props.win_width > 1400) var width = props.win_width / 3
-    else if (props.win_width > 1150) var width = props.win_width / 3
-    else var width = props.win_width - 120
+    var width;
+    if (props.win_width > 1400) width = props.win_width / 3
+    else if (props.win_width > 1150) width = props.win_width / 3
+    else width = props.win_width - 120
     var height = 230
     const margin = { 'top': 40, 'right': 30, 'bottom': 40, 'left': 50 }
 
@@ -16,7 +17,6 @@ export default function LineXG(props) {
     const svgHeight = height + margin.top + margin.bottom;
 
     React.useEffect(() => {
-        //console.log(props.data)
 
         d3.select(".tooltip").remove()
         var div = d3.select("body").append("div")
@@ -31,17 +31,9 @@ export default function LineXG(props) {
             d3.selectAll("#tooltip_shots").style("opacity", 0).style("visibility", "hidden")
         });
 
-        var team_data = props.data.filter(function (d) {
-            if (d.name === props.team) {
-                return d
-            }
-        })
+        var team_data = props.data.filter((d) => (d.name === props.team))
 
-        var opp_data = props.data.filter(function (d) {
-            if (d.name !== props.team) {
-                return d
-            }
-        })
+        var opp_data = props.data.filter((d) => (d.name !== props.team))
 
         team_data = d3.rollup(team_data, v => d3.sum(v, d => d.expectedGoals), d => d.round);
         opp_data = d3.rollup(opp_data, v => d3.sum(v, d => d.expectedGoals), d => d.round);
@@ -106,19 +98,12 @@ export default function LineXG(props) {
             .style("filter", "url(#glow)")
 
         function getAwayTeamName(d) {
-            var ret_value = ""
-            props.data.filter(function (e) {
-                if (e.round === d.round) {
-                    if (e.homeTeam === props.team) {
-                        ret_value = e.awayTeam
-                    }
-                    else ret_value = e.homeTeam
-                }
-            })
-            return ret_value
+            var value = props.data.filter((e) => e.round === d.round)[0]
+            if(value.homeTeam === props.team) return value.awayTeam
+            else return value.homeTeam
         }
 
-        function handleMouseClick(event, d) {
+        /*function handleMouseClick(event, d) {
             var homeTeam = ""
             var awayTeam = ""
             var benficaxg
@@ -129,19 +114,14 @@ export default function LineXG(props) {
                     awayTeam = e.awayTeam
                 }
             })
-            final_team_data.filter(function (e) {
-                if (e.round === d.round) {
-                    benficaxg = e.value
-                }
-            })
+
+            
+            var benficaxg = final_team_data.filter((e) => (e.round === d.round))[0].value
             final_opp_data.filter(function (e) {
                 if (e.round === d.round) {
                     oppxg = e.value
                 }
             })
-
-            var matrix = this.getScreenCTM()
-                .translate(+ this.getAttribute("cx"), + this.getAttribute("cy"));
 
             var string2 = "<p style='display: inline-block; font-size:60%; font-weight:bold; padding-left:2%'>"
                 + homeTeam + " xG: " + String(benficaxg).substring(0, 5) + "<br>"
@@ -152,11 +132,10 @@ export default function LineXG(props) {
                 .style("opacity", 1).style("visibility", "visible");
             div.html(string2).style("left", event.x + "px")
                 .style("top", event.y + "px");
-        }
+        }*/
 
         function handleMouseOver(event, d) {
             d3.select(this).style("cursor", "pointer")
-            //mouseaux(svg,"image#logos",d,"over","round")
 
             svg.selectAll("image#logos").style("opacity", e => { if (e.round !== d.round) return 0.2 })
         }
@@ -176,7 +155,6 @@ export default function LineXG(props) {
             .attr("xlink:href", require("./../../data/" + props.season + "/" + props.team.replaceAll(" ", "-") + ".png"))
             .on("mouseover", handleMouseOver)
             .on("mouseleave", handleMouseLeave)
-            .on("click", handleMouseClick)
             .transition()
             .ease(d3.easeLinear)
             .duration(800)
@@ -195,7 +173,6 @@ export default function LineXG(props) {
             })
             .on("mouseover", handleMouseOver)
             .on("mouseleave", handleMouseLeave)
-            .on("click", handleMouseClick)
             .transition()
             .ease(d3.easeLinear)
             .duration(800)
@@ -283,7 +260,7 @@ export default function LineXG(props) {
 
 
 
-    }, [props.data, props.win_width, props.win_height]);
+    }, [props.data, props.win_width, props.win_height, height, props.color, props.season, props.team, margin.bottom, margin.top, margin.right, margin.left, width]);
 
 
     return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;

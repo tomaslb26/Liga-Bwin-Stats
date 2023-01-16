@@ -27,14 +27,6 @@ export default function MatchMomentum(props) {
 
     const [score, setScore] = useState("4 - 0")
 
-    const styles = {
-        border: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"],
-    }
-
-    const textStyles = {
-        textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === team))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)",
-    }
-
     const [season, setSeason] = useState("22-23")
 
     function handleTeamDropDownChange() {
@@ -98,41 +90,6 @@ export default function MatchMomentum(props) {
 
     }
 
-    const background_styles = {
-        backgroundImage: 'url(' + require(`./../data/${season}/estadio_${team.replaceAll(" ", "-")}.jpg`) + ')',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        position: "absolute",
-        opacity: 0.2,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        content: "",
-        zIndex: -2
-    }
-
-    const styles_2 = {
-        backgroundColor: "#2A2E30",
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        position: "absolute",
-        opacity: 0.80,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        content: "",
-        zIndex: -1
-    }
-
-    const rect_styles = {
-        borderTop: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"],
-        borderBottom: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"]
-    }
-
     const [dataHome, setDataHome] = React.useState([])
     const [dataAway, setDataAway] = React.useState([])
 
@@ -144,27 +101,19 @@ export default function MatchMomentum(props) {
                     setScore(GetScore(data, teamId, oppTeamId))
                     return () => undefined;
                 })
+            d3.csv(require("./../data/" + season + "/" + oppTeam.replace(/\s+/g, '-') + "/" + team.replace("-", " ") + " - " + oppTeam.replace("-", " ") + ".csv"))
+            .then((data) => {
+                setDataAway(data)
+                return () => undefined;
+            })
 
         }
         catch (e) {
             setDataHome([])
+            setDataAway([])
             setScore("Not played yet")
         }
-    }, [team, season, oppTeam]);
-
-    React.useEffect(() => {
-        try {
-            d3.csv(require("./../data/" + season + "/" + oppTeam.replace(/\s+/g, '-') + "/" + team.replace("-", " ") + " - " + oppTeam.replace("-", " ") + ".csv"))
-                .then((data) => {
-                    setDataAway(data)
-                    return () => undefined;
-                })
-
-        }
-        catch (e) {
-            setDataAway([])
-        }
-    }, [team, season, oppTeam]);
+    }, [team, season, oppTeam, teamId, oppTeamId]);
 
     const [windowWidth, setWindowWidth] = React.useState(window.innerWidth)
     const [windowHeight, setWindowHeight] = React.useState(window.innerHeight)
@@ -180,6 +129,14 @@ export default function MatchMomentum(props) {
         }
     }, [])
 
+    function CircleLogo(props){
+        return(
+            <div style={{borderTop: "2px solid" + props.color, borderBottom: "2px solid" + props.color}} className="circle">
+                <img alt = "logo-1" src={require("./../data/" + props.season + "/" + props.team.replaceAll(" ", "-") + ".png")} id="home_team" />
+            </div>
+        )
+    }
+
 
     return (
         <>
@@ -189,30 +146,32 @@ export default function MatchMomentum(props) {
                             color={"#FFB700"}
                             />
             <main className="match-momentum--main">
-                <div style={rect_styles} className="result--container">
-                    <div style={rect_styles} className="circle">
-                        <img src={require("./../data/" + season + "/" + team.replaceAll(" ", "-") + ".png")} id="home_team" alt="" />
-                    </div>
+                <div style={{borderTop: "2px solid" + teams_colors.filter((item) => (item.team === team))[0]["color"],
+                             borderBottom: "2px solid" + teams_colors.filter((item) => (item.team === team))[0]["color"]}} 
+                className="result--container">
+                    <CircleLogo team = {team} season = {season} color = {teams_colors.filter((item) => (item.team === team))[0]["color"]} />
                     <div className="result-div">
                         <h1 style={{ textShadow: "1px 0px 5px #ffb404, 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }}>Match Momentum Chart</h1>
                         <div className="result">
-                            <Dropdown placeholder={team} displayFlag={displayTeams} li_elements={teams.map((item) => <li className="dropdown--elem" onClick={(event) => handleTeamChange(event, "home")}><img src={require(`./../data/${season}/${item.replaceAll(" ", "-")}.png`)}></img>{item}</li>)}
-                                styles={styles} textStyles={textStyles} handleInputChange={handleTeamDropDownChange} />
+                            <Dropdown placeholder={team} displayFlag={displayTeams} li_elements={teams.map((item) => <li className="dropdown--elem" onClick={(event) => handleTeamChange(event, "home")}><img alt = "team-logo" src={require(`./../data/${season}/${item.replaceAll(" ", "-")}.png`)}></img>{item}</li>)}
+                                styles={{border: '2px solid ' + teams_colors.filter((item) => (item.team === team))[0]["color"]}}
+                                textStyles={{textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === team))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)"}} 
+                                handleInputChange={handleTeamDropDownChange} />
                             <span style={{ borderLeft: "2px solid" + teams_colors.filter((item) => (item.team === team))[0]["color"], borderRight: "2px solid" + teams_colors.filter((item) => (item.team === oppTeam))[0]["color"] }}>{score}</span>
-                            <Dropdown placeholder={oppTeam} displayFlag={displayOppTeams} li_elements={oppTeams.map((item) => <li className="dropdown--elem" onClick={(event) => handleTeamChange(event, "away")}><img src={require(`./../data/${season}/${item.replaceAll(" ", "-")}.png`)}></img>{item}</li>)}
-                                styles={{ border: '2px solid ' + teams_colors.filter((item) => (item.team === oppTeam))[0]["color"], }} textStyles={{ textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === oppTeam))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }} handleInputChange={handleOppTeamDropDownChange} />
+                            <Dropdown placeholder={oppTeam} displayFlag={displayOppTeams} li_elements={oppTeams.map((item) => <li className="dropdown--elem" onClick={(event) => handleTeamChange(event, "away")}><img alt = "team-logo" src={require(`./../data/${season}/${item.replaceAll(" ", "-")}.png`)}></img>{item}</li>)}
+                                styles={{ border: '2px solid ' + teams_colors.filter((item) => (item.team === oppTeam))[0]["color"], }} 
+                                textStyles={{ textShadow: "1px 0px 5px " + teams_colors.filter((item) => (item.team === oppTeam))[0]["color"] + ", 2px 7px 5px rgba(0, 0, 0, 0.3), 0px -4px 10px rgba(0, 0, 0, 0.3)" }} 
+                                handleInputChange={handleOppTeamDropDownChange} />
                         </div>
                     </div>
-                    <div style={{ borderTop: '2px solid ' + teams_colors.filter((item) => (item.team === oppTeam))[0]["color"], borderBottom: '2px solid ' + teams_colors.filter((item) => (item.team === oppTeam))[0]["color"] }} className="circle">
-                        <img src={require("./../data/" + season + "/" + oppTeam.replaceAll(" ", "-") + ".png")} id="home_team" alt="" />
-                    </div>
+                    <CircleLogo team = {oppTeam} season = {season} color = {teams_colors.filter((item) => (item.team === oppTeam))[0]["color"]} />
                 </div>
                 <div style={{ border: "2px solid " + teams_colors.filter((item) => (item.team === team))[0]["color"] }} className="svg--container">
                     <MatchMomentumChart season={season} team={team} oppTeam={oppTeam} dataHome={dataHome} dataAway={dataAway} win_width={windowWidth} win_height={windowHeight} teamId={teamId} oppTeamId={oppTeamId} />
                 </div>
             </main>
-            <div style={styles_2}></div>
-            <div style={background_styles}></div>
+            <div className = "background-filter"></div>
+            <div className = "background-team" style={{backgroundImage: 'url(' + require(`./../data/${season}/estadio_${team.replaceAll(" ", "-")}.jpg`) + ')'}}></div>
         </>
     )
 }

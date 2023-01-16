@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "./../styles/playerstats.css"
-import Dropdown from "./Dropdown";
-import DropdownHide from "./DropdownHide";
-import team_ids from "./../data/team_ids";
 import * as d3 from "d3";
 import GetStat from "./GetStat";
 import teams_data from "./../data/teams"
@@ -20,8 +17,8 @@ export default function PlayerStats() {
 
     function handleSeasonChange(event) {
         let season = ""
-        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
-        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        if(event.target.tagName.toLowerCase() === "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() === "span") season = event.target.innerHTML
         else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
         setSeason(season)
@@ -29,30 +26,26 @@ export default function PlayerStats() {
     }
 
     const [team, setTeam] = useState("Benfica")
-    const [teamId, setTeamId] = useState(team_ids[team])
-    const [displayTeams, setDisplayTeams] = useState(false)
     const [teams, setTeams] = useState(teams_data[1]["teams"])
 
     const [player, setPlayer] = useState("Álex Grimaldo")
     const [playerId, setPlayerId] = useState(107252)
     const [fotmobPlayerId, setFotmobPlayerId] = React.useState(288406)
     const [players, setPlayers] = useState([])
-    const [displayPlayers, setDisplayPlayers] = useState(false)
 
     function handleTeamChange(event) {
         let team = ""
-        if(event.target.tagName.toLowerCase() == "li") team = event.target.getElementsByTagName('span')[0].innerHTML
-        else if(event.target.tagName.toLowerCase() == "span") team = event.target.innerHTML
+        if(event.target.tagName.toLowerCase() === "li") team = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() === "span") team = event.target.innerHTML
         else team = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
         setTeam(team)
-        setTeamId(team_ids[team])
     }
 
     function handlePlayerChange(event) {    
         let player = ""
-        if(event.target.tagName.toLowerCase() == "li") player = event.target.getElementsByTagName('span')[0].innerHTML
-        else if(event.target.tagName.toLowerCase() == "span") player = event.target.innerHTML
+        if(event.target.tagName.toLowerCase() === "li") player = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() === "span") player = event.target.innerHTML
         else return
 
         setPlayer(player)

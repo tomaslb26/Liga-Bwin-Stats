@@ -1,5 +1,4 @@
 import React from "react";
-import Nav from "./Nav";
 import TeamStats from "./TeamStats"
 import teams_data from "./../data/teams"
 import teams_colors from "./../data/teams_colors"
@@ -22,8 +21,8 @@ export default function TeamStatsDisplay(props) {
     function handleSeasonChange(event) {
 
         let season = ""
-        if(event.target.tagName.toLowerCase() == "li") season = event.target.getElementsByTagName('span')[0].innerHTML
-        else if(event.target.tagName.toLowerCase() == "span") season = event.target.innerHTML
+        if(event.target.tagName.toLowerCase() === "li") season = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() === "span") season = event.target.innerHTML
         else season = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
         setSeason(season)
@@ -39,8 +38,8 @@ export default function TeamStatsDisplay(props) {
     function handleTeamChange(event) {
         let team = ""
 
-        if(event.target.tagName.toLowerCase() == "li") team = event.target.getElementsByTagName('span')[0].innerHTML
-        else if(event.target.tagName.toLowerCase() == "span") team = event.target.innerHTML
+        if(event.target.tagName.toLowerCase() === "li") team = event.target.getElementsByTagName('span')[0].innerHTML
+        else if(event.target.tagName.toLowerCase() === "span") team = event.target.innerHTML
         else team = event.target.src.split("media/")[1].split(".")[0].replaceAll("-", " ")
 
         setTeam(team.replaceAll("-", " "))
@@ -57,44 +56,11 @@ export default function TeamStatsDisplay(props) {
 
     }
 
-    const styles = {
-        backgroundColor: "#2A2E30",
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        position: "absolute",
-        opacity: 0.95,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        content: "",
-        zIndex: -1
-    }
-
-    const styles2 = {
-        backgroundImage: 'url(' + require(`./../data/${season}/estadio_${team.replaceAll(" ", "-")}.jpg`) + ')',
-        backgroundPosition: 'center',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        position: "absolute",
-        opacity: 1,
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-        content: "",
-        zIndex: -2
-    }
-
-
-
-
     return (
         <>
             <TeamStats team={team} season={season} color={color} teamId={teamId} teams = {teams} handleTeamChange = {handleTeamChange} handleSeasonChange = {handleSeasonChange} />
-            <div style={styles2} id="background_div"></div>
-            <div style={styles} id="background_div"></div>
+            <div style={{backgroundImage: 'url(' + require(`./../data/${season}/estadio_${team.replaceAll(" ", "-")}.jpg`) + ')'}} className="background-team"></div>
+            <div className="background-filter"></div>
         </>
     )
 }

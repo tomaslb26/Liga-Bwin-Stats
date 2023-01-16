@@ -23,7 +23,7 @@ export default function Actions(props) {
 
     React.useEffect(() => {
         try {
-            if (props.side == "Home") {
+            if (props.side === "Home") {
                 d3.csv(require("./../data/" + props.season + "/" + props.team.replaceAll(" ", "-") + "/" + props.team + " - " + props.oppTeam + ".csv"))
                     .then((data) => {
                         setData(data)

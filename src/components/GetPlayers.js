@@ -1,6 +1,6 @@
 export default function GetPlayers(data, team) {
     var players = data.filter((item) => item.team === team)
-    players = players.map((item) => new Object({ name: item.name, photo: item.photo }))
+    players = players.map((item) => ({ name: item.name, photo: item.photo }))
     players = players.filter((player) => player.name !== "")
 
     players = players.sort(function (a, b) {

@@ -3,17 +3,18 @@ import * as d3 from "d3";
 import { create_glow } from './../CreateGlow';
 import "./../../styles/match_momentum.css"
 import teams_colors from "./../../data/teams_colors"
-import { createRoutesFromChildren } from "react-router";
 
 export default function MatchMomentumChart(props) {
     var svgRef = React.useRef(null);
+    var svgWidth;
+    var margin;
     if (props.win_width > 990) {
-        var svgWidth = props.win_width - 100;
-        var margin = { top: 55, right: 34, bottom: 30, left: 35 }
+        svgWidth = props.win_width - 100;
+        margin = { top: 55, right: 34, bottom: 30, left: 35 }
     }
     else {
-        var svgWidth = props.win_width - 100
-        var margin = { top: 55, right: 45, bottom: 30, left: 35 }
+        svgWidth = props.win_width - 100
+        margin = { top: 55, right: 45, bottom: 30, left: 35 }
     }
     var svgHeight = props.win_height / 2;
 
@@ -32,14 +33,14 @@ export default function MatchMomentumChart(props) {
                 "translate(" + (margin.left) + "," + (margin.top - 20) + ")");
 
 
-        var goals = props.dataHome.filter((item) => item.type === "Goal" && Number(item.teamId == props.teamId))
-        var away_goals = props.dataAway.filter((item) => item.type === "Goal" && Number(item.teamId == props.oppTeamId))
+        var goals = props.dataHome.filter((item) => item.type === "Goal" && Number(item.teamId) === Number(props.teamId))
+        var away_goals = props.dataAway.filter((item) => item.type === "Goal" && Number(item.teamId) === Number(props.oppTeamId))
         goals = goals.concat(away_goals)
 
-        var data_home = props.dataHome.filter(d => { if ((Number(d.teamId) === props.teamId && d.type === "Pass" && d.outcomeType === "Successful") || d.type === "Carry") return d })
+        var data_home = props.dataHome.filter(d => ((Number(d.teamId) === props.teamId && d.type === "Pass" && d.outcomeType === "Successful") || d.type === "Carry"))
         data_home = d3.rollup(data_home, v => d3.sum(v, d => d.xT), d => d.minute);
 
-        var data_away = props.dataAway.filter(d => { if ((Number(d.teamId) === props.oppTeamId && d.type === "Pass" && d.outcomeType === "Successful") || d.type === "Carry") return d })
+        var data_away = props.dataAway.filter(d => ((Number(d.teamId) === props.oppTeamId && d.type === "Pass" && d.outcomeType === "Successful") || d.type === "Carry"))
         data_away = d3.rollup(data_away, v => d3.sum(v, d => d.xT), d => d.minute);
 
 
@@ -59,15 +60,18 @@ export default function MatchMomentumChart(props) {
             console.log(e)
         }
 
-
         var xt_final = []
-        for (var minute = 0; minute <= lastMin; minute++) {
-            var home_xT = xt_home.find(e => e['minute'] == minute);
-            if (home_xT == null) home_xT = 0;
+        var minute;
+        for (minute = 0; minute <= lastMin; minute++) {
+
+            // eslint-disable-next-line
+            var home_xT = xt_home.find(e => e['minute'] === minute);
+            if (home_xT === undefined) home_xT = 0;
             else home_xT = home_xT['xT']
 
-            var away_xT = xt_away.find(e => e['minute'] == minute);
-            if (away_xT == null) away_xT = 0;
+            // eslint-disable-next-line
+            var away_xT = xt_away.find(e => e['minute'] === minute);
+            if (away_xT === undefined) away_xT = 0;
             else away_xT = away_xT['xT']
 
             xt_final.push({ 'minute': minute, 'home_xT': Number(home_xT), 'away_xT': Number(away_xT) })
@@ -83,8 +87,8 @@ export default function MatchMomentumChart(props) {
             .padding([0])
 
         var formatTick = function (d) {
-            if (d == 45) return "HT"
-            else if (d % 15 == 0) return String(d) + "'"
+            if (d === 45) return "HT"
+            else if (d % 15 === 0) return String(d) + "'"
         }
 
         var formatYTick = function (d) {
@@ -123,10 +127,10 @@ export default function MatchMomentumChart(props) {
             .attr('y1', d => y(0))
             .attr('y2', function (d) {
                 var change = 1
-                if (d.isOwnGoal == "True") change = -1
+                if (d.isOwnGoal === "True") change = -1
 
-                if (Number(d.teamId) == props.teamId) return y(0.5 * change)
-                else if (Number(d.teamId) == props.oppTeamId) return y(-0.5 * change)
+                if (Number(d.teamId) === props.teamId) return y(0.5 * change)
+                else if (Number(d.teamId) === props.oppTeamId) return y(-0.5 * change)
 
             })
             .attr('x1', d => x(Number(d['minute'])) + 8)
@@ -145,9 +149,7 @@ export default function MatchMomentumChart(props) {
                 .then((data) => {
 
                     function getPhotoLink(team, shirtNo) {
-                        var player = data.filter((item) => {
-                            if (item.team === team.replaceAll(" ", "-") && Number(item.shirtNo) === Number(shirtNo)) return item
-                        })[0]
+                        var player = data.filter((item) => (item.team === team.replaceAll(" ", "-") && Number(item.shirtNo) === Number(shirtNo)))[0]
                         return player.photo
                     }
 
@@ -157,16 +159,16 @@ export default function MatchMomentumChart(props) {
                         .attr("x", d => x(Number(d['minute'])) - 10)
                         .attr('y', function (d) {
                             var change = 1
-                            if (d.isOwnGoal == "True") change = -1
+                            if (d.isOwnGoal === "True") change = -1
 
-                            if (Number(d.teamId) == props.teamId) return y(0.5 * change + 0.03)
-                            else if (Number(d.teamId) == props.oppTeamId) return y(-0.5 * change + 0.03)
+                            if (Number(d.teamId) === props.teamId) return y(0.5 * change + 0.03)
+                            else if (Number(d.teamId) === props.oppTeamId) return y(-0.5 * change + 0.03)
 
                         })
                         .attr('height', 50)
                         .attr("xlink:href", function (d) {
-                            if (Number(d.teamId) == props.teamId) return getPhotoLink(props.team, d.shirtNo)
-                            else if (Number(d.teamId) == props.oppTeamId) return getPhotoLink(props.oppTeam, d.shirtNo)
+                            if (Number(d.teamId) === props.teamId) return getPhotoLink(props.team, d.shirtNo)
+                            else if (Number(d.teamId) === props.oppTeamId) return getPhotoLink(props.oppTeam, d.shirtNo)
                         })
                         .transition()
                         .ease(d3.easeBack)
@@ -186,10 +188,10 @@ export default function MatchMomentumChart(props) {
             .attr("x", d => x(Number(d['minute'])) - 2)
             .attr('y', function (d) {
                 var change = 1
-                if (d.isOwnGoal == "True") change = -1
+                if (d.isOwnGoal === "True") change = -1
 
-                if (Number(d.teamId) == props.teamId) return y(0.3 * change + 0.03)
-                else if (Number(d.teamId) == props.oppTeamId) return y(-0.3 * change + 0.03)
+                if (Number(d.teamId) === props.teamId) return y(0.3 * change + 0.03)
+                else if (Number(d.teamId) === props.oppTeamId) return y(-0.3 * change + 0.03)
             })
             .attr('height', 20)
             .attr("xlink:href", require("./../../data/football_ball.png"))
@@ -214,8 +216,9 @@ export default function MatchMomentumChart(props) {
                 .ease(d3.easeBack)
                 .duration(800)
                 .attr("height", function (d) {
-                    if (d.home_xT > d.away_xT) var ret = Math.abs(y(d.home_xT) - y(0));
-                    else var ret = Math.abs(y(d.away_xT) - y(0));
+                    var ret;
+                    if (d.home_xT > d.away_xT) ret = Math.abs(y(d.home_xT) - y(0));
+                    else ret = Math.abs(y(d.away_xT) - y(0));
                     return ret
                 })
                 .attr("width", x.bandwidth())
@@ -231,7 +234,7 @@ export default function MatchMomentumChart(props) {
         }
 
 
-    }, [props.dataHome, props.win_width, props.win_height, props.dataAway, props.team, props.oppTeam, props.teamId, props.oppTeamId]);
+    }, [props.dataHome, props.win_width, props.win_height, props.dataAway, props.team, props.oppTeam, props.teamId, props.oppTeamId, margin, props.season, svgHeight, svgWidth]);
 
 
     return <svg ref={svgRef} width={svgWidth + margin.right + margin.left} height={svgHeight + margin.bottom + margin.top} />;

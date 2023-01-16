@@ -43,7 +43,7 @@ export default function PassingNetwork(props) {
 
     React.useEffect(() => {
         try {
-            if (props.side == "Home") {
+            if (props.side === "Home") {
                 d3.csv(require("./../data/" + props.season + "/PassNetworks/" + props.team.replaceAll(" ", "-") + "/PassNetwork" + props.team.replaceAll(" ", "-") + props.oppTeam.replaceAll(" ", "-") + ".csv"))
                     .then((data) => {
                         setData(data)
@@ -69,7 +69,7 @@ export default function PassingNetwork(props) {
             <div className="choose-game">
                 <span>Game:</span>
                 <div style={{ marginLeft: "1%" }}>
-                    <Dropdown placeholder={props.oppTeam} displayFlag={displayOppTeam} li_elements={props.teams.map((item) => <li className="dropdown--elem" onClick={(event) => handleOppTeamChange(event)}><img src={require(`./../data/${props.season}/${item.replaceAll(" ", "-")}.png`)}></img>{item}</li>)}
+                    <Dropdown placeholder={props.oppTeam} displayFlag={displayOppTeam} li_elements={props.teams.map((item) => <li className="dropdown--elem" onClick={(event) => handleOppTeamChange(event)}><img alt = "player" src={require(`./../data/${props.season}/${item.replaceAll(" ", "-")}.png`)}></img>{item}</li>)}
                         styles={styles} textStyles={textStyles} handleInputChange={handleInputChange} />
                 </div>
                 <div style={{ marginLeft: "1%" }}>

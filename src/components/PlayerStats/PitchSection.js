@@ -18,7 +18,7 @@ export default function PitchSection(props) {
 
     React.useEffect(() => {
         try {
-            if (plotOption == "actions") {
+            if (plotOption === "actions") {
                 d3.csv(require("./../../data/" + props.season + "/" + props.team.replaceAll(" ", '-') + "/events_" + props.team.replaceAll(" ", "-") + ".csv"))
                     .then((data) => {
                         setDataPlot(data)
@@ -43,6 +43,8 @@ export default function PitchSection(props) {
 
     function handleOptionChange(event) {
         const array = [...event.target.childNodes]
+        if(event.target.className === "check") return
+        else if(event.target.tagName.toLowerCase() === "i") return 
         const option = array[0].data
         setOptions((prev) => {
             return {

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./../styles/landingpage.css"
-import { get_first_place } from "./LandingPage/GetStats";
 import Nav from "./Nav";
 import * as d3 from "d3";
 import { useNavigate } from "react-router";
@@ -36,7 +35,7 @@ export default function LandingPage() {
     function Card(props){
         return(
             <div onClick = {() => navigate(props.redirect)} className="card glow">
-                <img src={require("./../images/" + props.photo + ".jpg")} />
+                <img alt = "container-prop" src={require("./../images/" + props.photo + ".jpg")} />
                 <h2>{props.header}</h2>
                 <div className="card-bullets">
                     {props.bullets.map((item) => <li>{item}</li>)}

@@ -24,6 +24,35 @@
     width: 100%;
 }
 
+.background-team{
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    z-index: -2;
+}
+
+.background-filter{
+    background-color: #2A2E30;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    opacity: 0.80;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: "";
+    z-index: -1;
+}
+
 .match-momentum--nav>img {
     height: 55px;
 }

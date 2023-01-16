@@ -29,24 +29,25 @@ export default function PlotActions(props) {
     });
 
     var lineWidth = 1.8
-    var margin = { top: 0, right: 60, bottom: 0, left: 30 }
 
+    var svgWidth;
+    var svgHeight;
     if (props.win_width > 1400) {
-        var svgWidth = props.win_width / 3 - 200;
-        var svgHeight = props.win_height - 350;
+        svgWidth = props.win_width / 3 - 200;
+        svgHeight = props.win_height - 350;
     }
     else if (props.win_width > 992) {
-        var svgWidth = props.win_width / 3 - 120;
-        var svgHeight = props.win_height - 180;
+        svgWidth = props.win_width / 3 - 120;
+        svgHeight = props.win_height - 180;
     }
     else if (props.win_width > 768) {
-        var svgWidth = props.win_width / 2 - 50
-        var svgHeight = 650;
+        svgWidth = props.win_width / 2 - 50
+        svgHeight = 650;
 
     }
     else {
-        var svgWidth = props.win_width - 70
-        var svgHeight = 600;
+        svgWidth = props.win_width - 70
+        svgHeight = 600;
 
     }
 
@@ -83,8 +84,8 @@ export default function PlotActions(props) {
         }
 
         function handleMouseClick(event, d) {
-            var string2 = "<p style='display: inline-block; font-size:60%; font-weight:bold; padding-left:2%;'>" + d.name + " (" + Number(d.shirtNo) + ")" + "<br>" + "Minute: "
-                + String(Number(d.minute)) + "<br>" + d.homeTeam + " - " + d.awayTeam + "<br>" + "Progressive " + d.type + "<p/>";
+            var string2 = "<p style='display: inline-block; font-size:60%; font-weight:bold; padding-left:2%;'>" + d.name + " (" + Number(d.shirtNo) + ")<br>Minute: "
+                + String(Number(d.minute)) + "<br>" + d.homeTeam + " - " + d.awayTeam + "<br>Progressive " + d.type + "<p/>";
 
             tooltip.transition()
                 .duration(200)
@@ -123,7 +124,7 @@ export default function PlotActions(props) {
         createTriangle(pitch, "triangle2", 0.1)
         createTriangle(pitch, "triangle3", 0.8)
 
-        if (props.data == null) {
+        if (props.data === null) {
             pitch
                 .append("text")
                 .attr("x", (34 * (svgWidth / 68)))
@@ -138,11 +139,7 @@ export default function PlotActions(props) {
         else {
             if (props.option === "actions") {
                 if (props.options.unsuccessful_passes) {
-                    var unsuccesful = dataset.filter(function (d) {
-                        if (d.type === "Pass" && d.outcomeType === "Unsuccessful" && Number(d.teamId) === props.teamId) {
-                            return d;
-                        }
-                    });
+                    var unsuccesful = dataset.filter((d) => (d.type === "Pass" && d.outcomeType === "Unsuccessful" && Number(d.teamId) === props.teamId));
 
                     pitch.selectAll('.progressiveLines')
                         .data(unsuccesful)
@@ -159,11 +156,7 @@ export default function PlotActions(props) {
                         .attr("marker-end", "url(#triangle2)");
                 }
                 if (props.options.all_passes && !props.options.progressive_passes) {
-                    var passes = props.data.filter(function (d) {
-                        if (d.type === "Pass" && d.outcomeType === "Successful" && Number(d.teamId) === props.teamId) {
-                            return d;
-                        }
-                    });
+                    var passes = props.data.filter((d) => (d.type === "Pass" && d.outcomeType === "Successful" && Number(d.teamId) === props.teamId));
 
                     pitch.selectAll('.progressiveLines')
                         .data(passes)
@@ -180,11 +173,7 @@ export default function PlotActions(props) {
                         .attr("marker-end", "url(#triangle3)");
                 }
                 else if (props.options.all_passes) {
-                    var passes = dataset.filter(function (d) {
-                        if (d.type === "Pass" && d.outcomeType === "Successful" && d.progressive === "False" && Number(d.teamId) === props.teamId) {
-                            return d;
-                        }
-                    });
+                    passes = dataset.filter((d) => (d.type === "Pass" && d.outcomeType === "Successful" && d.progressive === "False" && Number(d.teamId) === props.teamId));
 
                     pitch.selectAll('.progressiveLines')
                         .data(passes)
@@ -201,24 +190,13 @@ export default function PlotActions(props) {
                         .attr("marker-end", "url(#triangle3)");
                 }
                 if (props.options.progressive_passes) {
-                    var progressive = props.data.filter(function (d) {
-                        if (d.type === "Pass" && d.outcomeType === "Successful" && d.progressive === "True" && Number(d.teamId) === props.teamId) {
-                            return d;
-                        }
-                    });
-
-
+                    var progressive = props.data.filter((d) => (d.type === "Pass" && d.outcomeType === "Successful" && d.progressive === "True" && Number(d.teamId) === props.teamId));
                     plotLines(pitch, progressive)
-
                     plotCircles(pitch, progressive, props.color)
 
                 }
                 if (props.options.all_carries && !props.options.progressive_carries) {
-                    var carries = dataset.filter(function (d) {
-                        if (d.type == "Carry") {
-                            return d;
-                        }
-                    });
+                    var carries = dataset.filter((d) => (d.type === "Carry"));
 
                     pitch.selectAll('.progressiveLines')
                         .data(carries)
@@ -235,11 +213,7 @@ export default function PlotActions(props) {
                         .attr("marker-end", "url(#triangle3)");
                 }
                 else if (props.options.all_carries) {
-                    var carries = dataset.filter(function (d) {
-                        if (d.type == "Carry" && d.progressive == "False") {
-                            return d;
-                        }
-                    });
+                    carries = dataset.filter((d) => (d.type === "Carry" && d.progressive === "False"));
 
                     pitch.selectAll('.progressiveLines')
                         .data(carries)
@@ -256,21 +230,17 @@ export default function PlotActions(props) {
                         .attr("marker-end", "url(#triangle3)");
                 }
                 if (props.options.progressive_carries) {
-                    var progressiveC = dataset.filter(function (d) {
-                        if (d.type === "Carry" && d.progressive === "True") {
-                            return d;
-                        }
-                    });
+                    var progressiveC = dataset.filter((d) => (d.type === "Carry" && d.progressive === "True"));
                     plotLines(pitch, progressiveC)
                     plotCircles(pitch, progressiveC, "#48EDDB")
                 }
             }
-            else if (props.option == "shots") {
-                d3.csv(require("./../../data/" + props.season + "/" + "allShotsLigaBwin" + props.season.replace("-", "") + ".csv")).then((data) => {
-                    data = data.filter(function (d) {
-                        if ((props.side == "Home" && d.homeTeam == props.team && d.awayTeam == props.oppTeam && d.name == props.team) ||
-                            (props.side == "Away" && d.awayTeam == props.team && d.homeTeam == props.oppTeam && d.name == props.team)) return d
-                    })
+            else if (props.option === "shots") {
+                d3.csv(require("./../../data/" + props.season + "/allShotsLigaBwin" + props.season.replace("-", "") + ".csv")).then((data) => {
+                    data = data.filter((d) => 
+                    ((props.side === "Home" && d.homeTeam === props.team && d.awayTeam === props.oppTeam && d.name === props.team) 
+                    || 
+                    (props.side === "Away" && d.awayTeam === props.team && d.homeTeam === props.oppTeam && d.name === props.team)) )
 
                     function handleMouseOver(event, d) {
                         d3.select(this).style("cursor", "pointer")
@@ -284,11 +254,11 @@ export default function PlotActions(props) {
                             .attr("x1", d => (68 - Number(d.y)) * (svgWidth / 68))
                             .attr("y1", d => (105 - Number(d.x)) * (svgHeight - 20) / 105)
                             .attr("x2", d => {
-                                if (d.blockedY == "") return (68 - Number(d.goalCrossedY)) * (svgWidth / 68)
+                                if (d.blockedY === "") return (68 - Number(d.goalCrossedY)) * (svgWidth / 68)
                                 else return (68 - Number(d.blockedY)) * (svgWidth / 68)
                             })
                             .attr("y2", d => {
-                                if (d.blockedX == "") {
+                                if (d.blockedX === "") {
                                     return (105 - 105) * (svgHeight - 20) / 105
                                 }
                                 else return (105 - Number(d.blockedX)) * (svgHeight - 20) / 105
@@ -317,7 +287,7 @@ export default function PlotActions(props) {
                     _data.push({ 'x': 36, 'y': 32, 'expectedGoals': 0.75 })
                     _data.push({ 'x': 36, 'y': 24, 'expectedGoals': 1, 'eventType': "Goal" })
 
-                    var circles = pitch.selectAll('.progressiveCircles')
+                    pitch.selectAll('.progressiveCircles')
                         .data(data)
                         .enter().append('circle')
                         .attr("id", "shots")
@@ -328,9 +298,9 @@ export default function PlotActions(props) {
                         .style('stroke', "white")
                         .style("filter", "url(#glow)")
                         .style('fill', function (d) {
-                            if (d.eventType == "Goal") return "#42DC60"
-                            else if (d.eventType == "AttemptSaved") return "red"
-                            else if (d.eventType == "Post") return "#42DCD5"
+                            if (d.eventType === "Goal") return "#42DC60"
+                            else if (d.eventType === "AttemptSaved") return "red"
+                            else if (d.eventType === "Post") return "#42DCD5"
                             else return "red"
                         })
                         .on("click", handleClick)
@@ -338,7 +308,7 @@ export default function PlotActions(props) {
                         .on("mouseleave", handleMouseLeave)
                         .style("fill-opacity", 1)
 
-                    circles = pitch.selectAll('.progressiveCircles')
+                    pitch.selectAll('.progressiveCircles')
                         .data(_data)
                         .enter().append('circle')
                         .attr('cy', d => (105 - d.x) * (svgHeight - 20) / 105)
@@ -348,9 +318,9 @@ export default function PlotActions(props) {
                         .style('stroke', "white")
                         .style("filter", "url(#glow)")
                         .style('fill', function (d) {
-                            if (d.eventType == "Goal") return "#42DC60"
-                            else if (d.eventType == "AttemptSaved") return "red"
-                            else if (d.eventType == "Post") return "#42DCD5"
+                            if (d.eventType === "Goal") return "#42DC60"
+                            else if (d.eventType === "AttemptSaved") return "red"
+                            else if (d.eventType === "Post") return "#42DCD5"
                             else return "red"
                         })
                         .style("fill-opacity", 1)
@@ -386,10 +356,10 @@ export default function PlotActions(props) {
 
                 })
             }
-            else if (props.option == "def_actions") {
+            else if (props.option === "def_actions") {
 
                 function handleMouseClick(event, d) {
-                    var string2 = "<p style='display: inline-block; font-size:60%; font-weight:bold; padding-left:2%'>" + d.name + " (" + Number(d.shirtNo) + ")" + "<br>" + "Minute: "
+                    var string2 = "<p style='display: inline-block; font-size:60%; font-weight:bold; padding-left:2%'>" + d.name + " (" + Number(d.shirtNo) + ")<br>Minute: "
                         + String(Number(d.minute)) + "<br>" + d.homeTeam + " - " + d.awayTeam + "<br>" + d.type + " " + d.outcomeType + "<p/>";
 
                     tooltip.transition()
@@ -411,19 +381,15 @@ export default function PlotActions(props) {
 
                     pitch.selectAll("circle#def")
                         .style("fill-opacity", function (e) {
-                            if (e.outcomeType == "Unsuccessful") return 0.1
-                            else if (e["name"] != d["name"]) return 1
+                            if (e.outcomeType === "Unsuccessful") return 0.1
+                            else if (e["name"] !== d["name"]) return 1
                         })
                 }
 
                 var def_actions_list = ["Interception", "BlockedPass", "BallRecovery", "Clearance", "Tackle"]
-                var def_actions = dataset.filter(function (d) {
-                    if (def_actions_list.includes(d.type, 0) && d.teamId == props.teamId) {
-                        return d;
-                    }
-                });
+                var def_actions = dataset.filter((d) => (def_actions_list.includes(d.type, 0) && Number(d.teamId) === Number(props.teamId)));
 
-                var circles = pitch.selectAll('.progressiveCircles')
+                pitch.selectAll('.progressiveCircles')
                     .data(def_actions)
                     .enter().append('circle')
                     .attr("id", "def")
@@ -434,11 +400,11 @@ export default function PlotActions(props) {
                     .style('stroke', "white")
                     .style("filter", "url(#glow)")
                     .style('fill', function (d) {
-                        if (d.type == "BallRecovery") return "#42DC60"
-                        else if (d.type == "Interception") return "red"
-                        else if (d.type == "BlockedPass") return "#42DCD5"
-                        else if (d.type == "Clearance") return "#D047D6"
-                        else if (d.type == "Tackle") return "#E38A18"
+                        if (d.type === "BallRecovery") return "#42DC60"
+                        else if (d.type === "Interception") return "red"
+                        else if (d.type === "BlockedPass") return "#42DCD5"
+                        else if (d.type === "Clearance") return "#D047D6"
+                        else if (d.type === "Tackle") return "#E38A18"
                         else return "red"
                     })
                     .on("mouseover", handleMouseOver)
@@ -446,7 +412,7 @@ export default function PlotActions(props) {
                     .on("mouseleave", handleMouseLeave)
                     //.style("filter", "url(#glow)")
                     .style("fill-opacity", function (d) {
-                        if (d.outcomeType == "Successful") return 1
+                        if (d.outcomeType === "Successful") return 1
                         else return 0.1
                     })
 
@@ -458,7 +424,8 @@ export default function PlotActions(props) {
         }
 
 
-    }, [props.data, props.win_width, props.win_height, props.options, props.option]);
+    }, [props.data, props.win_width, props.win_height, props.options, props.option, dataset, lineWidth, props.color,
+    props.oppTeam, props.season, props.side, props.team, props.teamId, svgHeight, svgWidth, tooltip, tooltip_shots]);
 
     return <svg ref={svgRef} width={svgWidth} height={svgHeight} />;
 }

@@ -23,24 +23,25 @@ export default function PlotPassingNetwork(props) {
     });
 
     var lineWidth = 1.8
-    var pitchMultiplier = 5.5
+    var svgWidth;
+    var svgHeight
 
     if (props.win_width > 1400) {
-        var svgWidth = props.win_width / 3 - 200;
-        var svgHeight = props.win_height - 350;
+        svgWidth = props.win_width / 3 - 200;
+        svgHeight = props.win_height - 350;
     }
     else if (props.win_width > 992) {
-        var svgWidth = props.win_width / 3 - 120;
-        var svgHeight = props.win_height - 180;
+        svgWidth = props.win_width / 3 - 120;
+        svgHeight = props.win_height - 180;
     }
     else if (props.win_width > 768) {
-        var svgWidth = props.win_width / 2 - 50
-        var svgHeight = 650;
+        svgWidth = props.win_width / 2 - 50
+        svgHeight = 650;
 
     }
     else {
-        var svgWidth = props.win_width - 70
-        var svgHeight = 600;
+        svgWidth = props.win_width - 70
+        svgHeight = 600;
 
     }
 
@@ -58,26 +59,21 @@ export default function PlotPassingNetwork(props) {
 
         if (props.data != null) {
             var positions = [];
+
+            // eslint-disable-next-line
             dataset.filter(function (d) {
-                if (d.average_location == "True") positions.push({ 'name': d.name, 'shirtNo': Number(d.shirtNo), 'x': Number(d.x), 'y': Number(d.y) })
+                if (d.average_location ==="True") positions.push({ 'name': d.name, 'shirtNo': Number(d.shirtNo), 'x': Number(d.x), 'y': Number(d.y) })
             })
 
-            var lines = dataset.filter(function (d) {
-                if (d.average_location == "False") return d;
-            })
+            var lines = dataset.filter((d) => (d.average_location ==="False"))
 
             var pass_count = []
+            // eslint-disable-next-line
             lines.filter(function (d) {
                 pass_count.push(Number(d.pass_count));
             })
 
-            const average = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
-            var avgPasses = average(pass_count);
             var max = Math.max.apply(Math, pass_count)
-            var min = Math.min.apply(Math, pass_count)
-
-            var t1 = (avgPasses + max) / 2
-            var t2 = (avgPasses + min) / 2
 
             create_glow(pitch)
             createTriangle(pitch, "triangle", 1)
@@ -125,9 +121,7 @@ export default function PlotPassingNetwork(props) {
 
                 d3.csv(require("./../../data/" + props.season + "/calcs.csv"))
                     .then((data) => {
-                        data = data.filter((item) => {
-                            if (item.team === props.team.replaceAll(" ", "-") && Number(item.shirtNo) === Number(d.shirtNo)) return item
-                        })[0]
+                        data = data.filter((item) => (item.team === props.team.replaceAll(" ", "-") && Number(item.shirtNo) === Number(d.shirtNo)))[0]
 
                         svg_t.append("svg:image")
                             .attr("width", 80)
@@ -147,17 +141,6 @@ export default function PlotPassingNetwork(props) {
                     .style("filter", "url(#glow)")
                     .style("fill", "white")
                     .text(String(d.name));
-
-
-                /*if (d.name.includes(" ")) var string2 = "<p style='display: inline-block; font-family: Inter, sans serif; font-size:60%; font-weight:bold; padding-left:2%'>" + d.name.split(" ")[0] + "<br>" +
-                    d.name.split(" ")[1] + "<p/>";
-                else var string2 = "<p style='display: inline-block; font-size:60%; font-weight:bold; padding-left:2%'>\n" + d.name + "<pre/>";
-    
-                tooltip.transition()
-                    .duration(200)
-                    .style("opacity", 1).style("visibility", "visible");
-                tooltip.html(string + string2).style("left", event.x + "px")
-                    .style("top", event.y + "px");*/
             }
 
             function handleMouseOver(event, d) {
@@ -219,6 +202,7 @@ export default function PlotPassingNetwork(props) {
                 .text(d => d.shirtNo);
 
             var game_time;
+            // eslint-disable-next-line
             dataset.filter(function (d) {
                 game_time = d.game_minutes
             })
