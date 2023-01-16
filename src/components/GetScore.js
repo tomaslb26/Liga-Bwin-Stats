@@ -1,10 +1,12 @@
 export default function GetScore(data, home_id, away_id) {
     var own_goals = data.filter((item) => (item.isOwnGoal === "True"))
 
-    var home_goals = data.filter((item) => ((item.type === "Goal" && item.teamId === home_id)))
+    var home_goals = data.filter((item) => ((item.type === "Goal" && Number(item.teamId) === home_id)))
 
 
-    var away_goals = data.filter((item) => ((item.type === "Goal" && item.teamId === away_id)))
+    var away_goals = data.filter((item) => ((item.type === "Goal" && Number(item.teamId) === away_id)))
+
+    console.log(home_goals)
 
     var home_own_goals = 0;
     var away_own_goals = 0;
