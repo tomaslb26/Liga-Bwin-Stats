@@ -36,4 +36,3 @@ All the data present in this website comes from whoscored, fotmob and fbref. The
 ## What's is next?
 * ### A couple of new visualizations will be added ###
 * ### Docker container for scraping (just missing Opera integration) ###
-* ### Landing Page improvement ###
