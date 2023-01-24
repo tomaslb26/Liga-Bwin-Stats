@@ -12,7 +12,7 @@ export default function Nav(props) {
                                                     }} smooth to={"/"}>{"Home"}</Link>
                 <Link className="nav-item" style={{ color: props.option === "classification" ? props.color : "rgba(255, 255, 255, 0.7)",
                                                     textDecoration: "none" 
-                                                    }} smooth to={"/global"}>{"Classification"}</Link>
+                                                    }} smooth to={"/global"}>{"Standings"}</Link>
                 <Link className="nav-item" style={{ color: props.option === "match momentum" ? props.color : "rgba(255, 255, 255, 0.7)",
                                                     textDecoration: "none" 
                                                     }} smooth to={"/match_momentum"}>{"Match Momentum"}</Link>

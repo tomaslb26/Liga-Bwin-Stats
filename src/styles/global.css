@@ -1,8 +1,10 @@
 .global {
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin-top: 1%;
     margin-left: 0%;
+    gap: 30px;
 }
 
 .text-d3 {
@@ -85,7 +87,197 @@
     font-weight: bold;
 }
 
+table{
+    width: 80%;
+    padding: 0;
+    margin: 0;
+    border-spacing: 0;
+    box-shadow: 0px 8px 8px -8px #000000;
+}
+
+table th:first-child{
+    border-radius:5px 0 0 0px;
+}
+  
+table th:last-child{
+    border-radius:0 5px 0px 0;
+}
+
+th{
+    background-color: #ffb404;
+    font-family: "Roboto", sans-serif;
+    color: white;
+    font-size: 150%;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -1px 10px rgba(255,255,255,0.3);
+    text-align: center;
+    padding: 0.5% 0 0.5% 0;
+}
+
+td{
+    font-family: "Roboto", sans-serif;
+    color: #ffb404;
+    font-size: 150%;
+    text-align: center;
+    background-color: #1A1A1A;
+    border-left: 1.5px solid #ffb404;
+    border-right: 1.5px solid #ffb404;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -1px 10px rgba(255,255,255,0.3);
+    vertical-align:middle;
+    padding: 0.2% 0 0.2% 0;
+    font-weight: bold   ;
+}
+
+td>img{
+    height: 30px;
+    vertical-align: middle;
+    box-shadow: 0px 8px 8px -8px #000000;
+}
+
+tr{
+}
+
+table tr:first-child td{
+    border-top: 2px solid #ffb404;
+}
+  
+table tr:last-child td{
+    border-bottom: 2px solid #ffb404;
+}
+
+table tr:last-child td:first-child{
+    border-radius: 0px 0px 0px 5px;
+}
+
+table tr:last-child td:last-child{
+    border-radius: 0px 0px 5px 0px;
+}
+
+tr td:first-child{
+    border-left: 2px solid #ffb404;
+}
+
+tr td:last-child{
+    border-right: 2px solid #ffb404;
+}
+
+.top-containers{
+    display: flex;
+    width: 80%;
+    justify-content: center;
+    gap: 30px;
+    overflow: hidden;
+}
+
+.top-container{
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    font-family: "Roboto", sans-serif;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #ffb404;
+    gap: 5px;
+}
+
+.top-container-header>h3{
+    color: white;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -1px 10px rgba(255,255,255,0.3);
+    font-size: 150%;
+    margin: 0;
+}
+
+
+.top-container-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-container-first{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-container-first>img{
+    height: 80px;
+    border-radius: 30%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border: 2px solid red;
+}
+
+.top-container-player{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.top-container-player>h6{
+    font-family: "Roboto", sans-serif;
+    color: white;
+    margin: 0;
+    font-size: 110%;
+    font-weight: normal;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -1px 10px rgba(255,255,255,0.3);
+}
+
+.top-container-line{
+    display: flex;
+    align-items: center;
+    border-top: 2px solid #ffb404;
+    padding-top: 1%;
+    gap: 5px;
+}
+
+.top-container-line>h4{
+    margin: 0;
+    color: white;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -1px 10px rgba(255,255,255,0.3);
+}
+
+.top-container-line>span{
+    margin: 0;
+    color: white;
+    text-shadow: 2px 7px 5px rgba(0,0,0,0.3), 
+    0px -1px 10px rgba(255,255,255,0.3);
+}
+
+.top-container-line>img{
+    height: 18px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.top-container-line h4:last-child{
+    margin-left: auto;
+}
+
+.swiper {
+    width: 90%;
+}
+  
+
 @media only screen and (max-width: 768px) {
+    table{
+        width: 95%;
+    }
+
+    th{
+        font-size: 70%;
+    }
+
+    td>img{
+        height: 15px;
+    }
+
+    td{
+        font-size: 70%;
+    }
+
     .global-grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -114,5 +306,17 @@
         display: flex;
         margin-top: 3%;
         padding-bottom: 5%;
+    }
+
+    table{
+        width: 95%;
+    }
+
+    th{
+        font-size: 120%;
+    }
+
+    td>img{
+        height: 25px;
     }
 }

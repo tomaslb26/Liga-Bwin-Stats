@@ -6,6 +6,8 @@ import teams_colors from "./../../data/teams_colors"
 
 export default function Misc(props) {
 
+    console.log(props.data)
+
     var svgRef = React.useRef(null);
     if (props.win_width > 990) {
         var svgWidth = props.win_width / 2 - 100;
