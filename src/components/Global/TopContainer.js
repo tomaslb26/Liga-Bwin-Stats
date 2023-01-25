@@ -25,7 +25,7 @@ export default function TopContainer(props){
                 <div className="top-container-first">
                     <div className="top-container-player">
                         <h6>{props.data[0].name}</h6>
-                        <h6>{props.data[0].team}</h6>
+                        <h6>{props.data[0].team + " - " + props.data[0].minutes + " min"}</h6>
                     </div>
                     <img style = {{border: "2px solid " + teams_colors.filter((color) => (color.team === props.data[0].team.replaceAll("-", " ")))[0]["color"]}} 
                     src={props.data[0].photo} />
@@ -35,6 +35,7 @@ export default function TopContainer(props){
                         <div className="top-container-line">
                         <h4>{index + 2}</h4>
                         <span>{player.name}</span>
+                        <span>{player.minutes + " min"}</span>
                         <img src={require(`./../../images/teams/${player.team}.png`)}></img>
                         <h4>{String(Number(player.stat)).slice(0,4)}</h4>
                     </div>

@@ -22,8 +22,6 @@ export default function Global(props) {
             "prog_passes",
             "prog_carries",
             "defensive_actions", 
-            "suc_take_ons",
-            "suc_passes",
             "xt",
             "final_third_entries", 
             "final_third_passes",
@@ -128,7 +126,9 @@ export default function Global(props) {
                     modules={[Pagination]}
                     className="mySwiper"
                     breakpoints={{
-                        // when window width is >= 640px
+                        100: {
+                            slidesPerView: 1,
+                          },
                         640: {
                           slidesPerView: 1,
                         },
@@ -152,28 +152,4 @@ export default function Global(props) {
             </main>
         </>
     )
-
-    /*
-    return (
-        <>
-            <Nav option = "classification" color = {"#FFB700"} />
-            <DropdownSection season = {season} handleSeasonChange = {handleSeasonChange}
-                            options = {{season: true, teams: false, players : false}}
-                            color={"#FFB700"}
-                            />
-            <main className="global">
-                <div className="global-grid">
-                    <div className="classification">
-                        <Classification data={dataClassification} win_width={windowWidth} win_height={windowHeight} season={season} />
-                    </div>
-                    <div className="misc">
-                        <div style={{ marginLeft: "2%" }}>
-                            <Dropdown placeholder={stat} displayFlag={displayStat} li_elements={misc_stats.map((item) => <li className="dropdown--elem" onClick={(event) => handleStatChange(event)}>{item}</li>)} styles={styles} textStyles={textStyles} handleInputChange={handleInputChange2} />
-                        </div>
-                        <Misc data={dataMisc} win_width={windowWidth} win_height={windowHeight} season={season} stat={stat} />
-                    </div>
-                </div>
-            </main>
-        </>
-    )*/
 }
