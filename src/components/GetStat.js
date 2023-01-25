@@ -2,7 +2,7 @@ import GetMaxMinutes from "./GetMaxMinutes"
 
 export default function GetStat(data, player, option, stat) {
 
-    var minutes_treshold = Math.round(GetMaxMinutes(data) / 3)
+    var minutes_treshold = Math.round(GetMaxMinutes(data) * 0.4)
 
     var data_temp = data.filter(item => item["minutes"] > minutes_treshold)
 

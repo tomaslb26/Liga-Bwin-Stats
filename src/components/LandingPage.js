@@ -61,7 +61,7 @@ export default function LandingPage() {
                     </h1>
                 </div>
                 <div className="cards-container">
-                    <Card redirect = "global" photo = "classification" header = "Classification" bullets = {["classification table", "general stats", "attendance"]} />
+                    <Card redirect = "global" photo = "classification" header = "Standings" bullets = {["classification table", "general stats", "attendance"]} />
                     <Card redirect = "match_momentum" photo = "match_momentum" header = "match momentum" bullets = {["threat created", "match dominance", "all games"]} />
                     <Card redirect = "player_stats" photo = "player_stats" header = "player stats" bullets = {["rank amongst the league", "plot passes, shots and others", "and more"]} />
                     <Card redirect = "team_stats" photo = "team_stats" header = "team stats" bullets = {["Passing network", "xG Performance", "and more"]} />

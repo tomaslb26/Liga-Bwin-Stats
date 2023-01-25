@@ -8,7 +8,7 @@ export default function Misc(props) {
 
     var svgRef = React.useRef(null);
     if (props.win_width > 990) {
-        var svgWidth = props.win_width / 2 - 100;
+        var svgWidth = props.win_width *0.75;
         var font_size = 130 * props.win_width / 1920
         font_size = String(font_size) + "%"
     }
@@ -21,11 +21,11 @@ export default function Misc(props) {
 
     if (props.win_width > 1400) {
         var logosize = 30
-        var windowTax = 3
+        var windowTax = 17
     }
     else if (props.win_width > 1200) {
         var logosize = 25
-        var windowTax = 1
+        var windowTax = 12
     }
     else if (props.win_width > 1000) {
         var logosize = 20
@@ -40,7 +40,7 @@ export default function Misc(props) {
         var windowTax = 0
     }
 
-    var svgHeight = props.win_height - 255;
+    var svgHeight = 700;
 
     React.useEffect(() => {
         d3.select(svgRef.current).selectAll("*").remove();
@@ -59,6 +59,8 @@ export default function Misc(props) {
             if (keyA > keyB) return -1;
             return 0;
         })
+
+        create_glow(svg)
 
         var x = d3.scaleBand()
             .range([40, svgWidth - 15])
@@ -94,7 +96,7 @@ export default function Misc(props) {
             .attr("width", x.bandwidth())
             .attr("height", function (d) { return svgHeight + 0 - y(d.stat); })
             .style("filter", "url(#glow)")
-            .style("opacity", 0.8)
+            .style("opacity", 0.7)
             .style("stroke", function (d) {
                 return "white"
             })
