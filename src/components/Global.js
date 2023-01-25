@@ -1,5 +1,4 @@
 import React from "react";
-import "./../styles/global.css"
 import Dropdown from "./Dropdown"
 import Misc from "./Global/Misc";
 import { useState } from "react";
@@ -15,6 +14,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import {Pagination } from "swiper";
 import GetTop5Players from "./GetTop5Players";
+import "./../styles/global.css"
 
 export default function Global(props) {
 
@@ -23,9 +23,7 @@ export default function Global(props) {
             "prog_carries",
             "defensive_actions", 
             "suc_take_ons",
-            "total_passes",
             "suc_passes",
-            "take_ons", 
             "xt",
             "final_third_entries", 
             "final_third_passes",
@@ -120,7 +118,7 @@ export default function Global(props) {
                 <Standings data={dataClassification} />
                 <Swiper
                     style={{
-                        "--swiper-pagination-color": "#ffb404",
+                        "--swiper-pagination-color": "#ffb404"
                     }}
                     slidesPerView={3}
                     spaceBetween={30}
@@ -129,6 +127,19 @@ export default function Global(props) {
                       }}
                     modules={[Pagination]}
                     className="mySwiper"
+                    breakpoints={{
+                        // when window width is >= 640px
+                        640: {
+                          slidesPerView: 1,
+                        },
+                        // when window width is >= 768px
+                        768: {
+                          slidesPerView: 2,
+                        },
+                        1024:{
+                            slidesPerView: 3,
+                        }
+                    }}
                     >
                     {stats.map((item) => <SwiperSlide><TopContainer stat = {item} data = {GetTop5Players(dataCalcs, item)} /></SwiperSlide>)}
                 </Swiper>

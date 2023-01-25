@@ -3,8 +3,13 @@ import GetMaxMinutes from "./GetMaxMinutes"
 export default function GetTop5Players(data, stat){
     var minutes_treshold = Math.round(GetMaxMinutes(data) / 3)
     var updatedData  = data.filter(item => Number(item["minutes"]) > Number(minutes_treshold))
-    updatedData = updatedData.map((item) => ({player: item.name, team: item.team, stat: (Number(item[stat])*90)/Number(item.minutes), photo: item.photo }))
     
+    if (stat === "Goals" || stat === "Assists") updatedData = updatedData.map(o => ({ name: o.name, stat: (o[stat]), photo: o.photo, team: o.team }))
+    else if (stat === "Pass Percentage") updatedData = updatedData.map(o => ({ name: o.name, stat: (o["suc_passes"] / o["total_passes"]) * 100, photo: o.photo, team: o.team }))
+    else if (stat === "Take-On Percentage") updatedData = updatedData.map(o => ({ name: o.name, stat: (o["suc_take_ons"] / o["take_ons"]) * 100, photo: o.photo, team: o.team }))
+    else updatedData = updatedData.map(o => ({ name: o.name, stat: (o[stat] * 90) / o.minutes, photo: o.photo, team: o.team }))
+
+
     updatedData = updatedData.sort(function (a, b) {
         var keyA = Number(a["stat"]),
             keyB = Number(b["stat"]);

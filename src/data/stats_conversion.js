@@ -16,5 +16,7 @@ export default {
     "xGOT Per 90'": "xGOT",
     "Chances Created Per 90'": "ChancesCreated",
     "Pass Percentage": "Pass Percentage",
-    "Take-On Percentage": "Take-On Percentage"
+    "Take-On Percentage": "Take-On Percentage",
+    "Pass Percentage": "suc_passes",
+    "Take-On Percentage": "suc_take_ons",
 }

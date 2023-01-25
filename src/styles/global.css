@@ -5,6 +5,7 @@
     margin-top: 1%;
     margin-left: 0%;
     gap: 30px;
+    overflow-x: hidden;
 }
 
 .text-d3 {
@@ -166,8 +167,6 @@ tr td:last-child{
     display: flex;
     width: 80%;
     justify-content: center;
-    gap: 30px;
-    overflow: hidden;
 }
 
 .top-container{
@@ -180,6 +179,7 @@ tr td:last-child{
     flex-direction: column;
     border: 2px solid #ffb404;
     gap: 5px;
+    cursor: pointer;
 }
 
 .top-container-header>h3{
@@ -256,8 +256,16 @@ tr td:last-child{
     margin-left: auto;
 }
 
-.swiper {
+
+.swiper{
     width: 90%;
+    overflow: visible !important;
+    position: relative;
+}
+
+
+.swiper-pagination-bullet{
+    transform: translateY(30px);
 }
   
 
