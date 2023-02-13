@@ -192,3 +192,9 @@ div.tooltip_3 {
     border: 2px solid #cf261f;
     border-radius: 10px;
 }
+
+@media only screen and (min-width: 968px) and (max-width: 1366px) {
+    .button-teamstats{
+        padding: 1.2%;
+    }
+}
