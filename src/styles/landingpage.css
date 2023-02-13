@@ -80,11 +80,13 @@ body {
 .card-bullets{
     color: #FFB700;
     text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    margin: 0 auto;
 }
 
 .card>h2{
     margin: 3% 0 2% 0;
     text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+    text-align: center;
 }
 
 .card>img{
@@ -204,5 +206,7 @@ body {
 }
 
 @media only screen and (min-width: 968px) and (max-width: 1366px) {
-
+    .card-bullets{
+        width: 90%;
+    }
 }
