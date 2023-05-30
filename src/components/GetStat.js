@@ -23,6 +23,8 @@ export default function GetStat(data, player, option, stat) {
     if (percentile.toFixed(0) === 100) percentile = 99
     else if (percentile.toFixed(0) === 0) percentile = 1
 
+    if(percentile > 99) percentile = 99;
+
     if (option === "percentile") return percentile
     else return new_player["stat"]
 

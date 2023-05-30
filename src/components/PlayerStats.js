@@ -154,8 +154,8 @@ export default function PlayerStats() {
                         <div style={{ gridTemplateColumns: "1fr 1fr 1fr 1fr" }} className="stats--grid">
                             <StatContainer stat={"xA"} title={"xA"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
                             <StatContainer stat={"key_passes"} title={"Key Passes"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
-                            <StatContainer stat={"ChancesCreated"} title={"Chances Created"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
-                            <StatContainer stat={"xt"} title={"Threat"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
+                            <StatContainer stat={season === "21-22" ? "ChancesCreated" : "SCA"} title={season === "21-22" ? "Chances Created" : "GCA"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
+                            <StatContainer stat={season === "21-22" ? "xt" : "GCA"} title={season === "21-22" ? "Threat" : "GCA"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
                         </div>
                     </div>
                     <div className="svg-section">
@@ -168,9 +168,8 @@ export default function PlayerStats() {
                     </div>
                     <div className="svg-section">
                         <h1>Shooting</h1>
-                        <div style={{ gridTemplateColumns: "1fr 1fr 1fr" }} className="stats--grid">
+                        <div style={{ gridTemplateColumns: "1fr 1fr" }} className="stats--grid">
                             <StatContainer stat={"xG"} title={"xG"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
-                            <StatContainer stat={"xGOT"} title={"xGOT"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
                             <StatContainer stat={"Shots"} title={"Shots"} data={data} playerId={playerId} color={teams_colors.filter((item) => (item.team === team))[0]["color"]} option={option} />
                         </div>
                     </div>

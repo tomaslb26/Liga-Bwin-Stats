@@ -22,7 +22,6 @@ export default function Global(props) {
             "prog_passes",
             "prog_carries",
             "defensive_actions", 
-            "xt",
             "final_third_entries", 
             "final_third_passes",
             "penalty_box_entries",
@@ -32,9 +31,9 @@ export default function Global(props) {
             "Assists",
             "Shots",
             "xG",
-            "xGOT",
             "xA",
-            "ChancesCreated"
+            "SCA",
+            "GCA"
              ]
 
     const styles = {

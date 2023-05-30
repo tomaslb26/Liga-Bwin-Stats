@@ -19,4 +19,6 @@ export default {
     "Take-On Percentage": "Take-On Percentage",
     "Pass Percentage": "suc_passes",
     "Take-On Percentage": "suc_take_ons",
+    "SCA Per 90'": "SCA",
+    "GCA Per 90'": "GCA",
 }

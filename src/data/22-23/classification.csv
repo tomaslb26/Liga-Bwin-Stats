@@ -1,19 +1,19 @@
-Position,Team,Games,Wins,Draws,Losses,Goals,Goals Against,Goal Difference,Points,Last 5,Attendance
-1,Benfica,25,22,2,1,66,14,52,68,W W W W W,51236
-2,Porto,25,18,4,3,55,17,38,58,W L W W D,41784
-3,Braga,25,18,2,5,54,22,32,56,W L W W D,13370
-4,Sporting,24,16,2,6,49,23,26,50,L W W W W,28738
-5,Vitoria de Guimaraes,25,12,4,9,25,29,-4,40,D W W L L,14957
-6,Arouca,25,10,8,7,29,32,-3,38,L W D W D,1666
-7,Casa Pia,25,11,5,9,22,24,-2,38,D L W L W,4038
-8,Rio Ave,25,9,6,10,25,28,-3,33,L W L W W,2764
-9,Famalicao,25,10,3,12,25,32,-7,33,W W L W W,3652
-10,Vizela,25,9,5,11,27,27,0,32,D L W L W,3284
-11,Chaves,25,8,8,9,26,31,-5,32,L L L W W,3701
-12,Boavista,25,8,6,11,28,40,-12,30,L W D L L,6504
-13,Gil Vicente,24,8,5,11,26,31,-5,29,W D W W L,3985
-14,Portimonense,25,8,2,15,18,32,-14,26,W L L L L,1845
-15,Estoril,25,6,4,15,21,39,-18,22,L L L L L,2303
-16,Maritimo,25,4,4,17,17,47,-30,16,L W L L L,8148
-17,Pacos de Ferreira,25,4,4,17,19,43,-24,16,W L L W D,4280
-18,Santa Clara,25,3,6,16,17,38,-21,15,L L L L L,2555
+Position,Team,Games,Wins,Draws,Losses,Goals,Goals Against,Goal Difference,Points,Attendance
+1,Benfica,34,28,3,3,82,20,62,87,57049
+2,Porto,34,27,4,3,73,22,51,85,41380
+3,Braga,34,25,3,6,75,30,45,78,15490
+4,Sporting,34,23,5,6,71,32,39,74,29292
+5,Arouca,34,15,9,10,36,37,-1,54,1836
+6,Vitoria de Guimaraes,34,16,5,13,34,39,-5,53,16111
+7,Chaves,34,12,10,12,35,40,-5,46,3711
+8,Famalicao,34,13,5,16,39,47,-8,44,3800
+9,Boavista,34,12,8,14,43,54,-11,44,6542
+10,Casa Pia,34,11,8,15,31,40,-9,41,3959
+11,Vizela,34,11,7,16,34,38,-4,40,3310
+12,Rio Ave,34,10,10,14,36,43,-7,40,2906
+13,Gil Vicente,34,10,7,17,32,41,-9,37,4389
+14,Estoril,34,10,5,19,33,49,-16,35,2362
+15,Portimonense,34,10,4,20,25,48,-23,34,1945
+16,Maritimo,34,7,5,22,32,63,-31,26,8509
+17,Pacos de Ferreira,34,6,5,23,26,62,-36,23,4430
+18,Santa Clara,34,5,7,22,26,58,-32,22,2164
